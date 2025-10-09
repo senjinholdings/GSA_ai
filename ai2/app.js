@@ -88,33 +88,51 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   const detailLinks = document.querySelectorAll('.summary-cta-btn a');
-  detailLinks.forEach(link => {
+  detailLinks.forEach((link, index) => {
     link.innerHTML = commonText.button_detail_text || '詳細を見る +';
   });
 
   // ==================== サービスIDリスト ====================
   const serviceIds = ['shiftai', 'dmmai', 'samuraiai'];
 
+  // 公式サイトを見るボタン (.summary-cta-btn.btn-wide) のURL設定
+  const officialSiteLinks = document.querySelectorAll('.summary-cta-btn.btn-wide');
+  officialSiteLinks.forEach((link, index) => {
+    const serviceId = serviceIds[index];
+    if (serviceCta[serviceId]?.officialUrl) {
+      link.href = serviceCta[serviceId].officialUrl;
+      link.target = '_blank';
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(serviceCta[serviceId].officialUrl, '_blank');
+      });
+    }
+  });
+
   // ==================== CTA URL設定 ====================
   const rankingCards = document.querySelectorAll('.rankingCard');
   rankingCards.forEach((card, index) => {
     const serviceId = serviceIds[index];
     if (serviceCta[serviceId]) {
-      // セミナーボタン (.cta-button-2)
-      const seminarBtn = card.querySelector('.cta-button-2');
-      if (seminarBtn && serviceCta[serviceId].seminarUrl) {
-        seminarBtn.addEventListener('click', () => {
-          window.open(serviceCta[serviceId].seminarUrl, '_blank');
-        });
-      }
+      // セミナーボタン (.cta-button-2) - 複数のボタンに対応
+      const seminarBtns = card.querySelectorAll('.cta-button-2');
+      seminarBtns.forEach(seminarBtn => {
+        if (seminarBtn && serviceCta[serviceId].seminarUrl) {
+          seminarBtn.addEventListener('click', () => {
+            window.open(serviceCta[serviceId].seminarUrl, '_blank');
+          });
+        }
+      });
 
-      // 公式サイトボタン (.cta-button-3)
-      const officialBtn = card.querySelector('.cta-button-3');
-      if (officialBtn && serviceCta[serviceId].officialUrl) {
-        officialBtn.addEventListener('click', () => {
-          window.open(serviceCta[serviceId].officialUrl, '_blank');
-        });
-      }
+      // 公式サイトボタン (.cta-button-3) - 複数のボタンに対応
+      const officialBtns = card.querySelectorAll('.cta-button-3');
+      officialBtns.forEach(officialBtn => {
+        if (officialBtn && serviceCta[serviceId].officialUrl) {
+          officialBtn.addEventListener('click', () => {
+            window.open(serviceCta[serviceId].officialUrl, '_blank');
+          });
+        }
+      });
     }
   });
 
@@ -299,13 +317,24 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // 4.6. 基本情報テーブルのデータ反映
-  const programTypeMap = {
-    'ライティング': '1',
-    '総合': '2',
-    'プログラミング': '3',
-    '腕': '4',
-    '脚': '5'
-  };
+  const programTypeMap = {};
+  const updatedPartLabels = [
+    commonText.part_1 || 'ライティング',
+    commonText.part_2 || '総合',
+    commonText.part_3 || 'プログラミング',
+    commonText.part_4 || '腕',
+    commonText.part_5 || '脚'
+  ];
+  const legacyPartLabels = ['ライティング', '総合', 'プログラミング', '腕', '脚'];
+
+  updatedPartLabels.forEach((label, index) => {
+    const typeId = String(index + 1);
+    programTypeMap[label] = typeId;
+    const legacyLabel = legacyPartLabels[index];
+    if (legacyLabel !== label) {
+      programTypeMap[legacyLabel] = typeId;
+    }
+  });
 
   // 各サービスの基本情報セクションを処理
   document.querySelectorAll('.c-basicInfo').forEach((basicInfoSection) => {
@@ -876,6 +905,8 @@ function openProgramDetailModal(rank, programName, programRow) {
 
   // ランキングカード全体をクローン
   const cardClone = rankingCard.cloneNode(true);
+  cardClone.classList.add('rankingCard--modal');
+  cardClone.dataset.rank = rank;
   
   // クローンからIDを削除（重複を避けるため）
   const clonedTarget = cardClone.querySelector('.rankingCard__target');
