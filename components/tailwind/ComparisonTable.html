@@ -1,0 +1,86 @@
+<!-- ComparisonTable.html - 比較テーブル -->
+<div class="bg-cyan-50">
+    <!-- タイトル -->
+    <div>
+        <img src="{{titleImage}}" alt="{{titleText}}" class="block w-full">
+        <div class="py-5 md:py-6 text-center">
+            <div class="text-lg md:text-2xl font-bold">{{titleCopy}}</div>
+            <img
+                src="{{titleSubImage}}"
+                alt="{{titleSubText}}"
+                class="w-[200px] md:w-[280px] mt-2 md:mt-3 mx-auto"
+            >
+        </div>
+    </div>
+
+    <!-- テーブル -->
+    <div class="pb-16">
+        <div class="mt-2 px-3">
+            <table class="w-full border-collapse">
+                <!-- ヘッダー行（ブランド情報） -->
+                <thead>
+                    <tr>
+                        <th class="p-0 border border-gray-300"></th>
+                        {{#each brands}}
+                            <th class="w-[26%] py-3 px-1 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                                <!-- バッジ -->
+                                <div class="flex justify-center">
+                                    <img src="{{badge}}" alt="{{rankText}}" class="w-8 h-8">
+                                </div>
+
+                                <!-- ロゴ -->
+                                <div class="mt-2 flex justify-center">
+                                    <img src="{{logo}}" alt="{{name}}" class="max-w-16 max-h-16">
+                                </div>
+
+                                <!-- ブランド名 -->
+                                <div class="mt-2 px-1">
+                                    <a
+                                        href="{{link}}"
+                                        class="text-blue-500 font-bold underline"
+                                    >
+                                        {{name}}
+                                    </a>
+                                </div>
+
+                                <!-- CTA -->
+                                <a
+                                    href="{{officialLink}}"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="block mx-1 mt-2 py-3 rounded bg-red-600 shadow-[0_4px_0_#a70606] text-white font-bold"
+                                >
+                                    {{buttonText}}
+                                </a>
+                            </th>
+                        {{/each}}
+                    </tr>
+                </thead>
+
+                <!-- データ行 -->
+                <tbody>
+                    {{#each rows}}
+                        <tr>
+                            <th class="w-[22%] py-3 px-1 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                                {{label}}
+                            </th>
+                            {{#each values}}
+                                <td class="w-[26%] py-3 border border-gray-300 bg-white text-slate-700 text-center align-top text-sm {{class}}">
+                                    {{#if image}}
+                                        <img src="{{image}}" alt="{{alt}}" class="w-8 h-8 mx-auto">
+                                    {{/if}}
+                                    {{#if text}}
+                                        {{text}}
+                                    {{/if}}
+                                    {{#if html}}
+                                        {{{html}}}
+                                    {{/if}}
+                                </td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

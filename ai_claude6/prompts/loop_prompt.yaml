@@ -1,0 +1,48 @@
+variables:
+  project_root: "/Users/hattaryoga/Desktop/mouthpiece_list/ai_claude6"
+  server_url: "http://localhost:52954/ai_claude6/"
+prompt: |
+  現在のサイクル: ${cycle_ts}
+  作業フォルダ: ${project_root}/flows/${cycle_ts}
+  初期ファイル: 1_screenshot.md / 2_scoring.md / 3_tasks.md / 4_execution.md / assets/
+
+  最新状況
+  - 1_screenshot.md: ${summary_1}
+  - 2_scoring.md: ${summary_2}
+  - 3_tasks.md: ${summary_3}
+  - 4_execution.md: ${summary_4}
+
+  目的
+  - ${server_url} を評価・改善し、スコア90点以上を達成するまでステップ0〜4を繰り返す。
+
+  ステップ0: サイクルの初期化
+  - ローカルシェルで以下を実行し、新しいサイクルディレクトリを作成する。
+      cd ${project_root}
+      ./scripts/new_cycle.sh ${cycle_ts}
+  - これにより `${project_root}/flows/${cycle_ts}/` に Markdown テンプレートと `assets/` が生成される。
+
+  ステップ1: スクリーンショット（スマホ幅）
+  - DevTools のデバイスエミュレーション等を利用し、ビューポート幅を 375px（例: iPhone 12 Pro 相当）に設定する。
+  - スクロール位置を最上部に戻したうえでフルページスクリーンショットを撮影し、`${project_root}/flows/${cycle_ts}/assets/step1_full.png` として保存する。
+  - 撮影時の操作手順、使用デバイス設定、気付いた点を `${project_root}/flows/${cycle_ts}/1_screenshot.md` に追記する。
+
+  ステップ2: 採点
+  - サイトを100点満点で採点し、根拠を箇条書きで `${project_root}/flows/${cycle_ts}/2_scoring.md` に追記する。
+  - 現在の得点と主要な改善観点を明示する。
+  - 90点以上なら「完了」と報告しサイクルを終了。90点未満なら「続行」と明記しステップ3へ進む。
+
+  ステップ3: タスク化
+  - 採点結果を踏まえた改善タスクを優先度順に `${project_root}/flows/${cycle_ts}/3_tasks.md` に追記する。
+  - 各タスクに「タイトル／目的／完了条件」を含め、最低2件作成する。
+
+  ステップ4: 実行
+  - 優先度の高いタスクから実行（UI操作・コード編集等）。
+  - 実施内容、使用コマンド、検証結果、残課題を `${project_root}/flows/${cycle_ts}/4_execution.md` に記録する。
+  - 変更差分がある場合は要点をまとめる。
+
+  ループ処理
+  - ステップ4まで完了しスコアが90点未満の場合、新しい `cycle_ts` を採番し（例: `date +"%Y%m%d_%H%M%S"`）、再度ステップ0を実行して新サイクルを開始する。
+  - 前サイクルから引き継ぐ学びがあれば、新サイクルの `1_screenshot.md` 冒頭に記載する。
+
+  最初のアクション
+  - ステップ0から開始し、`./scripts/new_cycle.sh ${cycle_ts}` を実行してサイクルの準備を整えてください。

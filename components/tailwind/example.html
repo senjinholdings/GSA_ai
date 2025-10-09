@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンズ・ヒゲ医療脱毛ランキング - Tailwind版サンプル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-sm leading-relaxed" style="font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;">
+    <!-- コンテナ -->
+    <div class="relative max-w-2xl min-h-screen mx-auto bg-white shadow-md">
+        <div id="main">
+            <!--
+            ============================================
+            以下、各コンポーネントを組み合わせて使用
+            ============================================
+            -->
+
+            <!-- Header.html の内容をここに挿入 -->
+            <h1 class="relative">
+                <img
+                    alt="メンズ・ヒゲ医療脱毛 徹底比較"
+                    src="https://via.placeholder.com/640x200?text=Banner"
+                    class="w-full h-auto"
+                >
+                <div class="absolute top-2 left-2 md:top-4 md:left-4 flex items-center">
+                    <img src="https://via.placeholder.com/5x20?text=|" alt="frame" class="w-[5px] md:w-[7px]">
+                    <div class="mx-1 md:mx-2 text-[#0e184c] text-lg md:text-2xl font-bold tracking-wide md:tracking-wider">
+                        全国版
+                    </div>
+                    <img src="https://via.placeholder.com/5x20?text=|" alt="frame" class="w-[5px] md:w-[7px]">
+                </div>
+                <div class="absolute top-1 right-1 md:top-2 md:right-2 px-1 py-0.5 md:px-2 md:py-1 border border-white rounded-sm text-white text-[10px] md:text-sm leading-none">
+                    広告
+                </div>
+            </h1>
+
+            <!-- Hero.html の内容をここに挿入 -->
+            <div class="bg-gray-100">
+                <div class="flex justify-center items-center py-6 md:py-8">
+                    <div>
+                        <div class="flex justify-center items-center md:text-lg">
+                            <div class="px-1 py-1 md:px-1.5 md:py-1.5 bg-gray-700 text-white text-xs md:text-[15px] leading-none tracking-wide">
+                                2025年最新版
+                            </div>
+                            <img src="https://via.placeholder.com/10x10?text=X" alt="×" class="mx-0.5">
+                            <div class="ml-1">医療脱毛</div>
+                        </div>
+                        <div class="mt-1 md:mt-2 text-lg md:text-2xl font-bold text-center">
+                            おすすめランキングTOP3
+                        </div>
+                    </div>
+                    <div class="ml-2 md:ml-4 w-[140px] md:w-[200px]">
+                        <img src="https://via.placeholder.com/200x200?text=Icon" alt="アイコン">
+                    </div>
+                </div>
+
+                <!-- サマリーカード例（1つだけ表示） -->
+                <div class="pb-8 bg-cyan-50">
+                    <div class="mt-2 px-3">
+                        <!-- SummaryCard.html の簡略版 -->
+                        <div class="px-2 pb-4 bg-white">
+                            <div class="flex -mr-2">
+                                <div class="flex-shrink-0 relative -top-1.5 w-[72px]">
+                                    <img src="https://via.placeholder.com/72x72?text=1位" alt="第1位">
+                                </div>
+                                <div class="ml-1 pt-4">
+                                    <a href="#" class="flex items-center text-blue-500 text-xl font-bold underline">
+                                        エミナルクリニック
+                                    </a>
+                                    <div class="flex items-center mt-1">
+                                        <div class="ml-1 text-orange-600 text-[15px] leading-none">4.8</div>
+                                        <div class="ml-1 text-gray-400 text-[11px]">/ 5.0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="https://via.placeholder.com/400x100?text=Banner" alt="バナー" class="mt-3 mx-auto w-3/4">
+
+                            <!-- 簡略テーブル -->
+                            <table class="w-full mt-4 border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 border bg-gray-700 text-white text-sm">評価</th>
+                                        <th class="py-2 border bg-gray-700 text-white text-sm">料金</th>
+                                        <th class="py-2 border bg-gray-700 text-white text-sm">回数</th>
+                                        <th class="py-2 border bg-gray-700 text-white text-sm">脱毛機</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 border text-center text-sm">⭐⭐⭐⭐⭐</td>
+                                        <td class="py-2 border text-center text-sm font-bold">38,000円</td>
+                                        <td class="py-2 border text-center text-sm">5回</td>
+                                        <td class="py-2 border text-center text-sm">熱破壊式</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- CTA -->
+                            <div class="mt-4">
+                                <div class="flex justify-center mb-2">
+                                    <div class="text-slate-700 font-bold">まずはチェック！</div>
+                                </div>
+                                <div class="flex justify-between">
+                                    <a href="#" class="flex-1 mr-2 py-3 rounded bg-blue-700 text-white text-center font-bold">詳細を見る</a>
+                                    <a href="#" class="flex-1 py-3 rounded bg-red-600 text-white text-center font-bold">公式サイト</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 注: 実際は RankingSection.html と ComparisonTable.html もここに挿入 -->
+            <div class="py-8 text-center text-gray-500">
+                <p>※ この例では一部のコンポーネントのみ表示しています</p>
+                <p>実際のページでは RankingSection と ComparisonTable も含まれます</p>
+            </div>
+        </div>
+
+        <!-- Footer.html の内容をここに挿入 -->
+        <div class="px-4 py-8 bg-gray-700 text-white">
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
+                <a href="#" class="hover:underline">プライバシーポリシー</a>
+                <a href="#" class="hover:underline">利用規約</a>
+                <a href="#" class="hover:underline">お問い合わせ</a>
+            </div>
+            <div class="mt-4 text-xs tracking-wider text-center">
+                © 2025 メンズ脱毛比較レビュー All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 必要に応じてJavaScriptを追加
+        console.log('Tailwind CSS コンポーネントサンプルページ');
+    </script>
+</body>
+</html>

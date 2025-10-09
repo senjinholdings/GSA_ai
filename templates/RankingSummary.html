@@ -1,0 +1,119 @@
+<!-- ランキングサマリーセクション -->
+<div class="top-summary">
+    <h2 class="top-summary-title">
+        <div class="title-left">
+            <div class="title-copy1">
+                <div class="copy1-label">料金</div>
+                <div class="copy1-cross">×</div>
+                <div class="copy1-label">効果</div>
+                <div class="copy1-cross">×</div>
+                <div class="copy1-label">痛み</div>
+                <div class="copy1-text">で選ぶ</div>
+            </div>
+            <div class="title-copy2"><span class="marker">{{area}}</span>のメンズ医療脱毛</div>
+        </div>
+        <div class="title-right">
+            <img alt="TOP3" src="{{top3ImageSrc}}">
+        </div>
+    </h2>
+    <div class="top-summary-content">
+        <div class="title-bottom">
+            <img src="{{titleBottomImageSrc}}">
+        </div>
+        <div class="top-summary-brands">
+            {{#each summaryBrands}}
+            <div class="summary" data-brand-id="{{id}}">
+                <div class="summary-header">
+                    <div class="summary-header-rank">
+                        <img src="{{rankImageSrc}}">
+                    </div>
+                    <div class="summary-header-right">
+                        <a class="summary-header-name" target="_blank" rel="nofollow"
+                           data-event-category="g-listing"
+                           data-event-action="{{eventAction}}"
+                           data-event-label="{{eventLabel}}"
+                           href="{{brandLink}}">
+                            <h3>{{brandName}}</h3>
+                            <svg class="svg-inline--fa fa-external-link-alt fa-w-16 link-icon" aria-hidden="true" focusable="false">
+                                <!-- SVG path -->
+                            </svg>
+                        </a>
+                        <div class="summary-header-score">
+                            <div class="score-stars">
+                                {{#repeat rating}}
+                                <img src="{{starImageSrc}}">
+                                {{/repeat}}
+                            </div>
+                            <div class="score-num">{{rating}}</div>
+                            <div class="score-text">(総合評価)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-banner">
+                    <a target="_blank" rel="nofollow"
+                       data-event-category="g-listing"
+                       data-event-action="{{eventAction}}"
+                       data-event-label="{{eventLabel}}"
+                       href="{{brandLink}}">
+                        <img src="{{bannerImageSrc}}">
+                    </a>
+                </div>
+                <div class="summary-table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>ヒゲ料金</th>
+                                <th>全身料金</th>
+                                <th>効果</th>
+                                <th>痛み</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="t-score">
+                                        <img src="{{higeScoreImageSrc}}">
+                                    </div>
+                                    <div class="t-comment">
+                                        <div class="t-times">{{higeTimes}}</div>
+                                        <div class="t-price">{{higePrice}}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="t-score">
+                                        <img src="{{bodyScoreImageSrc}}">
+                                    </div>
+                                    <div class="t-comment">
+                                        <div class="t-times">{{bodyTimes}}</div>
+                                        <div class="t-price">{{bodyPrice}}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="t-score">
+                                        <img src="{{effectScoreImageSrc}}">
+                                    </div>
+                                    <div class="t-comment">{{effectComment}}</div>
+                                </td>
+                                <td>
+                                    <div class="t-score">
+                                        <img src="{{painScoreImageSrc}}">
+                                    </div>
+                                    <div class="t-comment">{{painComment}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>公式サイト</th>
+                                <td>
+                                    <a class="t-btn" target="_blank" rel="nofollow"
+                                       data-event-category="g-listing"
+                                       data-event-action="{{eventAction}}"
+                                       data-event-label="{{eventLabel}}"
+                                       href="{{brandLink}}">公式サイト</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
