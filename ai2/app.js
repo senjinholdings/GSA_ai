@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   // ==================== CSVデータ読み込み ====================
   console.log('🚀 app.js: CSV読み込み開始');
-  const { tabData, commonText, serviceMeta, serviceSummary, serviceDetail, serviceReviews, servicePricing, serviceCta } = await loadServiceText();
+  const { tabData, commonText, serviceMeta, serviceSummary, serviceDetail, serviceReviews, servicePricing, serviceCta, serviceBasicInfo } = await loadServiceText();
   console.log('✅ app.js: CSV読み込み完了');
   console.log('📊 tabData:', tabData);
   console.log('📝 commonText:', commonText);
@@ -146,28 +146,70 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // ==================== サマリーテーブル行データの更新 ====================
+  const replaceCustomSummaryTags = (text) => {
+    if (!text) return '';
+    return text
+      .replace(/<\s*(sq-[a-z0-9_-]+)([^>]*)>/gi, (match, tagName, attrs) => {
+        const classMatch = attrs.match(/\sclass\s*=\s*"([^"]*)"/i) || attrs.match(/\sclass\s*=\s*'([^']*)'/i);
+        if (classMatch) {
+          const fullMatch = classMatch[0];
+          const existingClasses = classMatch[1];
+          const updated = fullMatch.replace(existingClasses, `${tagName} ${existingClasses}`);
+          return `<span${attrs.replace(fullMatch, updated)}>`;
+        }
+        return `<span class="${tagName}"${attrs}>`;
+      })
+      .replace(/<\s*\/\s*(sq-[a-z0-9_-]+)\s*>/gi, '</span>');
+  };
+
+  const buildSummaryCellContent = (rawValue) => {
+    const safeValue = rawValue || '';
+    const parts = safeValue.split('<br>');
+    const topRaw = replaceCustomSummaryTags(parts.shift() || '');
+    const bottomRaw = replaceCustomSummaryTags(parts.join('<br>'));
+    const hasCustomTag = /<span\s+class="sq-[^"]*"/i.test(topRaw);
+
+    let topSection = '';
+    if (topRaw) {
+      topSection = hasCustomTag
+        ? `<div class="t-times">${topRaw}</div>`
+        : `<div>${topRaw}</div>`;
+    }
+    const bottomSection = bottomRaw ? `<div class="t-price">${bottomRaw}</div>` : '';
+
+    return topSection + bottomSection;
+  };
+
   const summaryTableRows = document.querySelectorAll('.summary-table table tr:nth-child(2) td');
   let cellIndex = 0;
   serviceIds.forEach(serviceId => {
     if (serviceSummary[serviceId]) {
       if (summaryTableRows[cellIndex]) {
-        summaryTableRows[cellIndex].querySelector('.t-comment').innerHTML =
-          `<div class="t-times">${serviceSummary[serviceId].col1.split('<br>')[0]}</div>` +
-          `<div class="t-price">${serviceSummary[serviceId].col1.split('<br>')[1]}</div>`;
+        const commentEl = summaryTableRows[cellIndex].querySelector('.t-comment');
+        if (commentEl) {
+          commentEl.innerHTML = buildSummaryCellContent(serviceSummary[serviceId].col1);
+        }
       }
       cellIndex++;
       if (summaryTableRows[cellIndex]) {
-        summaryTableRows[cellIndex].querySelector('.t-comment').innerHTML =
-          `<div class="t-times">${serviceSummary[serviceId].col2.split('<br>')[0]}</div>` +
-          `<div class="t-price">${serviceSummary[serviceId].col2.split('<br>')[1]}</div>`;
+        const commentEl = summaryTableRows[cellIndex].querySelector('.t-comment');
+        if (commentEl) {
+          commentEl.innerHTML = buildSummaryCellContent(serviceSummary[serviceId].col2);
+        }
       }
       cellIndex++;
       if (summaryTableRows[cellIndex]) {
-        summaryTableRows[cellIndex].querySelector('.t-comment').innerHTML = serviceSummary[serviceId].col3;
+        const commentEl = summaryTableRows[cellIndex].querySelector('.t-comment');
+        if (commentEl) {
+          commentEl.innerHTML = replaceCustomSummaryTags(serviceSummary[serviceId].col3);
+        }
       }
       cellIndex++;
       if (summaryTableRows[cellIndex]) {
-        summaryTableRows[cellIndex].querySelector('.t-comment').textContent = serviceSummary[serviceId].col4;
+        const commentEl = summaryTableRows[cellIndex].querySelector('.t-comment');
+        if (commentEl) {
+          commentEl.textContent = serviceSummary[serviceId].col4;
+        }
       }
       cellIndex++;
     }
@@ -283,113 +325,209 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
 
-  // 3. 部位名
-  const partNames = document.querySelectorAll('.c-basicInfo__tablePartName span');
-  partNames.forEach((span) => {
-    const text = span.textContent.trim();
-    if (text === 'ライティング') {
-      span.textContent = commonText.part_1;
-    } else if (text === '総合') {
-      span.textContent = commonText.part_2;
-    } else if (text === 'プログラミング') {
-      span.textContent = commonText.part_3;
-    } else if (text === '腕') {
-      span.textContent = commonText.part_4;
-    } else if (text === '脚') {
-      span.textContent = commonText.part_5;
-    }
-  });
-
-  // 4. 「詳しく見る」ボタン
-  const detailButtons = document.querySelectorAll('.c-basicInfo__table button');
-  detailButtons.forEach((btn) => {
-    if (btn.textContent.trim().includes('詳しく見る')) {
-      btn.textContent = commonText.button_details;
-    }
-  });
-
-  // 4.5. 月額プラン「対応なし」
-  const monthlyCells = document.querySelectorAll('.c-basicInfo__table tbody tr td:last-child');
-  monthlyCells.forEach((cell) => {
-    if (cell.textContent.trim() === '対応なし') {
-      cell.textContent = commonText.monthly_plan_none;
-    }
-  });
-
-  // 4.6. 基本情報テーブルのデータ反映
-  const programTypeMap = {};
-  const updatedPartLabels = [
-    commonText.part_1 || 'ライティング',
-    commonText.part_2 || '総合',
-    commonText.part_3 || 'プログラミング',
-    commonText.part_4 || '腕',
-    commonText.part_5 || '脚'
+  const basicInfoHeaderMap = [
+    { defaultText: '学習形式', key: 'basic_info_learning_format' },
+    { defaultText: '難易度', key: 'basic_info_difficulty' },
+    { defaultText: 'レッスン時間', key: 'basic_info_lesson_time' },
+    { defaultText: '受講スタイル', key: 'basic_info_learning_style' },
+    { defaultText: 'サポート時間', key: 'basic_info_support_hours' },
+    { defaultText: '予約変更', key: 'basic_info_reservation_change' },
+    { defaultText: '質問サポート', key: 'basic_info_question_support' },
+    { defaultText: '転職支援', key: 'basic_info_career_support' },
+    { defaultText: '返金保証', key: 'basic_info_refund_policy' }
   ];
-  const legacyPartLabels = ['ライティング', '総合', 'プログラミング', '腕', '脚'];
 
-  updatedPartLabels.forEach((label, index) => {
-    const typeId = String(index + 1);
-    programTypeMap[label] = typeId;
-    const legacyLabel = legacyPartLabels[index];
-    if (legacyLabel !== label) {
-      programTypeMap[legacyLabel] = typeId;
+  const tbodyHeaderCells = document.querySelectorAll('.c-basicInfo__table tbody tr:first-child th');
+  tbodyHeaderCells.forEach((th) => {
+    const currentText = th.textContent.trim();
+    const mapping = basicInfoHeaderMap.find(({ defaultText }) => defaultText === currentText);
+    if (mapping && commonText[mapping.key]) {
+      th.textContent = commonText[mapping.key];
     }
   });
 
-  // 各サービスの基本情報セクションを処理
+  // 3. プログラム名と価格表の更新
   document.querySelectorAll('.c-basicInfo').forEach((basicInfoSection) => {
-    // サービスIDを取得（親要素から推測）
     const serviceName = basicInfoSection.querySelector('h3')?.textContent.replace('の基本情報', '');
-    let serviceId = null;
+    if (!serviceName) return;
 
-    // サービス名からIDを特定
-    Object.entries(serviceMeta).forEach(([id, meta]) => {
-      if (meta.name === serviceName) {
-        serviceId = id;
+    const serviceEntry = Object.entries(serviceMeta).find(([, meta]) => meta.name === serviceName);
+    if (!serviceEntry) return;
+
+    const [serviceId] = serviceEntry;
+    const basicInfoData = serviceBasicInfo[serviceId] || {};
+    if (!servicePricing[serviceId]) return;
+
+    const pricingEntries = Object.entries(servicePricing[serviceId])
+      .sort((a, b) => parseInt(a[0], 10) - parseInt(b[0], 10))
+      .map(([, value]) => value);
+
+    const tableElement = basicInfoSection.querySelector('.c-basicInfo__table');
+    if (!tableElement) return;
+
+    let programBodies = Array.from(tableElement.querySelectorAll('tbody'))
+      .filter(tbody => tbody.querySelector('.c-basicInfo__tablePartName span'));
+
+    if (programBodies.length === 0) return;
+
+    const createEmptyRow = (tbody) => {
+      const cloned = tbody.cloneNode(true);
+      cloned.style.display = '';
+      const programNameEl = cloned.querySelector('.c-basicInfo__tablePartName span');
+      if (programNameEl) {
+        programNameEl.textContent = '';
       }
-    });
 
-    if (!serviceId || !servicePricing[serviceId]) return;
+      const imageWrapper = cloned.querySelector('.c-basicInfo__tablePartImg');
+      if (imageWrapper) {
+        imageWrapper.style.display = 'none';
+        const imageEl = imageWrapper.querySelector('img');
+        if (imageEl) {
+          imageEl.removeAttribute('src');
+          imageEl.alt = '';
+        }
+      }
 
-    // 各プログラム行を処理
-    const programRows = basicInfoSection.querySelectorAll('.c-basicInfo__table tbody tr');
-    programRows.forEach((row) => {
-      const programNameEl = row.querySelector('.c-basicInfo__tablePartName span');
-      if (!programNameEl) return;
+      const cells = cloned.querySelectorAll('td');
+      const priceCell = cells[1];
+      if (priceCell) {
+        const priceSpan = priceCell.querySelector('span:first-child');
+        const descSpan = priceCell.querySelector('.c-basicInfo__tablePriceDesc');
+        if (priceSpan) priceSpan.textContent = '';
+        if (descSpan) descSpan.textContent = '';
+      }
 
-      const programName = programNameEl.textContent.trim();
-      const programType = programTypeMap[programName];
+      const perSessionCell = cells[2];
+      if (perSessionCell) {
+        perSessionCell.textContent = '';
+      }
 
-      if (!programType || !servicePricing[serviceId][programType]) return;
+      const monthlyCell = cells[3];
+      if (monthlyCell) {
+        monthlyCell.textContent = '';
+      }
 
-      const pricing = servicePricing[serviceId][programType];
+      return cloned;
+    };
 
-      // 総額とプログラム説明を更新（2列目）
-      const priceCell = row.querySelectorAll('td')[1];
+    if (programBodies.length < pricingEntries.length) {
+      const templateBody = createEmptyRow(programBodies[programBodies.length - 1]);
+      while (programBodies.length < pricingEntries.length) {
+        const newBody = templateBody.cloneNode(true);
+        tableElement.appendChild(newBody);
+        programBodies.push(newBody);
+      }
+    }
+
+    programBodies.forEach((tbody, index) => {
+      const row = tbody.querySelector('tr');
+      if (!row) return;
+
+      if (index >= pricingEntries.length) {
+        tbody.style.display = 'none';
+        return;
+      }
+
+      const pricing = pricingEntries[index];
+      tbody.style.display = 'table-row-group';
+
+      const programNameEl = tbody.querySelector('.c-basicInfo__tablePartName span');
+      if (programNameEl && pricing.programName) {
+        programNameEl.textContent = pricing.programName;
+      }
+
+      const imageWrapper = tbody.querySelector('.c-basicInfo__tablePartImg');
+      if (imageWrapper) {
+        const imageEl = imageWrapper.querySelector('img');
+        if (pricing.programImage) {
+          if (imageEl) {
+            imageEl.src = pricing.programImage;
+            imageEl.alt = pricing.programName ? `${pricing.programName}のイメージ` : 'プログラムイメージ';
+          }
+          imageWrapper.style.display = '';
+        } else {
+          if (imageEl) {
+            imageEl.removeAttribute('src');
+            imageEl.alt = '';
+          }
+          imageWrapper.style.display = 'none';
+        }
+      }
+
+      const cells = row.querySelectorAll('td');
+
+      const priceCell = cells[1];
       if (priceCell) {
         const priceSpan = priceCell.querySelector('span:first-child');
         const descSpan = priceCell.querySelector('.c-basicInfo__tablePriceDesc');
 
-        if (priceSpan) priceSpan.textContent = pricing.totalPrice + '円';
-        if (descSpan) descSpan.textContent = pricing.programDesc;
+        if (priceSpan && pricing.totalPrice) {
+          const priceValue = pricing.totalPrice.includes('円') ? pricing.totalPrice : `${pricing.totalPrice}円`;
+          priceSpan.textContent = priceValue;
+        }
+        if (descSpan && pricing.programDesc !== undefined) {
+          descSpan.textContent = pricing.programDesc;
+        }
       }
 
-      // 一回あたりを更新（3列目）
-      const perSessionCell = row.querySelectorAll('td')[2];
+      const perSessionCell = cells[2];
       if (perSessionCell) {
-        perSessionCell.textContent = pricing.perSessionPrice + '円';
+        if (pricing.perSessionPrice) {
+          const perSessionValue = pricing.perSessionPrice.includes('円') ? pricing.perSessionPrice : `${pricing.perSessionPrice}円`;
+          perSessionCell.textContent = perSessionValue;
+        } else {
+          perSessionCell.textContent = '';
+        }
       }
 
-      // 月額を更新（4列目）
-      const monthlyCell = row.querySelectorAll('td')[3];
+      const monthlyCell = cells[3];
       if (monthlyCell) {
         if (pricing.monthlyPrice) {
-          monthlyCell.textContent = pricing.monthlyPrice + '円';
+          const monthlyValue = pricing.monthlyPrice.includes('円') ? pricing.monthlyPrice : `${pricing.monthlyPrice}円`;
+          monthlyCell.textContent = monthlyValue;
         } else {
-          monthlyCell.textContent = commonText.monthly_plan_none;
+          monthlyCell.textContent = commonText.monthly_plan_none || '';
         }
       }
     });
+
+    const infoItems = basicInfoSection.querySelectorAll('.c-basicInfo__item');
+    const tabMappings = [
+      { tabIndex: 2, itemIndex: 1 },
+      { tabIndex: 3, itemIndex: 2 },
+      { tabIndex: 4, itemIndex: 3 }
+    ];
+
+    tabMappings.forEach(({ tabIndex, itemIndex }) => {
+      const tabDataForService = basicInfoData[tabIndex];
+      const itemElement = infoItems[itemIndex];
+      if (!tabDataForService || !itemElement) return;
+
+      const table = itemElement.querySelector('table');
+      if (!table) return;
+
+      const row = table.querySelector('tbody tr');
+      if (!row) return;
+
+      const cells = row.querySelectorAll('td');
+      cells.forEach((cell, cellIndex) => {
+        const colValue = tabDataForService[cellIndex + 1];
+        if (colValue !== undefined) {
+          cell.innerHTML = colValue;
+        } else {
+          cell.innerHTML = '';
+        }
+      });
+    });
+  });
+
+  // 4. 「詳しく見る」ボタンは非表示化
+  document.querySelectorAll('.c-basicInfo__table button').forEach((btn) => {
+    const wrapper = btn.parentElement;
+    btn.remove();
+    if (wrapper && wrapper.childElementCount === 0) {
+      wrapper.remove();
+    }
   });
 
   // 5. 「受講者の口コミ」見出し

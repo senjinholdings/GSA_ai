@@ -152,9 +152,10 @@ async function loadServiceText() {
   const serviceDetail = await loadServiceDetail();
   const serviceReviews = await loadServiceReviews();
   const servicePricing = await loadServicePricing();
+  const serviceBasicInfo = await loadServiceBasicInfo();
   const serviceCta = await loadServiceCta();
 
-  return { tabData, commonText, serviceMeta, serviceSummary, serviceDetail, serviceReviews, servicePricing, serviceCta };
+  return { tabData, commonText, serviceMeta, serviceSummary, serviceDetail, serviceReviews, servicePricing, serviceCta, serviceBasicInfo };
 }
 
 // service-meta.csvを読み込む
@@ -235,6 +236,8 @@ async function loadServicePricing() {
       pricing[row.service_id] = {};
     }
     pricing[row.service_id][row.program_type] = {
+      programName: row.program_name,
+      programImage: row.program_image,
       totalPrice: row.total_price,
       programDesc: row.program_desc,
       perSessionPrice: row.per_session_price,
@@ -243,6 +246,31 @@ async function loadServicePricing() {
   });
   console.log('✅ service-pricing.csv読み込み完了:', Object.keys(pricing).length + 'サービス');
   return pricing;
+}
+
+// service-basic-info.csvを読み込む
+async function loadServiceBasicInfo() {
+  const data = await loadCSV('text/service-basic-info.csv');
+  const basicInfo = {};
+
+  data.forEach(row => {
+    const serviceId = row.service_id;
+    const tabIndex = row.tab_index;
+    const colIndex = row.col_index;
+    if (!serviceId || !tabIndex || !colIndex) return;
+
+    if (!basicInfo[serviceId]) {
+      basicInfo[serviceId] = {};
+    }
+    if (!basicInfo[serviceId][tabIndex]) {
+      basicInfo[serviceId][tabIndex] = {};
+    }
+
+    basicInfo[serviceId][tabIndex][colIndex] = row.value || '';
+  });
+
+  console.log('✅ service-basic-info.csv読み込み完了:', Object.keys(basicInfo).length + 'サービス');
+  return basicInfo;
 }
 
 // service-cta.csvを読み込む

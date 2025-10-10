@@ -670,10 +670,6 @@ td {
   color: var(--color-text-body) !important;
 }
 
-td span {
-  color: var(--color-primary) !important;
-}
-
 /* ランキングカード関連の紫色を修正 */
 .rankingCard__epilatorInfo {
   color: var(--color-primary) !important;
@@ -1944,6 +1940,20 @@ a[data-v-54756d29] {
   outline-offset: 2px;
 }
 
+.program-detail-modal .rankingCard--modal .l-salonCard__header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.program-detail-modal .rankingCard--modal .l-salonCard__header::before {
+  margin-left: 0 !important;
+  margin-right: 8px !important;
+  display: inline-block !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+
 /* 行の背景色 - classicパターン */
 .rankingcomparetable.comparison-table--classic .table table tbody tr:first-child td {
   background: #fffbdc !important;
@@ -2610,7 +2620,7 @@ a[data-v-54756d29] {
 /* レスポンシブデザイン */
 @media screen and (max-width: 767px) {
   .top-summary .top-summary-title {
-    padding: 16px 0px;
+    padding: 26px 0px;
   }
 
   .top-summary .top-summary-title .title-left .title-copy1 .copy1-label {
@@ -2715,7 +2725,8 @@ a[data-v-54756d29] {
 
 /* 1位：金色 */
 #rankingCard1 ~ .rankingCard__header .l-salonCard__header::before,
-.rankingCard:has(#rankingCard1) .l-salonCard__header::before {
+.rankingCard:has(#rankingCard1) .l-salonCard__header::before,
+.program-detail-modal .rankingCard[data-rank="1"] .l-salonCard__header::before {
   width: 1.5em !important;
   height: 1.5em !important;
   margin-left: 4%;
@@ -2726,7 +2737,8 @@ a[data-v-54756d29] {
 
 /* 2位：銀色（グレー） */
 #rankingCard2 ~ .rankingCard__header .l-salonCard__header::before,
-.rankingCard:has(#rankingCard2) .l-salonCard__header::before {
+.rankingCard:has(#rankingCard2) .l-salonCard__header::before,
+.program-detail-modal .rankingCard[data-rank="2"] .l-salonCard__header::before {
   width: 1.5em !important;
   height: 1.5em !important;
   margin-left: 4%;
@@ -2737,7 +2749,8 @@ a[data-v-54756d29] {
 
 /* 3位：銅色（茶色） */
 #rankingCard3 ~ .rankingCard__header .l-salonCard__header::before,
-.rankingCard:has(#rankingCard3) .l-salonCard__header::before {
+.rankingCard:has(#rankingCard3) .l-salonCard__header::before,
+.program-detail-modal .rankingCard[data-rank="3"] .l-salonCard__header::before {
   width: 1.5em !important;
   height: 1.5em !important;
   margin-left: 4%;
@@ -2748,7 +2761,8 @@ a[data-v-54756d29] {
 
 /* 4位：濃いグレー */
 #rankingCard4 ~ .rankingCard__header .l-salonCard__header::before,
-.rankingCard:has(#rankingCard4) .l-salonCard__header::before {
+.rankingCard:has(#rankingCard4) .l-salonCard__header::before,
+.program-detail-modal .rankingCard[data-rank="4"] .l-salonCard__header::before {
   width: 1.5em !important;
   height: 1.5em !important;
   margin-left: 4%;
@@ -2759,7 +2773,8 @@ a[data-v-54756d29] {
 
 /* 5位：濃いグレー */
 #rankingCard5 ~ .rankingCard__header .l-salonCard__header::before,
-.rankingCard:has(#rankingCard5) .l-salonCard__header::before {
+.rankingCard:has(#rankingCard5) .l-salonCard__header::before,
+.program-detail-modal .rankingCard[data-rank="5"] .l-salonCard__header::before {
   width: 1.5em !important;
   height: 1.5em !important;
   margin-left: 4%;
