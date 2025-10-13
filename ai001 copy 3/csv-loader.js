@@ -543,8 +543,8 @@ async function loadServiceReviews() {
       reviews[row.service_id] = [];
     }
     reviews[row.service_id].push({
-      age: row.age,
       gender: row.gender,
+      name: row.name,
       title: row.title,
       content: row.content,
       date: row.date,

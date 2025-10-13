@@ -1,5 +1,196 @@
 // AI副業比較ナビ - インタラクティブ機能
 
+let gServiceCta = {};
+let gServiceMeta = {};
+let gSlugToServiceId = {};
+let gServiceNameToId = {};
+
+function openExternalLink(url) {
+  if (!url) return;
+  const opened = window.open(url, '_blank');
+  if (!opened) {
+    window.location.href = url;
+  }
+}
+
+function resolveServiceIdFromElement(element) {
+  if (!element) return null;
+
+  const fromDataset = element.closest('[data-service-id]')?.dataset?.serviceId;
+  if (fromDataset && gServiceCta[fromDataset]) {
+    return fromDataset;
+  }
+
+  const slug = element.getAttribute('data-gtm-item-slug');
+  if (slug && gSlugToServiceId[slug]) {
+    return gSlugToServiceId[slug];
+  }
+
+  const rankingCard = element.closest('.rankingCard');
+  if (rankingCard) {
+    const basicInfoTitle = rankingCard.querySelector('.c-basicInfo__ttl')?.textContent?.trim();
+    if (basicInfoTitle) {
+      const normalized = basicInfoTitle.replace('の基本情報', '').trim();
+      if (gServiceNameToId[normalized]) {
+        return gServiceNameToId[normalized];
+      }
+    }
+
+    const headingName = rankingCard.querySelector('.rankingCard__name')?.textContent?.trim();
+    if (headingName && gServiceNameToId[headingName]) {
+      return gServiceNameToId[headingName];
+    }
+  }
+
+  return null;
+}
+
+function bindCtaButtons(root = document) {
+  const buttons = root.querySelectorAll('.cta-button-2, .cta-button-3');
+  buttons.forEach((btn) => {
+    if (btn.__ctaBound) return;
+
+    const isSeminar = btn.classList.contains('cta-button-2');
+    const isOfficial = btn.classList.contains('cta-button-3');
+    const serviceId = resolveServiceIdFromElement(btn);
+    if (!serviceId) return;
+
+    const url = isSeminar ? gServiceCta[serviceId]?.seminarUrl : gServiceCta[serviceId]?.officialUrl;
+    if (!url) return;
+
+    btn.dataset.serviceId = serviceId;
+    btn.__ctaBound = true;
+    btn.style.cursor = 'pointer';
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      openExternalLink(url);
+    });
+  });
+}
+
+function initializeBasicInfoTabs(root = document) {
+  const sections = root.querySelectorAll('.c-basicInfo.rankingCard__basicInfo');
+  sections.forEach((section) => {
+    const tabs = Array.from(section.querySelectorAll('.c-basicInfo__tab'));
+    const contents = Array.from(section.querySelectorAll('.c-basicInfo__item'));
+    if (!tabs.length || !contents.length) return;
+
+    const showTab = (activeIndex) => {
+      tabs.forEach((tab, idx) => {
+        const isActive = idx === activeIndex;
+        tab.classList.toggle('is-active', isActive);
+      });
+      contents.forEach((content, idx) => {
+        const isActive = idx === activeIndex;
+        content.classList.toggle('is-active', isActive);
+        content.style.display = isActive ? '' : 'none';
+      });
+    };
+
+    const defaultIndex = tabs.findIndex(tab => tab.classList.contains('is-active'));
+    showTab(defaultIndex >= 0 ? defaultIndex : 0);
+
+    tabs.forEach((tab, index) => {
+      if (tab.__basicTabBound) return;
+      tab.__basicTabBound = true;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('tabindex', '0');
+
+      const activate = (event) => {
+        event.preventDefault();
+        showTab(index);
+      };
+
+      tab.addEventListener('click', activate);
+      tab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          activate(event);
+        }
+      });
+    });
+  });
+}
+
+function initializePlanAccordions(root = document) {
+  const subItems = root.querySelectorAll('.c-basicInfo__subItem');
+  subItems.forEach((subItem) => {
+    if (subItem.__accordionInitialized) return;
+
+    const buttonBg = subItem.querySelector('.button-background');
+    const expandBtn = subItem.querySelector('.expand-button');
+    const table = subItem.querySelector('table');
+    if (!buttonBg || !expandBtn || !table) return;
+
+    const rowGroups = Array.from(table.querySelectorAll('tbody'));
+    if (rowGroups.length <= 3) return;
+
+    subItem.__accordionInitialized = true;
+    const initialVisibleRows = 3;
+    let isExpanded = false;
+    const collapsedLabel = expandBtn.textContent.trim() || 'もっと見る';
+    const expandedLabel = expandBtn.dataset.expandedLabel || '閉じる';
+
+    expandBtn.textContent = collapsedLabel;
+    expandBtn.classList.add('expand-button--open');
+    expandBtn.classList.remove('expand-button--close');
+
+    rowGroups.forEach((row, idx) => {
+      row.style.display = idx < initialVisibleRows ? 'table-row-group' : 'none';
+    });
+
+    const toggleRows = () => {
+      isExpanded = !isExpanded;
+      rowGroups.forEach((row, idx) => {
+        if (idx >= initialVisibleRows) {
+          row.style.display = isExpanded ? 'table-row-group' : 'none';
+        }
+      });
+      const expandIcon = expandBtn.querySelector('img');
+      if (expandIcon) {
+        expandIcon.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+      expandBtn.textContent = isExpanded ? expandedLabel : collapsedLabel;
+      expandBtn.classList.toggle('expand-button--open', !isExpanded);
+      expandBtn.classList.toggle('expand-button--close', isExpanded);
+    };
+
+    [buttonBg, expandBtn].forEach((control) => {
+      control.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleRows();
+      });
+    });
+  });
+
+  const planButtons = root.querySelectorAll('.show-all-plans-btn');
+  planButtons.forEach((btn) => {
+    if (btn.__showAllPlansBound) return;
+    const wrapper = btn.closest('.show-all-plans-wrapper');
+    const table = wrapper?.previousElementSibling;
+    if (!wrapper || !table || table.tagName?.toLowerCase() !== 'table') return;
+
+    btn.__showAllPlansBound = true;
+    btn.addEventListener('click', () => {
+      const hiddenPlans = table.querySelectorAll('.is-hidden-plan');
+      if (!hiddenPlans.length) return;
+      const isCollapsed = hiddenPlans[0].classList.contains('is-hidden-plan-collapsed');
+      hiddenPlans.forEach((tbody) => {
+        tbody.classList.toggle('is-hidden-plan-collapsed', !isCollapsed);
+      });
+      const showText = btn.querySelector('.show-text');
+      const hideText = btn.querySelector('.hide-text');
+      if (showText) showText.style.display = isCollapsed ? 'none' : '';
+      if (hideText) hideText.style.display = isCollapsed ? '' : 'none';
+    });
+  });
+}
+
+function initializeRankingCardInteractions(root = document) {
+  bindCtaButtons(root);
+  initializeBasicInfoTabs(root);
+  initializePlanAccordions(root);
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
 
   // ==================== CSVデータ読み込み ====================
@@ -97,6 +288,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     '侍エンジニア': 'samuraiai'
   };
 
+  gServiceCta = serviceCta;
+  gServiceMeta = serviceMeta;
+  gSlugToServiceId = slugToServiceId;
+  gServiceNameToId = serviceNameToId;
+
   // DOMが完全に構築されるまで待つ
   setTimeout(() => {
     const seminarButtons = document.querySelectorAll('.cta-button-2');
@@ -151,7 +347,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       link.target = '_blank';
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        window.open(serviceCta[serviceId].officialUrl, '_blank');
+        openExternalLink(serviceCta[serviceId].officialUrl);
       });
     }
   });
@@ -160,26 +356,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   const rankingCards = document.querySelectorAll('.rankingCard');
   rankingCards.forEach((card, index) => {
     const serviceId = serviceIds[index];
-    if (serviceCta[serviceId]) {
-      // セミナーボタン (.cta-button-2) - 複数のボタンに対応
-      const seminarBtns = card.querySelectorAll('.cta-button-2');
-      seminarBtns.forEach(seminarBtn => {
-        if (seminarBtn && serviceCta[serviceId].seminarUrl) {
-          seminarBtn.addEventListener('click', () => {
-            window.open(serviceCta[serviceId].seminarUrl, '_blank');
-          });
-        }
-      });
-
-      // 公式サイトボタン (.cta-button-3) - 複数のボタンに対応
-      const officialBtns = card.querySelectorAll('.cta-button-3');
-      officialBtns.forEach(officialBtn => {
-        if (officialBtn && serviceCta[serviceId].officialUrl) {
-          officialBtn.addEventListener('click', () => {
-            window.open(serviceCta[serviceId].officialUrl, '_blank');
-          });
-        }
-      });
+    if (serviceId) {
+      card.dataset.serviceId = serviceId;
     }
   });
 
@@ -906,7 +1084,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           ctaButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            window.open(serviceCta[serviceId].officialUrl, '_blank');
+            openExternalLink(serviceCta[serviceId].officialUrl);
           });
           ctaButton.style.cursor = 'pointer';
         }
@@ -914,84 +1092,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   }
 
-  // ==================== 基本情報タブの切り替え ====================
-  const basicInfoSections = document.querySelectorAll('.c-basicInfo.rankingCard__basicInfo');
-  
-  basicInfoSections.forEach(section => {
-    const tabs = section.querySelectorAll('.c-basicInfo__tab');
-    const contents = section.querySelectorAll('.c-basicInfo__item');
-    
-    if (tabs.length > 0 && contents.length > 0) {
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('click', function() {
-          // アクティブクラスの切り替え
-          tabs.forEach(t => t.classList.remove('is-active'));
-          this.classList.add('is-active');
-          
-          // コンテンツの表示/非表示
-          contents.forEach((content, idx) => {
-            if (idx === index) {
-              content.style.display = 'block';
-            } else {
-              content.style.display = 'none';
-            }
-          });
-        });
-      });
-      
-      // 初期状態: 最初のコンテンツだけ表示
-      contents.forEach((content, idx) => {
-        content.style.display = idx === 0 ? 'block' : 'none';
-      });
-    }
-  });
-  
-  // ==================== アコーディオンの開閉 ====================
-  const accordionButtons = document.querySelectorAll('.button-background');
-  
-  accordionButtons.forEach(button => {
-    const parent = button.closest('.c-basicInfo__subItem');
-    if (!parent) return;
-    
-    const table = parent.querySelector('table');
-    const expandBtn = parent.querySelector('.expand-button');
-    
-    if (table && expandBtn) {
-      // 初期状態: 最初の3行だけ表示
-      const allRows = table.querySelectorAll('tbody');
-      const initialVisibleRows = 3;
-      
-      allRows.forEach((row, idx) => {
-        if (idx >= initialVisibleRows) {
-          row.style.display = 'none';
-        }
-      });
-      
-      let isExpanded = false;
-      
-      // ボタンとexpand-buttonの両方にクリックイベント
-      [button, expandBtn].forEach(elem => {
-        elem.addEventListener('click', function(e) {
-          e.stopPropagation();
-          isExpanded = !isExpanded;
-          
-          allRows.forEach((row, idx) => {
-            if (idx >= initialVisibleRows) {
-              row.style.display = isExpanded ? 'table-row-group' : 'none';
-            }
-          });
-          
-          // ボタンテキストとクラスの切り替え
-          if (expandBtn) {
-            expandBtn.textContent = isExpanded ? '閉じる' : 'もっと見る';
-            expandBtn.classList.toggle('expand-button--open', !isExpanded);
-            expandBtn.classList.toggle('expand-button--close', isExpanded);
-          }
-        });
-      });
-    }
-  });
-  
+  initializeRankingCardInteractions(document);
+
   // ==================== 検索フォームのアコーディオン ====================
   const searchFormTitle = document.querySelector('.searchForm__title');
   const searchFormContents = document.querySelector('.searchForm__contents');
@@ -1484,31 +1586,14 @@ function openProgramDetailModal(rank, programName, programRow) {
   const overlay = document.querySelector('.program-detail-overlay');
   const modal = document.querySelector('.program-detail-modal');
 
+  if (modal) {
+    initializeRankingCardInteractions(modal);
+  }
+
   requestAnimationFrame(() => {
     overlay?.classList.add('active');
     modal?.classList.add('active');
     document.body.classList.add('no-scroll');
-
-    // モーダル内のアコーディオンボタンにイベントリスナーを設定
-    const modalAccordionBtns = modal?.querySelectorAll('.show-all-plans-btn');
-    modalAccordionBtns?.forEach(btn => {
-      const tableElement = btn.closest('.show-all-plans-wrapper')?.previousElementSibling;
-      if (!tableElement) return;
-
-      btn.addEventListener('click', () => {
-        const hiddenPlans = tableElement.querySelectorAll('.is-hidden-plan');
-        const isCollapsed = hiddenPlans[0]?.classList.contains('is-hidden-plan-collapsed');
-
-        hiddenPlans.forEach(tbody => {
-          tbody.classList.toggle('is-hidden-plan-collapsed', !isCollapsed);
-        });
-
-        const showText = btn.querySelector('.show-text');
-        const hideText = btn.querySelector('.hide-text');
-        showText.style.display = isCollapsed ? 'none' : '';
-        hideText.style.display = isCollapsed ? '' : 'none';
-      });
-    });
   });
 
   const cleanup = () => {

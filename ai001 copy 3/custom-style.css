@@ -991,13 +991,19 @@ tr[data-v-769f10cc]:last-child {
 
 .rankingCard__kuchikomi .kuchikomi_head {
   display: flex;
-  gap: 12px;
+  gap: 0px;
   align-items: center;
-  justify-content: space-between;
+}
+
+.rankingCard__kuchikomi .kuchikomi_head .human {
+  flex: 0 0 30%;
+  max-width: 30%;
+  object-fit: contain;
 }
 
 .rankingCard__kuchikomi .kuchikomi_head .inner {
-  width: 74%;
+  flex: 0 0 70%;
+  max-width: 70%;
 }
 
 .rankingCard__kuchikomi .kuchikomi_head .title {
@@ -3258,15 +3264,15 @@ body.no-scroll {
 .table[data-column-number="5"] thead th[data-v-356e3e82]:first-child {
     min-width: 60px;
     padding: 4px;
-    width: 16%;
+    width: 17%;
 }
 
 .table[data-column-number="5"] thead th[data-v-356e3e82]:nth-child(2) {
-    width: 25%;
+    width: 27%;
 }
 
 .table[data-column-number="5"] thead th[data-v-356e3e82]:nth-child(3) {
-    width: 20%;
+    width: 17%;
 }
 
 .table[data-column-number="5"] thead th[data-v-356e3e82]:nth-child(4) {
@@ -3274,7 +3280,7 @@ body.no-scroll {
 }
 
 .table[data-column-number="5"] thead th[data-v-356e3e82]:nth-child(5) {
-    width: 16%;
+    width: 18%;
 }
 
 .rankingcomparetable.comparison-table--classic .table table td {
