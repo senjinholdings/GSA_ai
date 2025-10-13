@@ -1506,7 +1506,7 @@ a[data-v-54756d29] {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: auto;
   margin: 0 auto 20px;
   --comparison-fixed-col-width: 180px;
   --comparison-clinic-col-width: 100px;
@@ -1740,7 +1740,7 @@ a[data-v-54756d29] {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: auto;
   margin: 0 auto 20px;
 }
 
@@ -3379,5 +3379,4 @@ body.no-scroll {
     font-weight: 700;
     margin-left: 8px;
 }
-
 
