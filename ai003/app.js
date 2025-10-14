@@ -868,6 +868,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     siteSubtitle.textContent = commonText.site_subtitle;
   }
 
+  // 12. ランキング見出しSVGのテキスト差し替え
+  const headingSpSubtitle = document.querySelector('#heading-sp-subtitle');
+  if (headingSpSubtitle && commonText.heading_sp_subtitle) {
+    headingSpSubtitle.textContent = commonText.heading_sp_subtitle;
+  }
+
+  const headingSpMain = document.querySelector('#heading-sp-main');
+  if (headingSpMain && commonText.heading_sp_main) {
+    headingSpMain.textContent = commonText.heading_sp_main;
+  }
+
   // 10. フッター
   const footerHeadings = document.querySelectorAll('.footer_contents h5');
   footerHeadings.forEach((h5) => {
