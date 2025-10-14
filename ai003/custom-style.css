@@ -2417,6 +2417,10 @@ body.no-scroll {
 }
 
 /* ランキング見出し画像の下にマージンを追加 */
-.rankingcomparetable .title img {
+.rankingcomparetable .title img,
+.rankingcomparetable .title svg {
   margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
