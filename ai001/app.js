@@ -21,10 +21,7 @@ function resolveServiceIdFromElement(element) {
     return fromDataset;
   }
 
-  const slug = element.getAttribute('data-gtm-item-slug');
-  if (slug && gSlugToServiceId[slug]) {
-    return gSlugToServiceId[slug];
-  }
+
 
   const rankingCard = element.closest('.rankingCard');
   if (rankingCard) {
@@ -283,14 +280,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // ==================== ボタンテキストの更新 ====================
-  // data-gtm-item-slug と serviceId のマッピング
-  const slugToServiceId = {
-    'menseminal': 'shiftai',
-    'mensrize': 'dmmai',
-    'reginaclinichomme23': 'samuraiai'
-  };
-
-  // サービス名 と serviceId のマッピング
+// サービス名 と serviceId のマッピング
   const serviceNameToId = {
     'SHIFT AI': 'shiftai',
     'DMM 生成AICAMP': 'dmmai',
@@ -299,7 +289,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   gServiceCta = serviceCta;
   gServiceMeta = serviceMeta;
-  gSlugToServiceId = slugToServiceId;
   gServiceNameToId = serviceNameToId;
 
   // DOMが完全に構築されるまで待つ
@@ -309,12 +298,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     seminarButtons.forEach((btn) => {
       let serviceId = null;
 
-      // 1. data-gtm-item-slugから取得を試みる
-      const slug = btn.getAttribute('data-gtm-item-slug');
-      if (slug && slugToServiceId[slug]) {
-        serviceId = slugToServiceId[slug];
-      } else {
-        // 2. 親要素を辿ってサービス名から特定
+      // 親要素を辿ってサービス名から特定
         const rankingCard = btn.closest('.rankingCard');
         if (rankingCard) {
           // 基本情報のタイトルから取得
@@ -830,7 +814,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     const rankingCard = h3.closest('.rankingCard');
     if (!rankingCard) return;
 
-    const serviceSlug = rankingCard.querySelector('[data-gtm-item-slug]')?.dataset.gtmItemSlug;
     const serviceName = rankingCard.querySelector('.rankingCard__name')?.textContent.trim();
 
     // サービス名に基づいてタイトルを設定
@@ -1022,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           <tr data-v-356e3e82>
             <td class="comparison-table__service" style="position:relative" data-v-356e3e82 data-service="${rowData.service}">
               ${idx === 0 ? `<div class="recommend" data-v-356e3e82><img src="svg/sign/slash-left.svg" data-v-356e3e82><div data-v-356e3e82>${recommendText}</div><img src="svg/sign/slash-right.svg" data-v-356e3e82></div>` : ''}
-              <img src="${rowData.logo}" data-gtm-cv-type="micro-cv" data-gtm-item-slug="menseminal" data-gtm-cta-position="pickup-image" class="logo gtm-trigger" style="cursor: pointer" data-v-356e3e82>
+              <img src="${rowData.logo}" class="logo" style="cursor: pointer" data-v-356e3e82>
               <a class="cta-text" data-v-356e3e82>${rowData.service}</a>
             </td>
             ${rowData.cells.map(cell => `<td data-v-356e3e82>${generateCellHTML(cell)}</td>`).join('')}
@@ -1225,12 +1208,61 @@ document.addEventListener('DOMContentLoaded', async function() {
     return true;
   }
 
+  // filterStateをURLパラメータにシリアライズ
+  function serializeFilterState() {
+    const params = new URLSearchParams();
+
+    if (filterState.skills.size > 0) {
+      params.set('skills', Array.from(filterState.skills).join(','));
+    }
+
+    if (filterState.priceRange) {
+      params.set('priceRange', filterState.priceRange.join('-'));
+    }
+
+    if (filterState.learningStyle.size > 0) {
+      params.set('learningStyle', Array.from(filterState.learningStyle).join(','));
+    }
+
+    if (filterState.support.size > 0) {
+      params.set('support', Array.from(filterState.support).join(','));
+    }
+
+    return params.toString();
+  }
+
+  // URLパラメータからfilterStateを復元
+  function deserializeFilterState() {
+    const params = new URLSearchParams(window.location.search);
+
+    const skills = params.get('skills');
+    if (skills) {
+      skills.split(',').forEach(skill => filterState.skills.add(skill));
+    }
+
+    const priceRange = params.get('priceRange');
+    if (priceRange) {
+      const [min, max] = priceRange.split('-').map(Number);
+      filterState.priceRange = [min, max];
+    }
+
+    const learningStyle = params.get('learningStyle');
+    if (learningStyle) {
+      learningStyle.split(',').forEach(style => filterState.learningStyle.add(style));
+    }
+
+    const support = params.get('support');
+    if (support) {
+      support.split(',').forEach(s => filterState.support.add(s));
+    }
+  }
+
   // 絞り込みを適用
   function applyFilter() {
-    const hasActiveFilters = 
-      filterState.skills.size > 0 || 
-      filterState.priceRange !== null || 
-      filterState.learningStyle.size > 0 || 
+    const hasActiveFilters =
+      filterState.skills.size > 0 ||
+      filterState.priceRange !== null ||
+      filterState.learningStyle.size > 0 ||
       filterState.support.size > 0;
 
     serviceIds.forEach((serviceId, index) => {
@@ -1439,8 +1471,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     const applyBtn = drawerBody.querySelector('.drawer-filter-apply');
     if (applyBtn) {
       applyBtn.addEventListener('click', () => {
-        applyFilter();
-        closeSideDrawer();
+        // search.htmlに遷移してフィルタリング結果を表示
+        const params = serializeFilterState();
+        if (params) {
+          window.location.href = `search.html?${params}`;
+        } else {
+          // フィルタが何も選択されていない場合はそのままapplyFilter
+          applyFilter();
+          closeSideDrawer();
+        }
       });
     }
 
@@ -1521,7 +1560,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   // ==================== プログラム詳細モーダル ====================
   // 「詳しく見る」ボタンをクリックしたときのモーダル表示
   document.addEventListener('click', function(e) {
-    const detailButton = e.target.closest('button[data-gtm-cta-position="basic-info-table"]');
+    const detailButton = e.target.closest('button.c-basicInfo__detailBtn');
     if (!detailButton) return;
 
     e.preventDefault();
@@ -1666,4 +1705,94 @@ function closeProgramDetailModal() {
   if (overlay) overlay.parentNode.removeChild(overlay);
   if (modal) modal.parentNode.removeChild(modal);
   document.body.classList.remove('no-scroll');
+}
+
+// ==================== 検索結果ページの処理 ====================
+if (window.isSearchResultsPage) {
+  // URLパラメータからfilterStateを復元
+  deserializeFilterState();
+
+  // index.htmlからrankingCardを取得する
+  fetch('index.html')
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const allRankingCards = doc.querySelectorAll('.rankingCard.l-salonCard');
+
+      // フィルタリング
+      const filteredCards = [];
+      serviceIds.forEach((serviceId, index) => {
+        if (matchesFilter(serviceId) && allRankingCards[index]) {
+          filteredCards.push(allRankingCards[index].cloneNode(true));
+        }
+      });
+
+      // 結果を表示
+      const searchResultsContent = document.getElementById('searchResultsContent');
+      const resultsCount = document.getElementById('resultsCount');
+      const noResults = document.getElementById('noResults');
+      const appliedFilters = document.getElementById('appliedFilters');
+      const filtersList = document.getElementById('filtersList');
+
+      if (filteredCards.length > 0) {
+        // ランキングカードを表示
+        filteredCards.forEach(card => {
+          searchResultsContent.appendChild(card);
+        });
+
+        // 件数表示
+        resultsCount.textContent = `${filteredCards.length}件のスクールが見つかりました`;
+
+        // 適用中のフィルタを表示
+        const filterTags = [];
+
+        if (filterState.skills.size > 0) {
+          Array.from(filterState.skills).forEach(skill => {
+            filterTags.push(`スキル: ${skill}`);
+          });
+        }
+
+        if (filterState.priceRange) {
+          const [min, max] = filterState.priceRange;
+          filterTags.push(`料金: ${min.toLocaleString()}円〜${max.toLocaleString()}円`);
+        }
+
+        if (filterState.learningStyle.size > 0) {
+          Array.from(filterState.learningStyle).forEach(style => {
+            filterTags.push(`受講形式: ${style}`);
+          });
+        }
+
+        if (filterState.support.size > 0) {
+          Array.from(filterState.support).forEach(support => {
+            filterTags.push(`サポート: ${support}`);
+          });
+        }
+
+        if (filterTags.length > 0) {
+          appliedFilters.style.display = 'block';
+          filterTags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'filter-tag';
+            tagElement.textContent = tag;
+            filtersList.appendChild(tagElement);
+          });
+        }
+
+        // app.jsの初期化処理を再実行（CTAボタンなどのイベントリスナーを設定）
+        // Note: 必要に応じて追加のイベントリスナー設定を行う
+      } else {
+        // 該当なし
+        noResults.style.display = 'block';
+        resultsCount.textContent = '0件';
+      }
+    })
+    .catch(error => {
+      console.error('Error loading ranking cards:', error);
+      const noResults = document.getElementById('noResults');
+      noResults.style.display = 'block';
+      noResults.querySelector('.no-results-title').textContent = 'エラーが発生しました';
+      noResults.querySelector('.no-results-text').textContent = 'ページの読み込みに失敗しました。もう一度お試しください。';
+    });
 }
