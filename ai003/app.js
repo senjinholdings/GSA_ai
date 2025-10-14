@@ -970,14 +970,26 @@ document.addEventListener('DOMContentLoaded', async function() {
             const numberTextElement = tempSvg.querySelector('#title-clinic-number tspan');
             const suffixTextElement = tempSvg.querySelector('#title-clinic-suffix tspan');
 
-            if (mainTextElement && suffixTextElement) {
+            if (mainTextElement && numberTextElement && suffixTextElement) {
               // メインテキストの幅を取得
               const mainTextWidth = mainTextElement.getComputedTextLength();
               const baseX = 33; // メインテキストの開始位置
 
-              // 「を詳しくチェック」の位置を計算（メインテキストのすぐ後ろ）
-              // TOP3は傾斜デザインなので、その後に配置
-              const suffixX = baseX + mainTextWidth + 280; // TOP3のスペースを考慮
+              // TOP3の位置を計算（メインテキストのすぐ後ろ）
+              const numberX = baseX + mainTextWidth + 25;
+
+              // TOP3の親要素（text要素）のtransform属性を更新
+              const numberParent = tempSvg.querySelector('#title-clinic-number');
+              if (numberParent) {
+                // 現在のtransform: matrix(1 0 -0.325568 0.945519 300.86 22)
+                // 最後の2つの値を変更: translate(x, y)
+                const newTransform = `matrix(1 0 -0.325568 0.945519 ${numberX} 22)`;
+                numberParent.setAttribute('transform', newTransform);
+              }
+
+              // 「を詳しくチェック」の位置を計算（TOP3の後ろ）
+              const numberWidth = 180; // TOP3の幅（傾斜を考慮した概算）
+              const suffixX = numberX + numberWidth;
               suffixTextElement.setAttribute('x', suffixX);
 
               // 更新されたSVGを再シリアライズ
