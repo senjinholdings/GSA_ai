@@ -874,19 +874,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     headingSpSubtitle.textContent = commonText.heading_sp_subtitle;
   }
 
-  const headingSpMain = document.querySelector('#heading-sp-main tspan');
-  if (headingSpMain && commonText.heading_sp_main) {
-    headingSpMain.textContent = commonText.heading_sp_main;
-  }
+  if (commonText.heading_sp_main) {
+    // <big>...</big> と <big2>...</big2> を解析
+    const bigMatch = commonText.heading_sp_main.match(/<big>(.*?)<\/big>/);
+    const big2Match = commonText.heading_sp_main.match(/<big2>(.*?)<\/big2>/);
 
-  const headingSpNumber = document.querySelector('#heading-sp-number tspan');
-  if (headingSpNumber && commonText.heading_sp_number) {
-    headingSpNumber.textContent = commonText.heading_sp_number;
-  }
+    // タグを除いた通常テキスト部分を抽出
+    const mainText = commonText.heading_sp_main
+      .replace(/<big>.*?<\/big>/, '')
+      .replace(/<big2>.*?<\/big2>/, '');
 
-  const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
-  if (headingSpSuffix && commonText.heading_sp_suffix) {
-    headingSpSuffix.textContent = commonText.heading_sp_suffix;
+    const headingSpMain = document.querySelector('#heading-sp-main tspan');
+    if (headingSpMain) {
+      headingSpMain.textContent = mainText;
+    }
+
+    const headingSpNumber = document.querySelector('#heading-sp-number tspan');
+    if (headingSpNumber && bigMatch) {
+      headingSpNumber.textContent = bigMatch[1];
+    }
+
+    const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
+    if (headingSpSuffix && big2Match) {
+      headingSpSuffix.textContent = big2Match[1];
+    }
   }
 
   // 10. フッター
