@@ -869,12 +869,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 
   // 12. ランキング見出しSVGのテキスト差し替え
-  const headingSpSubtitle = document.querySelector('#heading-sp-subtitle');
+  const headingSpSubtitle = document.querySelector('#heading-sp-subtitle tspan');
   if (headingSpSubtitle && commonText.heading_sp_subtitle) {
     headingSpSubtitle.textContent = commonText.heading_sp_subtitle;
   }
 
-  const headingSpMain = document.querySelector('#heading-sp-main');
+  const headingSpMain = document.querySelector('#heading-sp-main tspan');
   if (headingSpMain && commonText.heading_sp_main) {
     headingSpMain.textContent = commonText.heading_sp_main;
   }
