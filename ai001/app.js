@@ -824,10 +824,24 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // 5. 「受講者の口コミ」見出し
-  const reviewHeadings = document.querySelectorAll('h3');
+  const reviewHeadings = document.querySelectorAll('.rankingCard__kuchikomi .c-basicInfo__ttl');
   reviewHeadings.forEach((h3) => {
-    if (h3.textContent.includes('受講者の口コミ')) {
-      h3.textContent = commonText.section_reviews;
+    // 親のrankingCard要素からサービス名を特定
+    const rankingCard = h3.closest('.rankingCard');
+    if (!rankingCard) return;
+
+    const serviceSlug = rankingCard.querySelector('[data-gtm-item-slug]')?.dataset.gtmItemSlug;
+    const serviceName = rankingCard.querySelector('.rankingCard__name')?.textContent.trim();
+
+    // サービス名に基づいてタイトルを設定
+    if (serviceName && serviceName.includes('SHIFT AI')) {
+      h3.textContent = 'SHIFT AIの受講者の声';
+    } else if (serviceName && serviceName.includes('DMM')) {
+      h3.textContent = 'DMM 生成AICAMPの受講者の声';
+    } else if (serviceName && serviceName.includes('侍')) {
+      h3.textContent = '侍エンジニアの受講者の声';
+    } else {
+      h3.textContent = commonText.section_reviews || '受講者の口コミ';
     }
   });
 
