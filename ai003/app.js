@@ -956,7 +956,42 @@ document.addEventListener('DOMContentLoaded', async function() {
           const svgString = serializer.serializeToString(svgDoc.documentElement);
           const blob = new Blob([svgString], { type: 'image/svg+xml' });
           const url = URL.createObjectURL(blob);
-          imgElement.src = url;
+
+          // 一時的にSVGを作成して幅を計測
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.visibility = 'hidden';
+          tempDiv.innerHTML = svgString;
+          document.body.appendChild(tempDiv);
+
+          const tempSvg = tempDiv.querySelector('svg');
+          if (tempSvg) {
+            const mainTextElement = tempSvg.querySelector('#title-clinic-main tspan');
+            const numberTextElement = tempSvg.querySelector('#title-clinic-number tspan');
+            const suffixTextElement = tempSvg.querySelector('#title-clinic-suffix tspan');
+
+            if (mainTextElement && numberTextElement && suffixTextElement) {
+              // メインテキストの幅を取得
+              const mainTextWidth = mainTextElement.getComputedTextLength();
+              const baseX = 33; // メインテキストの開始位置
+
+              // 「を詳しくチェック」の位置を計算（メインテキストのすぐ後ろ）
+              const suffixX = baseX + mainTextWidth + 10;
+              suffixTextElement.setAttribute('x', suffixX);
+
+              // 更新されたSVGを再シリアライズ
+              const updatedSvgString = new XMLSerializer().serializeToString(tempSvg);
+              const updatedBlob = new Blob([updatedSvgString], { type: 'image/svg+xml' });
+              const updatedUrl = URL.createObjectURL(updatedBlob);
+              imgElement.src = updatedUrl;
+            } else {
+              imgElement.src = url;
+            }
+          } else {
+            imgElement.src = url;
+          }
+
+          document.body.removeChild(tempDiv);
         }
       });
   }
