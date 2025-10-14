@@ -970,13 +970,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             const numberTextElement = tempSvg.querySelector('#title-clinic-number tspan');
             const suffixTextElement = tempSvg.querySelector('#title-clinic-suffix tspan');
 
-            if (mainTextElement && numberTextElement && suffixTextElement) {
+            if (mainTextElement && suffixTextElement) {
               // メインテキストの幅を取得
               const mainTextWidth = mainTextElement.getComputedTextLength();
               const baseX = 33; // メインテキストの開始位置
 
               // 「を詳しくチェック」の位置を計算（メインテキストのすぐ後ろ）
-              const suffixX = baseX + mainTextWidth + 10;
+              // TOP3は傾斜デザインなので、その後に配置
+              const suffixX = baseX + mainTextWidth + 180; // TOP3のスペースを考慮
               suffixTextElement.setAttribute('x', suffixX);
 
               // 更新されたSVGを再シリアライズ
