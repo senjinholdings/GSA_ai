@@ -977,7 +977,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
               // 「を詳しくチェック」の位置を計算（メインテキストのすぐ後ろ）
               // TOP3は傾斜デザインなので、その後に配置
-              const suffixX = baseX + mainTextWidth + 220; // TOP3のスペースを考慮
+              const suffixX = baseX + mainTextWidth + 280; // TOP3のスペースを考慮
               suffixTextElement.setAttribute('x', suffixX);
 
               // 更新されたSVGを再シリアライズ
