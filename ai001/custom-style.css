@@ -2334,7 +2334,7 @@ body.no-scroll {
 .skill-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 1px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -2352,7 +2352,7 @@ body.no-scroll {
   -ms-border-radius: 100px;
   text-align: center;
   border: 1px solid #111;
-  padding: 3px 1px;
+  padding: 3px 0px;
   font-size: 10px;
   font-weight: 500;
   margin-top: 4px;
