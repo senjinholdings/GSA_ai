@@ -1,38 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712 160" width="712" height="160">
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2c5f7c;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#4a7a96;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-
-  <!-- 背景 -->
-  <rect x="0" y="0" width="712" height="160" fill="url(#bgGradient)"/>
-
-  <!-- 右側の装飾（グレー） -->
-  <polygon points="600,0 712,0 712,160 520,160" fill="#b8c5ce" opacity="0.3"/>
-
-  <!-- 左側の装飾（ダークブルー） -->
-  <polygon points="0,18 150,18 120,142 0,142" fill="#1a3f54" opacity="0.5"/>
-
-  <!-- サブタイトル（上部） -->
-  <text id="heading-sp-subtitle" x="356" y="48"
-        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif"
-        font-size="20"
-        font-weight="400"
-        fill="#ffffff"
-        text-anchor="middle">
-    ＼ ここを選べば失敗なし ／
-  </text>
-
-  <!-- メインタイトル -->
-  <text id="heading-sp-main" x="356" y="115"
-        font-family="'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif"
-        font-size="46"
-        font-weight="700"
-        fill="#ffffff"
-        text-anchor="middle"
-        letter-spacing="2">
-    生成AIスクール人気3選
-  </text>
+<svg width="709" height="142" viewBox="0 0 709 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 2">
+<g id="Vector">
+<path d="M68 141.5H677.5L709 0H99.5L68 141.5Z" fill="#C9D1D7"/>
+<path d="M36 141.5H645.5L677 0H67.5L36 141.5Z" fill="#A3ADBB"/>
+<path d="M0 141.5H609.5L641 0H31.5L0 141.5Z" fill="url(#paint0_radial_1_30)"/>
+</g>
+<g id="Frame 1">
+<g id="Group 2">
+<g id="Group 1">
+<text id="&#231;&#148;&#159;&#230;&#136;&#144;AI&#227;&#130;&#185;&#227;&#130;&#175;&#227;&#131;&#188;&#227;&#131;&#171;&#228;&#186;&#186;&#230;&#176;&#151;" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="50" font-weight="bold" letter-spacing="0.01em"><tspan x="30" y="108.182">&#x751f;&#x6210;AI&#x30b9;&#x30af;&#x30fc;&#x30eb;&#x4eba;&#x6c17;</tspan></text>
+<text id="&#227;&#129;&#147;&#227;&#129;&#147;&#227;&#130;&#146;&#233;&#129;&#184;&#227;&#129;&#185;&#227;&#129;&#176;&#229;&#164;&#177;&#230;&#149;&#151;&#227;&#129;&#170;&#227;&#129;&#151;" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="128" y="45.8182">&#x3053;&#x3053;&#x3092;&#x9078;&#x3079;&#x3070;&#x5931;&#x6557;&#x306a;&#x3057;</tspan></text>
+<text id="/" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="426" y="45.8182">/</tspan></text>
+<text id="\" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="83" y="45.8182">\</tspan></text>
+<text id="3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="99" font-weight="500" letter-spacing="-0.03em"><tspan x="491" y="121">3</tspan></text>
+<text id="&#233;&#129;&#184;" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="51" font-weight="800" letter-spacing="-0.03em"><tspan x="559" y="109.545">&#x9078;</tspan></text>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<radialGradient id="paint0_radial_1_30" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(354.5 70.75) scale(354.5 70.75)">
+<stop stop-color="#4D96D3"/>
+<stop offset="1" stop-color="#284E6D"/>
+</radialGradient>
+</defs>
 </svg>

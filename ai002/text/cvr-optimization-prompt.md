@@ -74,7 +74,8 @@
 
    ```csv
    # 必ず確認すべき項目
-   title_main → カテゴリキーワードと一致させる
+   title_main → カテゴリキーワードと一致させる（改行位置にも注意）
+   site_subtitle → サブタイトルを検索意図に合わせる
    site_description → 主要キーワードを含める
    summary_table_header_X → 属性キーワードを反映
    ```
@@ -87,6 +88,35 @@
    # After（検索クエリ「生成AIセミナー 無料 講座」に最適化）
    title_main,生成AIセミナー
    ```
+
+   **IMPORTANT: タイトルの改行位置に注意**
+   - ❌ NG: `title_main,ChatGPT・生成AIセミナー` → 「セミナー」が「セミ/ナー」に分割される
+   - ✅ OK: `title_main,ChatGPTセミナー` → シンプルで改行問題なし
+   - ✅ OK: `title_main,おすすめ<br>ChatGPTセミナー` → 改行位置を明示指定
+
+   **サブタイトル（site_subtitle）の追加**
+   
+   検索意図に合わせたサブタイトルを設定：
+   ```csv
+   # 検索クエリ「ChatGPT セミナー」の場合
+   site_subtitle,〜未経験からChatGPTを使いこなせるセミナーを厳選紹介〜
+   
+   # 検索クエリ「生成AI 副業 スクール」の場合
+   site_subtitle,〜副業で稼げる生成AIスキルが身につくスクールを徹底比較〜
+   ```
+   
+   **app.jsへの反映（初回のみ）**
+   
+   site_subtitleをapp.jsに反映する処理を追加：
+   ```javascript
+   // 11. MVセクションのサブタイトル
+   const siteSubtitle = document.querySelector('.c-headingAboveMv');
+   if (siteSubtitle && commonText.site_subtitle) {
+     siteSubtitle.textContent = commonText.site_subtitle;
+   }
+   ```
+   
+   この処理は `site_description` の反映処理の直後に追加します。
 
 4. **カテゴリキーワードの統一性チェック**
 
@@ -137,7 +167,13 @@
 
 2. **common-text.csvを読み込んで修正**
    - `title_main`が検索クエリと一致しているか確認
+   - 改行位置の問題がないか確認（長すぎる場合はシンプル化）
+   - `site_subtitle`を検索意図に合わせて設定
    - 一致していない場合、修正してコミット＆プッシュ
+   
+   **app.jsの修正が必要な場合**
+   - 初めて`site_subtitle`を使う場合、app.jsに反映処理を追加
+   - `site_description`の反映処理の直後に追加
 
 3. **全CSVファイルでカテゴリキーワードを統一**
    - `service-detail.csv`を読み込み
@@ -162,6 +198,19 @@
 | AI副業 講座 おすすめ | セミナー | 講座 |
 | 初心者向け AI学習 | プロフェッショナル向け | 初心者向け |
 | オンライン 生成AI | 対面 | オンライン |
+
+#### タイトル改行問題のよくあるケース
+
+| 問題 | 原因 | 解決策 |
+|------|------|--------|
+| 「セミナー」が「セミ/ナー」に分割 | タイトルが長すぎる | シンプル化: `ChatGPTセミナー` |
+| 中途半端な位置で改行 | 「・」や長い単語 | `<br>`で改行位置を明示指定 |
+| スマホで見づらい | PC向けの長いタイトル | 10文字以内に収める |
+
+**推奨タイトル長:**
+- PC: 15文字以内
+- スマホ: 10文字以内
+- 改行を含む場合: 各行10文字以内
 
 ### フェーズ1: CVR要素の特定と優先順位付け
 
@@ -377,11 +426,14 @@ git push
 ai00Xのディレクトリ構造とCSVファイルを確認します。
 
 【フェーズ0: 検索クエリ整合性チェック】
-対象検索クエリ: 「生成AIセミナー 無料 講座」
+対象検索クエリ: 「ChatGPT セミナー」
 
 1. common-text.csvを確認します。
-→ `title_main,生成AIスクール` となっており、検索クエリ「セミナー」と不一致です。
-→ `title_main,生成AIセミナー` に修正します。
+→ `title_main,ChatGPT・生成AIセミナー` となっており、改行位置の問題があります（「セミナー」が「セミ/ナー」に分割）。
+→ `title_main,ChatGPTセミナー` にシンプル化します。
+→ `site_subtitle`を追加します：`〜未経験からChatGPTを使いこなせるセミナーを厳選紹介〜`
+
+app.jsにsite_subtitleの反映処理を追加します。
 
 GitHubにプッシュします。
 
