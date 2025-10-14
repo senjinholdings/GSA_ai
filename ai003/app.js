@@ -885,18 +885,34 @@ document.addEventListener('DOMContentLoaded', async function() {
       .replace(/<big2>.*?<\/big2>/, '');
 
     const headingSpMain = document.querySelector('#heading-sp-main tspan');
+    const headingSpMainText = document.querySelector('#heading-sp-main');
     if (headingSpMain) {
       headingSpMain.textContent = mainText;
-    }
 
-    const headingSpNumber = document.querySelector('#heading-sp-number tspan');
-    if (headingSpNumber && bigMatch) {
-      headingSpNumber.textContent = bigMatch[1];
-    }
+      // メインテキストの幅を取得して、3と選の位置を調整
+      setTimeout(() => {
+        const mainTextWidth = headingSpMain.getComputedTextLength();
+        const baseX = 30; // メインテキストの開始位置
+        const numberX = baseX + mainTextWidth + 10; // メインテキストの後ろ + 10px余白
 
-    const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
-    if (headingSpSuffix && big2Match) {
-      headingSpSuffix.textContent = big2Match[1];
+        const headingSpNumber = document.querySelector('#heading-sp-number tspan');
+        const headingSpNumberText = document.querySelector('#heading-sp-number');
+        if (headingSpNumber && bigMatch) {
+          headingSpNumber.textContent = bigMatch[1];
+          headingSpNumber.setAttribute('x', numberX);
+        }
+
+        const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
+        if (headingSpSuffix && big2Match) {
+          headingSpSuffix.textContent = big2Match[1];
+          // 「3」のテキスト幅を取得してその後ろに配置
+          if (headingSpNumber) {
+            const numberWidth = headingSpNumber.getComputedTextLength();
+            const suffixX = numberX + numberWidth;
+            headingSpSuffix.setAttribute('x', suffixX);
+          }
+        }
+      }, 0);
     }
   }
 
