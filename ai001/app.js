@@ -171,16 +171,23 @@ function initializePlanAccordions(root = document) {
 
     btn.__showAllPlansBound = true;
     btn.addEventListener('click', () => {
-      const hiddenPlans = table.querySelectorAll('.is-hidden-plan');
+      const hiddenPlans = Array.from(table.querySelectorAll('.is-hidden-plan'));
       if (!hiddenPlans.length) return;
-      const isCollapsed = hiddenPlans[0].classList.contains('is-hidden-plan-collapsed');
+      const currentlyCollapsed = hiddenPlans.every((tbody) => tbody.classList.contains('is-hidden-plan-collapsed'));
+      const collapseNext = !currentlyCollapsed;
       hiddenPlans.forEach((tbody) => {
-        tbody.classList.toggle('is-hidden-plan-collapsed', !isCollapsed);
+        if (collapseNext) {
+          tbody.classList.add('is-hidden-plan-collapsed');
+          tbody.style.display = 'none';
+        } else {
+          tbody.classList.remove('is-hidden-plan-collapsed');
+          tbody.style.display = 'table-row-group';
+        }
       });
       const showText = btn.querySelector('.show-text');
       const hideText = btn.querySelector('.hide-text');
-      if (showText) showText.style.display = isCollapsed ? 'none' : '';
-      if (hideText) hideText.style.display = isCollapsed ? '' : 'none';
+      if (showText) showText.style.display = collapseNext ? '' : 'none';
+      if (hideText) hideText.style.display = collapseNext ? 'none' : '';
     });
   });
 }
@@ -231,13 +238,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   const titleCopy2 = document.querySelector('.title-copy2');
   if (titleCopy2) {
-    // markerの後のテキストノードを更新
-    const textNode = Array.from(titleCopy2.childNodes).find(
-      node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+    // マーカー後のテキストノードを必要に応じて生成して更新
+    let textNode = Array.from(titleCopy2.childNodes).find(
+      node => node.nodeType === Node.TEXT_NODE
     );
-    if (textNode) {
-      textNode.textContent = commonText.title_main || 'AI副業スクール';
+    if (!textNode) {
+      textNode = document.createTextNode('');
+      titleCopy2.appendChild(textNode);
     }
+    textNode.textContent = commonText.title_main || 'AI副業スクール';
   }
 
   // ==================== サービスIDリスト ====================
@@ -331,16 +340,26 @@ document.addEventListener('DOMContentLoaded', async function() {
         btn.innerHTML = serviceCta[serviceId].buttonSeminarText;
       }
     });
+
+    const officialButtons = document.querySelectorAll('.cta-button-3');
+    officialButtons.forEach((btn) => {
+      if (commonText.button_card_text) {
+        btn.textContent = commonText.button_card_text;
+      } else if (!btn.textContent.trim()) {
+        btn.textContent = '公式サイトを見る';
+      }
+    });
   }, 100);
 
-  const detailLinks = document.querySelectorAll('.summary-cta-btn a');
-  detailLinks.forEach((link, index) => {
-    link.innerHTML = commonText.button_detail_text || '詳細を見る +';
+  const detailButtons = document.querySelectorAll('.summary-cta-btn.btn-narrow');
+  detailButtons.forEach((btn) => {
+    btn.textContent = commonText.button_detail_text || '詳細を見る +';
   });
 
   // 公式サイトを見るボタン (.summary-cta-btn.btn-wide) のURL設定
   const officialSiteLinks = document.querySelectorAll('.summary-cta-btn.btn-wide');
   officialSiteLinks.forEach((link, index) => {
+    link.innerHTML = commonText.button_card_text || '公式サイトを見る';
     const serviceId = serviceIds[index];
     if (serviceCta[serviceId]?.officialUrl) {
       link.href = serviceCta[serviceId].officialUrl;
@@ -528,41 +547,52 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   // 2. テーブルヘッダー
-  const tableHeaders = document.querySelectorAll('.c-basicInfo__tablePartsTh, .c-basicInfo__table thead th');
-  if (tableHeaders.length > 0 && commonText.table_header_program) {
-    tableHeaders.forEach((th) => {
-      const text = th.textContent.trim();
-      if (text === 'プログラム' || text.includes('プログラム')) {
-        th.textContent = commonText.table_header_program;
-      } else if (text === '総額') {
-        th.textContent = commonText.table_header_total;
-      } else if (text === '一回あたり') {
-        th.textContent = commonText.table_header_per_session;
-      } else if (text.includes('月額')) {
-        th.innerHTML = `${commonText.table_header_monthly}<small class="c-basicInfo__tablePartsThAnnot">${commonText.table_header_monthly_note}</small>`;
-      }
-    });
-  }
-
-  const basicInfoHeaderMap = [
-    { defaultText: '学習形式', key: 'basic_info_learning_format' },
-    { defaultText: '難易度', key: 'basic_info_difficulty' },
-    { defaultText: 'レッスン時間', key: 'basic_info_lesson_time' },
-    { defaultText: '受講スタイル', key: 'basic_info_learning_style' },
-    { defaultText: 'サポート時間', key: 'basic_info_support_hours' },
-    { defaultText: '予約変更', key: 'basic_info_reservation_change' },
-    { defaultText: '質問サポート', key: 'basic_info_question_support' },
-    { defaultText: '転職支援', key: 'basic_info_career_support' },
-    { defaultText: '返金保証', key: 'basic_info_refund_policy' }
+  const tableHeaderGroups = document.querySelectorAll('.c-basicInfo__table thead tr');
+  tableHeaderGroups.forEach((tr) => {
+    const headerCells = tr.querySelectorAll('th');
+    if (headerCells.length >= 4) {
+      headerCells[0].textContent = commonText.table_header_program || 'コース';
+      headerCells[1].textContent = commonText.table_header_total || '習得スキル';
+      headerCells[2].textContent = commonText.table_header_per_session || '料金';
+      headerCells[3].textContent = commonText.table_header_monthly || '月額';
+    }
+  });
+  const tbodyHeaderKeyGroups = [
+    [
+      { key: 'basic_info_learning_format', fallback: '利用者数' },
+      { key: 'basic_info_difficulty', fallback: '実績' },
+      { key: 'basic_info_lesson_time', fallback: '満足度' }
+    ],
+    [
+      { key: 'basic_info_learning_style', fallback: '受講形式' },
+      { key: 'basic_info_support_hours', fallback: 'コミュニティ' },
+      { key: 'basic_info_reservation_change', fallback: 'その他' }
+    ],
+    [
+      { key: 'basic_info_question_support', fallback: 'サポート体制' },
+      { key: 'basic_info_career_support', fallback: '案件支援' },
+      { key: 'basic_info_refund_policy', fallback: '返金保証' }
+    ]
   ];
 
-  const tbodyHeaderCells = document.querySelectorAll('.c-basicInfo__table tbody tr:first-child th');
-  tbodyHeaderCells.forEach((th) => {
-    const currentText = th.textContent.trim();
-    const mapping = basicInfoHeaderMap.find(({ defaultText }) => defaultText === currentText);
-    if (mapping && commonText[mapping.key]) {
-      th.textContent = commonText[mapping.key];
-    }
+  document.querySelectorAll('.c-basicInfo__items').forEach((itemsContainer) => {
+    const items = Array.from(itemsContainer.querySelectorAll('.c-basicInfo__item'));
+    items.forEach((item, itemIndex) => {
+      const headerGroupIndex = itemIndex - 1;
+      if (headerGroupIndex < 0 || headerGroupIndex >= tbodyHeaderKeyGroups.length) {
+        return;
+      }
+      const keyGroup = tbodyHeaderKeyGroups[headerGroupIndex];
+      const headerRow = item.querySelector('tbody tr');
+      if (!headerRow) return;
+      const headerCells = headerRow.querySelectorAll('th');
+      if (headerCells.length < 3) return;
+      headerCells.forEach((th, cellIndex) => {
+        const config = keyGroup[cellIndex];
+        if (!config) return;
+        th.textContent = commonText[config.key] || config.fallback;
+      });
+    });
   });
 
   // 3. プログラム名と価格表の更新
@@ -744,26 +774,11 @@ document.addEventListener('DOMContentLoaded', async function() {
       // テーブルの後に挿入
       tableElement.parentElement.insertBefore(btnWrapper, tableElement.nextSibling);
 
-      // ボタンのクリックイベント
-      const btn = btnWrapper.querySelector('.show-all-plans-btn');
-      btn.addEventListener('click', () => {
-        const hiddenPlans = tableElement.querySelectorAll('.is-hidden-plan');
-        const isCollapsed = hiddenPlans[0]?.classList.contains('is-hidden-plan-collapsed');
-
-        hiddenPlans.forEach(tbody => {
-          tbody.classList.toggle('is-hidden-plan-collapsed', !isCollapsed);
-        });
-
-        const showText = btn.querySelector('.show-text');
-        const hideText = btn.querySelector('.hide-text');
-        showText.style.display = isCollapsed ? 'none' : '';
-        hideText.style.display = isCollapsed ? '' : 'none';
-      });
-
       // 初期状態で非表示にする
       const hiddenPlans = tableElement.querySelectorAll('.is-hidden-plan');
       hiddenPlans.forEach(tbody => {
         tbody.classList.add('is-hidden-plan-collapsed');
+        tbody.style.display = 'none';
       });
     }
 
@@ -890,11 +905,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     rankingTabs.forEach((tab, index) => {
       const tabNameKey = `tab_${index}_name`;
       if (commonText[tabNameKey]) {
-        // 既存のテキストノードを更新
-        const textNode = Array.from(tab.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-        if (textNode) {
-          textNode.textContent = commonText[tabNameKey];
+        // 既存のテキストノードがなければ生成して更新
+        let textNode = Array.from(tab.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+        if (!textNode) {
+          textNode = document.createTextNode('');
+          tab.insertBefore(textNode, tab.firstChild || null);
         }
+        textNode.textContent = commonText[tabNameKey];
       }
     });
   }
@@ -1346,18 +1363,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     item.appendChild(header);
     item.appendChild(content);
     
-    // 初期状態は閉じた状態
-    content.style.maxHeight = '0';
-    
     // アコーディオンの開閉
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
       if (isOpen) {
         item.classList.remove('open');
-        content.style.maxHeight = '0';
       } else {
         item.classList.add('open');
-        content.style.maxHeight = content.scrollHeight + 'px';
       }
     });
     
