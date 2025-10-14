@@ -879,6 +879,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     headingSpMain.textContent = commonText.heading_sp_main;
   }
 
+  const headingSpNumber = document.querySelector('#heading-sp-number tspan');
+  if (headingSpNumber && commonText.heading_sp_number) {
+    headingSpNumber.textContent = commonText.heading_sp_number;
+  }
+
+  const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
+  if (headingSpSuffix && commonText.heading_sp_suffix) {
+    headingSpSuffix.textContent = commonText.heading_sp_suffix;
+  }
+
   // 10. フッター
   const footerHeadings = document.querySelectorAll('.footer_contents h5');
   footerHeadings.forEach((h5) => {
