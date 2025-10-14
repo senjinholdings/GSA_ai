@@ -916,6 +916,51 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   }
 
+  // 13. title_clinic.svgのテキスト差し替え
+  if (commonText.title_clinic_text) {
+    // <big>...</big> を解析
+    const bigMatch = commonText.title_clinic_text.match(/<big>(.*?)<\/big>/);
+
+    // タグを除いたテキスト部分を抽出
+    const parts = commonText.title_clinic_text.split(/<big>.*?<\/big>/);
+    const mainText = parts[0] || ''; // 最初の部分（生成AIスクール）
+    const suffixText = parts[1] || ''; // 最後の部分（を詳しくチェック）
+
+    // SVGを非同期で読み込んで更新
+    fetch('img/ranking/title_clinic.svg')
+      .then(response => response.text())
+      .then(svgText => {
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+
+        // テキスト要素を更新
+        const titleClinicMain = svgDoc.querySelector('#title-clinic-main tspan');
+        if (titleClinicMain) {
+          titleClinicMain.textContent = mainText;
+        }
+
+        const titleClinicNumber = svgDoc.querySelector('#title-clinic-number tspan');
+        if (titleClinicNumber && bigMatch) {
+          titleClinicNumber.textContent = bigMatch[1];
+        }
+
+        const titleClinicSuffix = svgDoc.querySelector('#title-clinic-suffix tspan');
+        if (titleClinicSuffix) {
+          titleClinicSuffix.textContent = suffixText;
+        }
+
+        // 元の<img>要素を更新されたSVGに置き換え
+        const imgElement = document.querySelector('img[src="img/ranking/title_clinic.svg"]');
+        if (imgElement) {
+          const serializer = new XMLSerializer();
+          const svgString = serializer.serializeToString(svgDoc.documentElement);
+          const blob = new Blob([svgString], { type: 'image/svg+xml' });
+          const url = URL.createObjectURL(blob);
+          imgElement.src = url;
+        }
+      });
+  }
+
   // 10. フッター
   const footerHeadings = document.querySelectorAll('.footer_contents h5');
   footerHeadings.forEach((h5) => {
