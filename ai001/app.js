@@ -317,7 +317,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
           }
         }
-      }
 
       // サービスIDが特定できた場合、対応するボタンテキストを設定
       if (serviceId && serviceCta[serviceId]?.buttonSeminarText) {
