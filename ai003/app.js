@@ -372,6 +372,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
+  // ==================== サマリーヘッダー星評価の更新 ====================
+  const summaryHeaderScores = document.querySelectorAll('.summary-header-score');
+  summaryHeaderScores.forEach((scoreElement, index) => {
+    const serviceId = serviceIds[index];
+    if (serviceMeta[serviceId]) {
+      const rating = parseFloat(serviceMeta[serviceId].ratingScore);
+      const starRating = scoreElement.querySelector('.star-rating');
+      const scoreNum = scoreElement.querySelector('.score-num');
+      const starsFilled = scoreElement.querySelector('.stars-filled');
+
+      if (starRating) {
+        starRating.setAttribute('data-rating', rating);
+      }
+      if (scoreNum) {
+        scoreNum.textContent = rating;
+      }
+      if (starsFilled) {
+        const percentage = (rating / 5) * 100;
+        starsFilled.style.width = percentage + '%';
+      }
+    }
+  });
+
   // ==================== サマリーテーブル行データの更新 ====================
   const replaceCustomSummaryTags = (text) => {
     if (!text) return '';
@@ -843,6 +866,83 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
+  // 7.5. ランキングタイトルSVGの更新
+  const rankingSvgImg = document.querySelector('img[src*="summary_h2.svg"]');
+  if (rankingSvgImg && commonText.summary_ranking_title) {
+    fetch(rankingSvgImg.src)
+      .then(response => response.text())
+      .then(svgText => {
+        const updatedSvg = svgText.replace(
+          /(<tspan[^>]*>)TOP\d+(<\/tspan>)/,
+          `$1${commonText.summary_ranking_title}$2`
+        );
+        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        rankingSvgImg.src = url;
+      })
+      .catch(err => console.error('SVG読み込みエラー:', err));
+  }
+
+  // 7.6. MVのSVG更新
+  const mvSvgImg = document.querySelector('.mv__contents img[src*="mv_ranking_semminar.svg"]');
+  if (mvSvgImg) {
+    fetch(mvSvgImg.src)
+      .then(response => response.text())
+      .then(svgText => {
+        let updatedSvg = svgText;
+
+        // フォントサイズ調整用の設定（各要素の最大幅と基準フォントサイズ）
+        const fontSizeConfig = {
+          'mv-year-label': { maxWidth: 300, baseFontSize: 48, baseLength: 6 },
+          'mv-main-title': { maxWidth: 600, baseFontSize: 119, baseLength: 8 },
+          'mv-tag1': { maxWidth: 200, baseFontSize: 70, baseLength: 4 },
+          'mv-tag2': { maxWidth: 200, baseFontSize: 70, baseLength: 4 },
+          'mv-tag3': { maxWidth: 200, baseFontSize: 70, baseLength: 5 }
+        };
+
+        // 各テキスト要素を置換（HTMLエンティティ対応 + フォントサイズ自動調整）
+        const replacements = [
+          { id: 'mv-year-label', text: commonText.mv_year_label },
+          { id: 'mv-main-title', text: commonText.mv_main_title },
+          { id: 'mv-tag1', text: commonText.mv_tag1 },
+          { id: 'mv-tag2', text: commonText.mv_tag2 },
+          { id: 'mv-tag3', text: commonText.mv_tag3 }
+        ];
+
+        replacements.forEach(({ id, text }) => {
+          if (text) {
+            // HTMLエンティティに変換
+            const encodedText = text.split('').map(char => {
+              const code = char.charCodeAt(0);
+              return code > 127 ? `&#x${code.toString(16)};` : char;
+            }).join('');
+
+            // フォントサイズを計算（英数字は0.8文字としてカウント）
+            let fontSize = fontSizeConfig[id]?.baseFontSize || 48;
+            if (fontSizeConfig[id]) {
+              // 英数字を0.8、それ以外を1としてカウント
+              const textLength = text.split('').reduce((count, char) => {
+                return count + (/[a-zA-Z0-9]/.test(char) ? 0.8 : 1);
+              }, 0);
+              const { baseFontSize, baseLength } = fontSizeConfig[id];
+              if (textLength > baseLength) {
+                fontSize = Math.floor(baseFontSize * (baseLength / textLength));
+              }
+            }
+
+            // text要素内のfont-sizeとtspan内容を置換
+            const textRegex = new RegExp(`(<text[^>]*id="${id}"[^>]*font-size=")[^"]*("[^>]*>[\\s\\S]*?<tspan[^>]*>)[^<]*(</tspan>)`, 'g');
+            updatedSvg = updatedSvg.replace(textRegex, `$1${fontSize}$2${encodedText}$3`);
+          }
+        });
+
+        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        mvSvgImg.src = url;
+      })
+      .catch(err => console.error('MV SVG読み込みエラー:', err));
+  }
+
   // 8. 絞り込み検索
   const filterHeading = document.querySelector('.modalArea__ttl');
   if (filterHeading) {
@@ -892,8 +992,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       // メインテキストの幅を取得して、3と選の位置を調整
       setTimeout(() => {
         const mainTextWidth = headingSpMain.getComputedTextLength();
-        const baseX = 30; // メインテキストの開始位置
-        const numberX = baseX + mainTextWidth + 10; // メインテキストの後ろ + 10px余白
+        const baseX = 20; // メインテキストの開始位置
+        const numberX = baseX + mainTextWidth +10; // メインテキストの後ろ + 10px余白
 
         const headingSpNumber = document.querySelector('#heading-sp-number tspan');
         const headingSpNumberText = document.querySelector('#heading-sp-number');
@@ -973,10 +1073,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (mainTextElement && numberTextElement && suffixTextElement) {
               // メインテキストの幅を取得
               const mainTextWidth = mainTextElement.getComputedTextLength();
-              const baseX = 33; // メインテキストの開始位置
+              const baseX = 18; // メインテキストの開始位置
 
               // TOP3の位置を計算（メインテキストのすぐ後ろ）
-              const numberX = baseX + mainTextWidth + 25;
+              const numberX = baseX + mainTextWidth + 22;
 
               // TOP3の親要素（text要素）のtransform属性を更新
               const numberParent = tempSvg.querySelector('#title-clinic-number');
@@ -988,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', async function() {
               }
 
               // 「を詳しくチェック」の位置を計算（TOP3の後ろ）
-              const numberWidth = 180; // TOP3の幅（傾斜を考慮した概算）
+              const numberWidth = 150; // TOP3の幅（傾斜を考慮した概算）
               const suffixX = numberX + numberWidth;
               suffixTextElement.setAttribute('x', suffixX);
 
