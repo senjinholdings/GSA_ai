@@ -105,7 +105,7 @@
 
 .rankingCard__heading {
   align-items: center !important;
-  gap: 12px !important;
+  gap: 0px !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -113,6 +113,7 @@
   .rankingCard__name {
     padding-left: 60px !important;
     padding-bottom: 4px !important;
+    font-weight: 900;
   }
 
 }
@@ -1945,7 +1946,7 @@ tr[data-v-769f10cc] {
   display: flex !important;
   align-items: center !important;
   gap: 0 !important;
-  padding: 12px 20px 12px 3px !important;
+  padding: 5px 20px 8px 3px !important;
 }
 
 .rankingCard__header .l-salonCard__header::before {
@@ -1966,7 +1967,7 @@ tr[data-v-769f10cc] {
 .rankingCard[data-rank="1"] .l-salonCard__header::before {
     width: 1.5em !important;
     height: 1.5em !important;
-    margin-right: 8px !important;
+    margin: 0px 6px 0px 10px !important;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.00488 19H22.0049V21H2.00488V19ZM2.00488 5L7.00488 8L12.0049 2L17.0049 8L22.0049 5V17H2.00488V5Z' fill='%23ffb500'%3E%3C/path%3E%3C/svg%3E") !important;
     content: '' !important;
     flex-shrink: 0 !important;
@@ -1980,7 +1981,15 @@ tr[data-v-769f10cc] {
 .rankingCard:has(#rankingCard2) .l-salonCard__header::before,
 .program-detail-modal .rankingCard[data-rank="2"] .l-salonCard__header::before,
 .rankingCard[data-rank="2"] .l-salonCard__header::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.00488 19H22.0049V21H2.00488V19ZM2.00488 5L7.00488 8L12.0049 2L17.0049 8L22.0049 5V17H2.00488V5Z' fill='%23c0c0c0'%3E%3C/path%3E%3C/svg%3E") !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
+    margin: 0px 6px 0px 10px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.00488 19H22.0049V21H2.00488V19ZM2.00488 5L7.00488 8L12.0049 2L17.0049 8L22.0049 5V17H2.00488V5Z' fill='%23c0c0c0'%3E%3C/path%3E%3C/svg%3E") !important;
+    content: '' !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
 }
 
 /* 3位：銅色（茶色） */
@@ -1988,7 +1997,15 @@ tr[data-v-769f10cc] {
 .rankingCard:has(#rankingCard3) .l-salonCard__header::before,
 .program-detail-modal .rankingCard[data-rank="3"] .l-salonCard__header::before,
 .rankingCard[data-rank="3"] .l-salonCard__header::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.00488 19H22.0049V21H2.00488V19ZM2.00488 5L7.00488 8L12.0049 2L17.0049 8L22.0049 5V17H2.00488V5Z' fill='%23cd7f32'%3E%3C/path%3E%3C/svg%3E") !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
+    margin: 0px 6px 0px 10px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.00488 19H22.0049V21H2.00488V19ZM2.00488 5L7.00488 8L12.0049 2L17.0049 8L22.0049 5V17H2.00488V5Z' fill='%23cd7f32'%3E%3C/path%3E%3C/svg%3E") !important;
+    content: '' !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
 }
 
 /* 4位：濃いグレー */
@@ -2241,7 +2258,7 @@ body.no-scroll {
 @media screen and (max-width: 767px) {
 
   .l-salonCard__header {
-    padding: 12px 20px 12px 3px !important;
+    padding: 5px 20px 8px 3px !important;
   }
 
   .l-salonCard__header::before {
@@ -2414,4 +2431,55 @@ body.no-scroll {
   font-size: 18px;
   font-weight: 700;
   margin-left: 8px;
+}
+
+/* ランキング見出し画像の下にマージンを追加 */
+.rankingcomparetable .title img,
+.rankingcomparetable .title svg {
+  margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ランキングカードバッジ */
+.rankingCard__heading {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.rankingCard__badge {
+  padding-left: 80px;
+}
+
+.rankingCard__badge .badge-stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.rankingCard__badge .badge-stars .star-rating {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.rankingCard__badge .badge-stars .rating-score {
+  font-weight: bold;
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .rankingCard__badge {
+    padding-left: 8px;
+  }
+
+  .rankingCard__badge .badge-stars {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .rankingCard__badge .badge-stars .star-rating {
+    font-size: 12px;
+  }
 }

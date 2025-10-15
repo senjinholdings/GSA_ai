@@ -441,7 +441,9 @@ async function loadServiceMeta() {
     meta[row.service_id] = {
       name: row.service_name,
       logo: row.logo_path,
-      ratingScore: row.rating_score
+      ratingScore: row.rating_score,
+      badgeRank: row.badge_rank,
+      badgeText: row.badge_text
     };
   });
   console.log('✅ service-meta.csv読み込み完了:', Object.keys(meta).length + 'サービス');

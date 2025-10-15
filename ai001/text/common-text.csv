@@ -54,6 +54,13 @@ table_header_monthly_note
 button_details,詳しく見る
 section_reviews,受講者の口コミ
 label_overall_rating,(総合評価)
+summary_ranking_title,TOP5
+mv_year_label,2025年最新版
+mv_main_title,生成AIスクール
+mv_ranking_word,ランキング
+mv_tag1,「副業」
+mv_tag2,「転職」
+mv_tag3,「業務活用」
 disclaimer,※当サイトはプロモーションを含んでいます。
 filter_heading,絞り込み検索
 filter_ai_type,AI副業の種類
@@ -67,6 +74,10 @@ button_close,閉じる
 button_menu,メニューを開く
 site_name,AI副業おすすめ比較.com
 site_description,AI副業スクール・ツールを探すならAI副業比較ナビ
+site_subtitle,〜未経験からChatGPTを使いこなせるセミナーを厳選紹介〜
+heading_sp_subtitle, ここを選べば失敗なし
+heading_sp_main, 生成AIスクール人気<big>3</big><big2>選</big2>
+title_clinic_text,生成AIスクール<big>TOP3</big>を詳しくチェック
 footer_popular_schools,人気スクール
 footer_management,運営
 footer_company,運営者情報

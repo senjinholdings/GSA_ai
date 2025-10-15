@@ -372,6 +372,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
+  // ==================== サマリーヘッダー星評価の更新 ====================
+  const summaryHeaderScores = document.querySelectorAll('.summary-header-score');
+  summaryHeaderScores.forEach((scoreElement, index) => {
+    const serviceId = serviceIds[index];
+    if (serviceMeta[serviceId]) {
+      const rating = parseFloat(serviceMeta[serviceId].ratingScore);
+      const starRating = scoreElement.querySelector('.star-rating');
+      const scoreNum = scoreElement.querySelector('.score-num');
+      const starsFilled = scoreElement.querySelector('.stars-filled');
+
+      if (starRating) {
+        starRating.setAttribute('data-rating', rating);
+      }
+      if (scoreNum) {
+        scoreNum.textContent = rating;
+      }
+      if (starsFilled) {
+        const percentage = (rating / 5) * 100;
+        starsFilled.style.width = percentage + '%';
+      }
+    }
+  });
+
   // ==================== サマリーテーブル行データの更新 ====================
   const replaceCustomSummaryTags = (text) => {
     if (!text) return '';
@@ -487,6 +510,24 @@ document.addEventListener('DOMContentLoaded', async function() {
       const rankingCardNames = document.querySelectorAll('.rankingCard__name');
       if (rankingCardNames[index]) {
         rankingCardNames[index].textContent = serviceName;
+      }
+
+      // 1.5. ランキングカードのバッジ (.rankingCard__badge)
+      const rankingCardBadges = document.querySelectorAll('.rankingCard__badge');
+      if (rankingCardBadges[index] && serviceMeta[serviceId]) {
+        const ratingScore = serviceMeta[serviceId].ratingScore;
+        if (ratingScore) {
+          const ratingPercent = (parseFloat(ratingScore) / 5) * 100;
+          rankingCardBadges[index].innerHTML = `
+            <div class="badge-stars">
+              <div class="star-rating" data-rating="${ratingScore}">
+                <div class="stars-empty">★★★★★</div>
+                <div class="stars-filled" style="width: ${ratingPercent}%;">★★★★★</div>
+              </div>
+              <span class="rating-score">${ratingScore}</span>
+            </div>
+          `;
+        }
       }
 
       // 2. サマリーヘッダーのサービス名 (.summary-header-name h3)
@@ -843,6 +884,86 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
+  // 7.5. ランキングタイトルSVGの更新
+  const rankingSvgImg = document.querySelector('img[src*="summary_h2.svg"]');
+  if (rankingSvgImg && commonText.summary_ranking_title) {
+    fetch(rankingSvgImg.src)
+      .then(response => response.text())
+      .then(svgText => {
+        const updatedSvg = svgText.replace(
+          /(<tspan[^>]*>)TOP\d+(<\/tspan>)/,
+          `$1${commonText.summary_ranking_title}$2`
+        );
+        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        rankingSvgImg.src = url;
+      })
+      .catch(err => console.error('SVG読み込みエラー:', err));
+  }
+
+  // 7.6. MVのSVG更新
+  const mvSvgImg = document.querySelector('.mv__contents img[src*="mv_ranking_semminar.svg"]');
+  if (mvSvgImg) {
+    fetch(mvSvgImg.src)
+      .then(response => response.text())
+      .then(svgText => {
+        let updatedSvg = svgText;
+
+        // フォントサイズ調整用の設定（各要素の最大幅と基準フォントサイズ）
+        const fontSizeConfig = {
+          'mv-year-label': { maxWidth: 300, baseFontSize: 48, baseLength: 6 },
+          'mv-main-title': { maxWidth: 600, baseFontSize: 119, baseLength: 8 },
+          'mv-tag1': {  baseFontSize: 70, baseLength: 4 },
+          'mv-tag2': {  baseFontSize: 70, baseLength: 4 },
+          'mv-tag3': {  baseFontSize: 70, baseLength: 4 }
+        };
+
+        // 各テキスト要素を置換（HTMLエンティティ対応 + フォントサイズ自動調整）
+        const replacements = [
+          { id: 'mv-year-label', text: commonText.mv_year_label },
+          { id: 'mv-main-title', text: commonText.mv_main_title },
+          { id: 'mv-tag1', text: commonText.mv_tag1 },
+          { id: 'mv-tag2', text: commonText.mv_tag2 },
+          { id: 'mv-tag3', text: commonText.mv_tag3 }
+        ];
+
+        replacements.forEach(({ id, text }) => {
+          if (text) {
+            // HTMLエンティティに変換
+            const encodedText = text.split('').map(char => {
+              const code = char.charCodeAt(0);
+              return code > 127 ? `&#x${code.toString(16)};` : char;
+            }).join('');
+
+            // フォントサイズを計算（英数字は0.8文字としてカウント）
+            let fontSize = fontSizeConfig[id]?.baseFontSize || 48;
+            if (fontSizeConfig[id]) {
+              // 英数字を0.8、それ以外を1としてカウント
+              const textLength = text.split('').reduce((count, char) => {
+                return count + (/[a-zA-Z0-9]/.test(char) ? 0.8 : 1);
+              }, 0);
+              const { baseFontSize, baseLength } = fontSizeConfig[id];
+              // mv-tag1, mv-tag2, mv-tag3は常に同じフォントサイズにする
+              if (id === 'mv-tag1' || id === 'mv-tag2' || id === 'mv-tag3') {
+                fontSize = baseFontSize;
+              } else if (textLength > baseLength) {
+                fontSize = Math.floor(baseFontSize * (baseLength / textLength));
+              }
+            }
+
+            // text要素内のfont-sizeとtspan内容を置換
+            const textRegex = new RegExp(`(<text[^>]*id="${id}"[^>]*font-size=")[^"]*("[^>]*>[\\s\\S]*?<tspan[^>]*>)[^<]*(</tspan>)`, 'g');
+            updatedSvg = updatedSvg.replace(textRegex, `$1${fontSize}$2${encodedText}$3`);
+          }
+        });
+
+        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        mvSvgImg.src = url;
+      })
+      .catch(err => console.error('MV SVG読み込みエラー:', err));
+  }
+
   // 8. 絞り込み検索
   const filterHeading = document.querySelector('.modalArea__ttl');
   if (filterHeading) {
@@ -860,6 +981,153 @@ document.addEventListener('DOMContentLoaded', async function() {
   const siteDescription = document.querySelector('.header__catchcopy');
   if (siteDescription) {
     siteDescription.textContent = commonText.site_description;
+  }
+
+  // 11. MVセクションのサブタイトル
+  const siteSubtitle = document.querySelector('.c-headingAboveMv');
+  if (siteSubtitle && commonText.site_subtitle) {
+    siteSubtitle.textContent = commonText.site_subtitle;
+  }
+
+  // 12. ランキング見出しSVGのテキスト差し替え
+  const headingSpSubtitle = document.querySelector('#heading-sp-subtitle tspan');
+  if (headingSpSubtitle && commonText.heading_sp_subtitle) {
+    headingSpSubtitle.textContent = commonText.heading_sp_subtitle;
+  }
+
+  if (commonText.heading_sp_main) {
+    // <big>...</big> と <big2>...</big2> を解析
+    const bigMatch = commonText.heading_sp_main.match(/<big>(.*?)<\/big>/);
+    const big2Match = commonText.heading_sp_main.match(/<big2>(.*?)<\/big2>/);
+
+    // タグを除いた通常テキスト部分を抽出
+    const mainText = commonText.heading_sp_main
+      .replace(/<big>.*?<\/big>/, '')
+      .replace(/<big2>.*?<\/big2>/, '');
+
+    const headingSpMain = document.querySelector('#heading-sp-main tspan');
+    const headingSpMainText = document.querySelector('#heading-sp-main');
+    if (headingSpMain) {
+      headingSpMain.textContent = mainText;
+
+      // メインテキストの幅を取得して、3と選の位置を調整
+      setTimeout(() => {
+        const mainTextWidth = headingSpMain.getComputedTextLength();
+        const baseX = 20; // メインテキストの開始位置
+        const numberX = baseX + mainTextWidth +10; // メインテキストの後ろ + 10px余白
+
+        const headingSpNumber = document.querySelector('#heading-sp-number tspan');
+        const headingSpNumberText = document.querySelector('#heading-sp-number');
+        if (headingSpNumber && bigMatch) {
+          headingSpNumber.textContent = bigMatch[1];
+          headingSpNumber.setAttribute('x', numberX);
+        }
+
+        const headingSpSuffix = document.querySelector('#heading-sp-suffix tspan');
+        if (headingSpSuffix && big2Match) {
+          headingSpSuffix.textContent = big2Match[1];
+          // 「3」のテキスト幅を取得してその後ろに配置
+          if (headingSpNumber) {
+            const numberWidth = headingSpNumber.getComputedTextLength();
+            const suffixX = numberX + numberWidth;
+            headingSpSuffix.setAttribute('x', suffixX);
+          }
+        }
+      }, 0);
+    }
+  }
+
+  // 13. title_clinic.svgのテキスト差し替え
+  if (commonText.title_clinic_text) {
+    // <big>...</big> を解析
+    const bigMatch = commonText.title_clinic_text.match(/<big>(.*?)<\/big>/);
+
+    // タグを除いたテキスト部分を抽出
+    const parts = commonText.title_clinic_text.split(/<big>.*?<\/big>/);
+    const mainText = parts[0] || ''; // 最初の部分（生成AIスクール）
+    const suffixText = parts[1] || ''; // 最後の部分（を詳しくチェック）
+
+    // SVGを非同期で読み込んで更新
+    fetch('img/ranking/title_clinic.svg')
+      .then(response => response.text())
+      .then(svgText => {
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+
+        // テキスト要素を更新
+        const titleClinicMain = svgDoc.querySelector('#title-clinic-main tspan');
+        if (titleClinicMain) {
+          titleClinicMain.textContent = mainText;
+        }
+
+        const titleClinicNumber = svgDoc.querySelector('#title-clinic-number tspan');
+        if (titleClinicNumber && bigMatch) {
+          titleClinicNumber.textContent = bigMatch[1];
+        }
+
+        const titleClinicSuffix = svgDoc.querySelector('#title-clinic-suffix tspan');
+        if (titleClinicSuffix) {
+          titleClinicSuffix.textContent = suffixText;
+        }
+
+        // 元の<img>要素を更新されたSVGに置き換え
+        const imgElement = document.querySelector('img[src="img/ranking/title_clinic.svg"]');
+        if (imgElement) {
+          const serializer = new XMLSerializer();
+          const svgString = serializer.serializeToString(svgDoc.documentElement);
+          const blob = new Blob([svgString], { type: 'image/svg+xml' });
+          const url = URL.createObjectURL(blob);
+
+          // 一時的にSVGを作成して幅を計測
+          const tempDiv = document.createElement('div');
+          tempDiv.style.position = 'absolute';
+          tempDiv.style.visibility = 'hidden';
+          tempDiv.innerHTML = svgString;
+          document.body.appendChild(tempDiv);
+
+          const tempSvg = tempDiv.querySelector('svg');
+          if (tempSvg) {
+            const mainTextElement = tempSvg.querySelector('#title-clinic-main tspan');
+            const numberTextElement = tempSvg.querySelector('#title-clinic-number tspan');
+            const suffixTextElement = tempSvg.querySelector('#title-clinic-suffix tspan');
+
+            if (mainTextElement && numberTextElement && suffixTextElement) {
+              // メインテキストの幅を取得
+              const mainTextWidth = mainTextElement.getComputedTextLength();
+              const baseX = 18; // メインテキストの開始位置
+
+              // TOP3の位置を計算（メインテキストのすぐ後ろ）
+              const numberX = baseX + mainTextWidth + 22;
+
+              // TOP3の親要素（text要素）のtransform属性を更新
+              const numberParent = tempSvg.querySelector('#title-clinic-number');
+              if (numberParent) {
+                // 現在のtransform: matrix(1 0 -0.325568 0.945519 300.86 22)
+                // 最後の2つの値を変更: translate(x, y)
+                const newTransform = `matrix(1 0 -0.325568 0.945519 ${numberX} 22)`;
+                numberParent.setAttribute('transform', newTransform);
+              }
+
+              // 「を詳しくチェック」の位置を計算（TOP3の後ろ）
+              const numberWidth = 150; // TOP3の幅（傾斜を考慮した概算）
+              const suffixX = numberX + numberWidth;
+              suffixTextElement.setAttribute('x', suffixX);
+
+              // 更新されたSVGを再シリアライズ
+              const updatedSvgString = new XMLSerializer().serializeToString(tempSvg);
+              const updatedBlob = new Blob([updatedSvgString], { type: 'image/svg+xml' });
+              const updatedUrl = URL.createObjectURL(updatedBlob);
+              imgElement.src = updatedUrl;
+            } else {
+              imgElement.src = url;
+            }
+          } else {
+            imgElement.src = url;
+          }
+
+          document.body.removeChild(tempDiv);
+        }
+      });
   }
 
   // 10. フッター
@@ -1623,7 +1891,7 @@ function openProgramDetailModal(rank, programName, programRow) {
   const cardClone = rankingCard.cloneNode(true);
   cardClone.classList.add('rankingCard--modal');
   cardClone.dataset.rank = rank;
-  
+
   // クローンからIDを削除（重複を避けるため）
   const clonedTarget = cardClone.querySelector('.rankingCard__target');
   if (clonedTarget) clonedTarget.removeAttribute('id');
@@ -1641,7 +1909,7 @@ function openProgramDetailModal(rank, programName, programRow) {
         <button class="program-detail-close" aria-label="閉じる">&times;</button>
       </header>
       <div class="program-detail-body">
-        ${cardClone.innerHTML}
+        ${cardClone.outerHTML}
       </div>
     </div>`;
 
