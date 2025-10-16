@@ -901,7 +901,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // フォントサイズ調整用の設定（各要素の最大幅と基準フォントサイズ）
         const fontSizeConfig = {
-          'mv-year-label': { maxWidth: 300, baseFontSize: 48, baseLength: 6 },
+          'mv-year-label': { maxWidth: 300, baseFontSize: 55, baseLength: 6 },
           'mv-main-title': { maxWidth: 600, baseFontSize: 119, baseLength: 8 },
           'mv-tag1': {  baseFontSize: 70, baseLength: 4 },
           'mv-tag2': {  baseFontSize: 70, baseLength: 4 },
