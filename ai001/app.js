@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
-  // 7.5. ランキングタイトルSVGの更新
+  // 7.5. ランキングタイトルSVGの更新（インライン化）
   const rankingSvgImg = document.querySelector('img[src*="summary_h2.svg"]');
   if (rankingSvgImg && commonText.summary_ranking_title) {
     fetch(rankingSvgImg.src)
@@ -894,9 +894,17 @@ document.addEventListener('DOMContentLoaded', async function() {
           /(<tspan[^>]*>)TOP\d+(<\/tspan>)/,
           `$1${commonText.summary_ranking_title}$2`
         );
-        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
-        rankingSvgImg.src = url;
+
+        // imgタグをSVGインラインに置き換え
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(updatedSvg, 'image/svg+xml');
+        const svgElement = svgDoc.documentElement;
+
+        // 元のスタイルを保持
+        svgElement.setAttribute('style', rankingSvgImg.getAttribute('style') || 'width:140px;');
+
+        // imgタグをSVGで置き換え
+        rankingSvgImg.parentNode.replaceChild(svgElement, rankingSvgImg);
       })
       .catch(err => console.error('SVG読み込みエラー:', err));
   }
@@ -1120,16 +1128,17 @@ document.addEventListener('DOMContentLoaded', async function() {
               const suffixX = numberX + numberWidth;
               suffixTextElement.setAttribute('x', suffixX);
 
-              // 更新されたSVGを再シリアライズ
-              const updatedSvgString = new XMLSerializer().serializeToString(tempSvg);
-              const updatedBlob = new Blob([updatedSvgString], { type: 'image/svg+xml' });
-              const updatedUrl = URL.createObjectURL(updatedBlob);
-              imgElement.src = updatedUrl;
+              // imgタグをSVGインラインに置き換え
+              imgElement.parentNode.replaceChild(tempSvg, imgElement);
             } else {
-              imgElement.src = url;
+              // 位置計算ができない場合はそのままインライン化
+              const svgElement = svgDoc.documentElement;
+              imgElement.parentNode.replaceChild(svgElement, imgElement);
             }
           } else {
-            imgElement.src = url;
+            // tempSvgが見つからない場合はそのままインライン化
+            const svgElement = svgDoc.documentElement;
+            imgElement.parentNode.replaceChild(svgElement, imgElement);
           }
 
           document.body.removeChild(tempDiv);
