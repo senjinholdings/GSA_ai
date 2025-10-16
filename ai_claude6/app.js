@@ -377,6 +377,4 @@ document.addEventListener('DOMContentLoaded', function() {
     rankingSummaryHeading.remove();
   }
 
-  console.log('AI副業比較ナビ: インタラクティブ機能を初期化しました');
-  console.log('ハンバーガーメニュー: 初期化完了');
 });

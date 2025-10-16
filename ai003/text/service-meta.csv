@@ -1,4 +1,4 @@
-service_id,service_name,logo_path,rating_score
-shiftai,SHIFT AI,img/logo/shiftai.webp,4.8
-dmmai,DMM 生成AICAMP,img/logo/horiemonai.webp,4.2
-samuraiai,侍エンジニア,img/logo/samuraiai.webp,4.1
+service_id,service_name,logo_path,rating_score,badge_rank,badge_text
+shiftai,SHIFT AI,img/logo/shiftai.webp,4.8,1,
+dmmai,DMM 生成AICAMP,img/logo/horiemonai.webp,4.2,2,
+samuraiai,侍エンジニア,img/logo/samuraiai.webp,4.1,3,

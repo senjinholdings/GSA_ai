@@ -198,17 +198,7 @@ function initializeRankingCardInteractions(root = document) {
 document.addEventListener('DOMContentLoaded', async function() {
 
   // ==================== CSVデータ読み込み ====================
-  console.log('🚀 app.js: CSV読み込み開始');
   const { tabData, commonText, serviceMeta, serviceSummary, serviceDetail, serviceReviews, servicePricing, serviceCta, serviceBasicInfo } = await loadServiceText();
-  console.log('✅ app.js: CSV読み込み完了');
-  console.log('📊 tabData:', tabData);
-  console.log('📝 commonText:', commonText);
-  console.log('📋 serviceMeta:', serviceMeta);
-  console.log('📄 serviceSummary:', serviceSummary);
-  console.log('📝 serviceDetail:', serviceDetail);
-  console.log('💬 serviceReviews:', serviceReviews);
-  console.log('💰 servicePricing:', servicePricing);
-  console.log('🔗 serviceCta:', serviceCta);
 
   // ==================== タイトルテキストの更新 ====================
   const titleLabels = document.querySelectorAll('.copy1-label');
@@ -1605,8 +1595,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
-  console.log('AI副業比較ナビ: インタラクティブ機能を初期化しました');
-  console.log('ハンバーガーメニュー: 初期化完了');
 });
 
 // ランキングカード詳細モーダルを開く

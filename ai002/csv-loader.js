@@ -44,13 +44,11 @@ function parseCSVLine(line) {
 // CSVファイルを読み込む
 async function loadCSV(url) {
   try {
-    console.log('📥 CSV読み込み中:', url);
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const text = await response.text();
-    console.log('✅ CSV取得成功:', url, '(' + text.length + 'バイト)');
     return parseCSV(text);
   } catch (error) {
     console.error('❌ CSV読み込みエラー:', url, error);
@@ -71,12 +69,9 @@ async function loadCommonText() {
 
 // service-text.csvを読み込んでtabData形式に変換
 async function loadServiceText() {
-  console.log('📊 CSV読み込み開始...');
   const data = await loadCSV('text/service-text.csv');
-  console.log('✅ service-text.csv読み込み完了:', data.length + '行');
 
   const commonText = await loadCommonText();
-  console.log('✅ common-text.csv読み込み完了:', Object.keys(commonText).length + '項目');
 
   // サービスIDのリストを取得（順序を保持）
   const serviceIds = [];
@@ -143,8 +138,6 @@ async function loadServiceText() {
     };
   }
 
-  console.log('✅ tabData構築完了:', tabData);
-  console.log('📝 タブ0の1行目のセル:', tabData[0]?.rows[0]?.cells);
 
   // 追加CSVを読み込み
   const serviceMeta = await loadServiceMeta();
@@ -160,12 +153,9 @@ async function loadServiceText() {
 
 // service-text-transposed.csvを読み込んでtabData形式に変換
 async function loadServiceTextTransposed() {
-  console.log('📊 転置CSV読み込み開始...');
   const data = await loadCSV('text/service-text-transposed.csv');
-  console.log('✅ service-text-transposed.csv読み込み完了:', data.length + '行');
 
   const commonText = await loadCommonText();
-  console.log('✅ common-text.csv読み込み完了:', Object.keys(commonText).length + '項目');
 
   if (data.length === 0) {
     console.error('❌ データが空です');
@@ -175,7 +165,6 @@ async function loadServiceTextTransposed() {
   // ヘッダー行から属性名のリストを取得（1列目以降がサービス名）
   const firstRow = data[0];
   const serviceNames = Object.keys(firstRow).filter(key => key !== 'attribute');
-  console.log('📝 サービス一覧:', serviceNames);
 
   // 行をオブジェクト化（attribute -> サービスごとの値）
   const attributeMap = {};
@@ -266,8 +255,6 @@ async function loadServiceTextTransposed() {
     };
   }
 
-  console.log('✅ tabData構築完了:', tabData);
-  console.log('📝 タブ0の1行目のセル:', tabData[0]?.rows[0]?.cells);
 
   // 追加CSVを読み込み
   const serviceMeta = await loadServiceMeta();
@@ -283,12 +270,9 @@ async function loadServiceTextTransposed() {
 
 // service-text.csv（コンパクト形式）を読み込んでtabData形式に変換
 async function loadServiceText() {
-  console.log('📊 CSV読み込み開始...');
   const data = await loadCSV('text/service-text.csv');
-  console.log('✅ service-text.csv読み込み完了:', data.length + '行');
 
   const commonText = await loadCommonText();
-  console.log('✅ common-text.csv読み込み完了:', Object.keys(commonText).length + '項目');
 
   if (data.length === 0) {
     console.error('❌ データが空です');
@@ -298,7 +282,6 @@ async function loadServiceText() {
   // ヘッダー行からサービス名を取得
   const firstRow = data[0];
   const serviceNames = Object.keys(firstRow).filter(key => key !== 'attribute');
-  console.log('📝 サービス一覧:', serviceNames);
 
   // 行をオブジェクト化（attribute -> サービスごとの値）
   const attributeMap = {};
@@ -418,8 +401,6 @@ async function loadServiceText() {
     };
   }
 
-  console.log('✅ tabData構築完了:', tabData);
-  console.log('📝 タブ0の1行目のセル:', tabData[0]?.rows[0]?.cells);
 
   // 追加CSVを読み込み
   const serviceMeta = await loadServiceMeta();
@@ -444,7 +425,6 @@ async function loadServiceMeta() {
       ratingScore: row.rating_score
     };
   });
-  console.log('✅ service-meta.csv読み込み完了:', Object.keys(meta).length + 'サービス');
   return meta;
 }
 
@@ -513,7 +493,6 @@ async function loadServiceSummary() {
     };
   });
 
-  console.log('✅ service-summary.csv読み込み完了:', Object.keys(summary).length + 'サービス');
   return summary;
 }
 
@@ -530,7 +509,6 @@ async function loadServiceDetail() {
       content: row.content
     });
   });
-  console.log('✅ service-detail.csv読み込み完了:', Object.keys(detail).length + 'サービス');
   return detail;
 }
 
@@ -551,7 +529,6 @@ async function loadServiceReviews() {
       imageUrl: row.image_url
     });
   });
-  console.log('✅ service-reviews.csv読み込み完了:', Object.keys(reviews).length + 'サービス');
   return reviews;
 }
 
@@ -644,7 +621,6 @@ async function loadServicePricing() {
     });
   });
 
-  console.log('✅ service-pricing.csv読み込み完了:', Object.keys(pricing).length + 'サービス');
   return pricing;
 }
 
@@ -703,7 +679,6 @@ async function loadServiceBasicInfo() {
     });
   });
 
-  console.log('✅ service-basic-info.csv読み込み完了:', Object.keys(basicInfo).length + 'サービス');
   return basicInfo;
 }
 
@@ -753,6 +728,5 @@ async function loadServiceCta() {
     };
   });
 
-  console.log('✅ service-cta.csv読み込み完了:', Object.keys(cta).length + 'サービス');
   return cta;
 }

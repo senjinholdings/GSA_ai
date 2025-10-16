@@ -2,11 +2,11 @@ attribute,SHIFT AI,DMM 生成AICAMP,侍エンジニア
 service_id,shiftai,dmmai,samuraiai
 logo_path,img/logo/shiftai.webp,img/logo/dmmai.webp,img/logo/samuraiai.webp
 tab0_col1,<i1><red>あり</red><br>無料セミナー開催中<br>,<i4>なし<br>（カウンセリングのみ）,<i4>なし<br>（カウンセリングのみ）
-tab0_col2,<i1><red>かなり高い</red><br>セミナー満足度94.4％,<i1><red>かなり高い</red><br>実務直結,<i2>高い<br>挫折率8%
+tab0_col2,<i1><red>かなり高い</red><br>セミナー満足度94.3%,<i1><red>かなり高い</red><br>実務直結,<i2>高い<br>挫折率8%
 tab0_col3,<i1><red>特典あり</red><br>プロンプト175選<br>GPTs130選<br>AI副業案件ほか12特典,生成AIプロンプト集,なし
 tab1_col1,<tag_r>ChatGPT<tag_r>画像生成<tag_r>動画制作<tag_r>文章作成<tag_r>資料作成<tag_r>副業<tag_r>業務効率<tag_r>ｱﾌﾟﾘ開発,<tag_r>生成AI<tag_r>画像生成<tag_r>文章作成<tag_r>資料作成<tag_r>副業<tag_r>業務効率<tag_r>ｱﾌﾟﾘ開発<tag_r>ﾏｰｹﾃｨﾝｸﾞ,<tag_r>生成AI<tag_r>画像生成<tag_r>文章作成<tag_r>資料作成<tag_r>副業<tag_r>業務効率<tag_r>ｱﾌﾟﾘ開発<tag_r>ﾏｰｹﾃｨﾝｸﾞ
 tab1_col2,"<i1><red>50コース</red><br>1,000本以上の動画講座",<i2>6コース<br>実務直結,<i2>6コース<br>完全オリジナル
 tab1_col3,<i1><red>会員数2万人以上<br>利用者数No.1</red>,<i2>ルーティンワーク70％削減,<i2>挫折率8％<br>確実にスキル習得
-tab2_col1,"<i1><red>月々21,800円</red><br>一括547,800円","<i2>一括198,000円〜<br>最短4週間","<i1><red>99,000円〜</red><br>入学金+99,000円"
+tab2_col1,"<i1><red>月々21,780円</red><br>一括547,800円","<i2>一括198,000円〜<br>最短4週間","<i1><red>99,000円〜</red><br>入学金+99,000円"
 tab2_col2,<i1><red>あり</red>,<i4>記載なし,<i4>記載なし
 tab2_col3,100名以上の講師が基礎から応用まで教えてくれる。,大手DMMが運営。職種別の専門コースを用意,給付金(受講料が最大80%OFF)+就業/副業支援を受けられる
