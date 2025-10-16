@@ -252,6 +252,11 @@ a:hover {
    テキストカラー・UI要素追加スタイル
    ======================================== */
 
+/* SVGテキストのフォント指定（PC/スマホ共通） */
+svg text {
+  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif !important;
+}
+
 /* 基本テキストカラー */
 body {
   color: var(--color-text-body) !important;
