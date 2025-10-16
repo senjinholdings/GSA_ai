@@ -1,9 +1,4 @@
 <svg width="709" height="142" viewBox="0 0 709 142" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
-</style>
-</defs>
 <g id="Frame 2">
 <g id="Vector">
 <path d="M68 141.5H677.5L709 0H99.5L68 141.5Z" fill="#C9D1D7"/>
@@ -13,12 +8,12 @@
 <g id="Frame 1">
 <g id="Group 2">
 <g id="Group 1">
-<text id="heading-sp-main" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="50" font-weight="bold" letter-spacing="0.01em"><tspan x="30" y="108.182">ChatGPTセミナー人気</tspan></text>
-<text id="heading-sp-subtitle" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="27" letter-spacing="0em"><tspan x="128" y="45.8182">＼ ここを選べば失敗なし ／</tspan></text>
-<text id="/" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="27" letter-spacing="0em"><tspan x="426" y="45.8182">/</tspan></text>
-<text id="\" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="27" letter-spacing="0em"><tspan x="83" y="45.8182">\</tspan></text>
-<text id="3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="99" font-weight="500" letter-spacing="-0.03em"><tspan x="491" y="121">3</tspan></text>
-<text id="&#233;&#129;&#184;" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="51" font-weight="800" letter-spacing="-0.03em"><tspan x="559" y="109.545">&#x9078;</tspan></text>
+<text id="heading-sp-main" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="50" font-weight="bold" letter-spacing="0.01em"><tspan x="30" y="108.182">ChatGPTセミナー人気</tspan></text>
+<text id="heading-sp-subtitle" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="128" y="45.8182">＼ ここを選べば失敗なし ／</tspan></text>
+<text id="/" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="426" y="45.8182">/</tspan></text>
+<text id="\" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="27" letter-spacing="0em"><tspan x="83" y="45.8182">\</tspan></text>
+<text id="3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="99" font-weight="500" letter-spacing="-0.03em"><tspan x="491" y="121">3</tspan></text>
+<text id="&#233;&#129;&#184;" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="51" font-weight="800" letter-spacing="-0.03em"><tspan x="559" y="109.545">&#x9078;</tspan></text>
 </g>
 </g>
 </g>
