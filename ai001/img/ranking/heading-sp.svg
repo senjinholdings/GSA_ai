@@ -1,4 +1,9 @@
 <svg width="709" height="142" viewBox="0 0 709 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+</style>
+</defs>
 <g id="Frame 2">
 <g id="Vector">
 <path d="M68 141.5H677.5L709 0H99.5L68 141.5Z" fill="#C9D1D7"/>
