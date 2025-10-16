@@ -10,9 +10,9 @@
 </g>
 <path id="Polygon 1" d="M368.5 123L349.88 104.25H387.12L368.5 123Z" fill="#284E6D"/>
 <rect id="image 4" opacity="0.18" x="632" y="5" width="99" height="93" fill="url(#pattern0_2_146)"/>
-<text id="title-clinic-number" transform="matrix(1 0 -0.325568 0.945519 300.86 22)" fill="white" stroke="#364D6D" stroke-width="2" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="51" font-weight="600" letter-spacing="0.01em"><tspan x="0" y="49.5455">TOP3</tspan></text>
-<text id="title-clinic-suffix" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="36" font-weight="600" letter-spacing="0.01em"><tspan x="445" y="65.0909">&#x3092;&#x8a73;&#x3057;&#x304f;&#x30c1;&#x30a7;&#x30c3;&#x30af;</tspan></text>
-<text id="title-clinic-main" fill="white" xml:space="preserve" style="white-space: pre" font-family="Inter" font-size="36" font-weight="600" letter-spacing="0.01em"><tspan x="33" y="65.0909">&#x751f;&#x6210;AI&#x30b9;&#x30af;&#x30fc;&#x30eb;</tspan></text>
+<text id="title-clinic-number" transform="matrix(1 0 -0.325568 0.945519 300.86 22)" fill="white" stroke="#364D6D" stroke-width="2" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="51" font-weight="600" letter-spacing="0.01em"><tspan x="0" y="49.5455">TOP3</tspan></text>
+<text id="title-clinic-suffix" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="36" font-weight="600" letter-spacing="0.01em"><tspan x="445" y="65.0909">&#x3092;&#x8a73;&#x3057;&#x304f;&#x30c1;&#x30a7;&#x30c3;&#x30af;</tspan></text>
+<text id="title-clinic-main" fill="white" xml:space="preserve" style="white-space: pre" font-family="Noto Sans JP" font-size="36" font-weight="600" letter-spacing="0.01em"><tspan x="33" y="65.0909">&#x751f;&#x6210;AI&#x30b9;&#x30af;&#x30fc;&#x30eb;</tspan></text>
 </g>
 </g>
 <defs>
