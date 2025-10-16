@@ -901,7 +901,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       .catch(err => console.error('SVG読み込みエラー:', err));
   }
 
-  // 7.6. MVのSVG更新
+  // 7.6. MVのSVG更新（インライン化）
   const mvSvgImg = document.querySelector('.mv__contents img[src*="mv_ranking_semminar.svg"]');
   if (mvSvgImg) {
     fetch(mvSvgImg.src)
@@ -957,9 +957,16 @@ document.addEventListener('DOMContentLoaded', async function() {
           }
         });
 
-        const blob = new Blob([updatedSvg], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
-        mvSvgImg.src = url;
+        // imgタグをSVGインラインに置き換え
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(updatedSvg, 'image/svg+xml');
+        const svgElement = svgDoc.documentElement;
+
+        // スタイル属性を追加
+        svgElement.setAttribute('style', 'width: 100%; height: auto;');
+
+        // imgタグをSVGで置き換え
+        mvSvgImg.parentNode.replaceChild(svgElement, mvSvgImg);
       })
       .catch(err => console.error('MV SVG読み込みエラー:', err));
   }
