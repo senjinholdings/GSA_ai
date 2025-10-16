@@ -1,0 +1,28 @@
+<!-- Header.html - ヘッダーバナー -->
+<h1 class="relative">
+    <img
+        alt="{{title}}"
+        src="{{bannerImage}}"
+        class="w-full h-auto"
+    >
+    <!-- エリア表示（左上） -->
+    <div class="absolute top-2 left-2 md:top-4 md:left-4 flex items-center">
+        <img
+            src="{{areaFrameImage}}"
+            alt="frame"
+            class="w-[5px] md:w-[7px]"
+        >
+        <div class="mx-1 md:mx-2 text-[#0e184c] text-lg md:text-2xl font-bold tracking-wide md:tracking-wider">
+            {{areaName}}
+        </div>
+        <img
+            src="{{areaFrameImage}}"
+            alt="frame"
+            class="w-[5px] md:w-[7px]"
+        >
+    </div>
+    <!-- 広告ラベル（右上） -->
+    <div class="absolute top-1 right-1 md:top-2 md:right-2 px-1 py-0.5 md:px-2 md:py-1 border border-white rounded-sm text-white text-[10px] md:text-sm leading-none">
+        {{adText}}
+    </div>
+</h1>

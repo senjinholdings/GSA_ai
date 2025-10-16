@@ -1,0 +1,18 @@
+{
+  "name": "ai-claude3-image-builder",
+  "version": "1.0.0",
+  "description": "画像をBase64化してHTMLに埋め込むビルドツール",
+  "scripts": {
+    "build": "node build.js",
+    "extract": "node extract-images.js",
+    "restore": "[ -f index.html.original ] && mv index.html.original index.html && [ -f custom-style.css.original ] && mv custom-style.css.original custom-style.css && echo '✅ 元のファイルに復元しました' || echo '⚠️  バックアップファイルが見つかりません'"
+  },
+  "keywords": [
+    "base64",
+    "image",
+    "embed",
+    "build"
+  ],
+  "author": "",
+  "license": "MIT"
+}

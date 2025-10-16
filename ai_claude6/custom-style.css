@@ -1,0 +1,2275 @@
+/* ========================================
+   Professional Trust Blue - カラーパレット
+   ======================================== */
+
+/* Vuetify デフォルトカラーのオーバーライド */
+.v-application a {
+  color: var(--color-primary) !important;
+}
+
+.v-application .primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.v-application .primary--text {
+  color: var(--color-primary) !important;
+  caret-color: var(--color-primary) !important;
+}
+
+.v-application .accent {
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+.v-application .accent--text {
+  color: var(--color-accent) !important;
+  caret-color: var(--color-accent) !important;
+}
+
+.v-application .secondary {
+  background-color: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
+}
+
+.v-application .secondary--text {
+  color: var(--color-secondary) !important;
+  caret-color: var(--color-secondary) !important;
+}
+
+/* ========================================
+   Professional Trust Blue - カラーパレット
+   ======================================== */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #1E5A8E;           /* Deep Professional Blue */
+  --color-primary-hover: #164771;     /* Darker shade for hover */
+  --color-secondary: #4A90C8;         /* Bright Intelligence Blue */
+  --color-accent: #00B4D8;            /* Tech Cyan */
+  --color-accent-hover: #0096B8;      /* Accent hover state */
+
+  /* Background Colors */
+  --color-bg-base: #F8FAFC;           /* Cool White */
+  --color-bg-white: #FFFFFF;          /* Pure White */
+  --color-bg-card: #FFFFFF;           /* Card background */
+
+  /* Text Colors */
+  --color-text-heading: #1A2B3C;      /* Deep Navy - for headings */
+  --color-text-body: #2D3748;         /* Charcoal Gray - for body text */
+  --color-text-sub: #64748B;          /* Slate Gray - for captions */
+  --color-text-white: #FFFFFF;        /* White text */
+
+  /* Border Colors */
+  --color-border-light: #E2E8F0;      /* Light borders */
+  --color-border-primary: #4A90C8;    /* Primary borders */
+
+  /* Gradient */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-header: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+
+  /* Shadow */
+  --shadow-card: 0 2px 8px rgba(30, 90, 142, 0.1);
+  --shadow-card-hover: 0 4px 16px rgba(30, 90, 142, 0.15);
+}
+
+/* カスタムカラースタイル - Professional Trust Blue適用 */
+
+/* ヘッダーにグラデーション */
+.header {
+  background: var(--gradient-primary) !important;
+}
+
+/* メインビジュアル周辺 */
+.c-headingAboveMv {
+  background: var(--gradient-header) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* タブアクティブ状態にグラデーション */
+.c-basicInfo__tab.is-active {
+  background: var(--gradient-primary) !important;
+}
+
+.tab--active {
+  background: var(--gradient-primary) !important;
+}
+
+/* 基本情報のタイトル */
+.c-basicInfo__ttl {
+  border-bottom: 2px solid #02A8C0;
+  /* border-top: 2px solid #02A8C0; */
+  color: #02A8C0;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding: 18px 0;
+}
+
+/* ランキングカードのヘッダー背景 */
+.rankingCard__header {
+  background: var(--gradient-primary) !important;
+}
+
+/* ボタンホバー効果 */
+.cta-button:hover,
+.cta-button--primary:hover,
+.cta-button--secondary:hover {
+  background: var(--color-accent-hover) !important;
+  box-shadow: 0 4px 0 0 var(--color-primary) !important;
+}
+
+/* 検索ボタン */
+.searchForm__submitBtn {
+  background: var(--color-accent) !important;
+}
+
+/* ページ見出し */
+.c-pageHeading {
+  background: var(--gradient-header) !important;
+}
+
+.c-pageHeading__txt {
+  color: var(--color-text-white) !important;
+}
+
+/* テーブルヘッダー */
+.c-basicInfo__table th {
+  background: var(--gradient-primary) !important;
+}
+
+/* リンクカラー */
+a {
+  color: var(--color-primary) !important;
+}
+
+a:hover {
+  color: var(--color-secondary) !important;
+}
+
+/* top-summary内のリンクは白色 */
+.top-summary a,
+.summary a {
+  color: #ffffff !important;
+}
+
+/* 星評価のスタイル */
+.star-rating {
+  font-size: 14px;
+}
+
+.star-rating {
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  margin-bottom: 0px;
+  letter-spacing: 0px;
+}
+
+.stars-empty {
+  color: #ddd;
+}
+
+.stars-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #ff8c00;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 767px) {
+  .star-rating {
+    font-size: 16px;
+  }
+}
+
+/* ランキングリボン */
+.rankingCard__heading {
+  /* background: var(--gradient-primary) !important; */
+}
+
+/* おすすめポイントのヘッダー */
+.rankingCard__pointHeader {
+  background: var(--gradient-primary) !important;
+}
+
+/* 展開ボタン */
+.expand-button {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+.expand-button:hover {
+  background: var(--gradient-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* ========================================
+   テキストカラー・UI要素追加スタイル
+   ======================================== */
+
+/* 基本テキストカラー */
+body {
+  color: var(--color-text-body) !important;
+  background-color: var(--color-bg-base) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.heading,
+.c-heading,
+.title {
+  color: var(--color-text-heading) !important;
+}
+
+/* サブテキスト・キャプション */
+.caption,
+.sub-text,
+.note,
+small {
+  color: var(--color-text-sub) !important;
+}
+
+/* CTAボタン - プライマリ */
+.cta-button,
+.cta-button--primary,
+.btn-primary,
+.v-btn.primary {
+  background: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+  border: none !important;
+}
+
+.cta-button:hover,
+.cta-button--primary:hover,
+.btn-primary:hover {
+  background: var(--color-accent-hover) !important;
+}
+
+/* CTAボタン - セカンダリ */
+.cta-button--secondary,
+.btn-secondary {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+  border: none !important;
+}
+
+.cta-button--secondary:hover,
+.btn-secondary:hover {
+  background: var(--color-primary) !important;
+}
+
+/* CTAボタン - アウトライン */
+.btn-outline {
+  background: transparent !important;
+  border: 2px solid var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+.btn-outline:hover {
+  background: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* カードスタイル */
+.card,
+.rankingCard,
+.c-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-light) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.card:hover,
+.rankingCard:hover {
+  box-shadow: var(--shadow-card-hover) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+/* ランキングバッジ */
+.ranking-badge,
+.rank-number {
+  background: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 評価スター・アイコン */
+.star,
+.rating-star,
+.icon-highlight {
+  color: var(--color-accent) !important;
+}
+
+/* テーブル */
+table {
+  border-color: var(--color-border-light) !important;
+}
+
+table tbody tr:hover {
+  background-color: rgba(30, 90, 142, 0.05) !important;
+}
+
+/* フォーム要素 */
+input,
+textarea,
+select {
+  border-color: var(--color-border-light) !important;
+  color: var(--color-text-body) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1) !important;
+}
+
+/* バッジ・ラベル */
+.badge,
+.label,
+.tag {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* フッター */
+.footer {
+  background: var(--color-text-heading) !important;
+  color: var(--color-text-white) !important;
+}
+
+.footer a {
+  color: var(--color-secondary) !important;
+}
+
+.footer a:hover {
+  color: var(--color-accent) !important;
+}
+
+/* ========================================
+   不統一な色の修正（#981C94, #f1381a等）
+   ======================================== */
+
+/* 紫色 (#981C94) を Professional Trust Blue に置き換え */
+.rankingSummary__cardTableText {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.rankingSummary__cardTableBoxDesc {
+  color: #324d6c !important;
+  border-color: #d9d9d9 !important;
+}
+
+/* rankingSummary__cardTable のセル幅を統一 */
+.rankingSummary__cardTable {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.rankingSummary__cardTableBox {
+  flex: 1 1 25%;
+  min-width: 0;
+}
+
+.rankingSummary__cardTableTexts {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* 「詳細を見る」ボタン - 紫から Primary Gradient へ */
+.rankingSummary__cardBtn {
+  background: var(--gradient-primary) !important;
+  color: var(--color-text-white) !important;
+  border-color: var(--color-text-white) !important;
+}
+
+.rankingSummary__cardBtn:hover {
+  background: var(--color-primary-hover) !important;
+  box-shadow: var(--shadow-card-hover) !important;
+}
+
+/* 赤/オレンジ色 (#f1381a) を Accent に置き換え */
+.cta-link.cta-button--testDesign {
+  background: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+  border-color: var(--color-text-white) !important;
+}
+
+.cta-link.cta-button--testDesign:hover {
+  background: var(--color-accent-hover) !important;
+  box-shadow: var(--shadow-card-hover) !important;
+}
+
+/* その他の古い色を強制的に上書き */
+[style*="rgb(152, 28, 148)"],
+[style*="#981C94"] {
+  color: var(--color-primary) !important;
+  background-color: transparent !important;
+  border-color: var(--color-primary) !important;
+}
+
+[style*="rgb(241, 56, 26)"],
+[style*="#f1381a"],
+[style*="rgb(224, 70, 45)"],
+[style*="#e0462d"] {
+  background-color: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+}
+
+[style*="rgb(40, 168, 119)"],
+[style*="#28a877"],
+[style*="rgb(50, 214, 150)"],
+[style*="#32D696"] {
+  background-color: var(--color-accent) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 全体的な色の統一 - より強力な上書き */
+* {
+  /* 紫色のテキストを全てプライマリカラーに */
+}
+
+*[style*="color: rgb(152, 28, 148)"],
+*[style*="color:#981C94"],
+p[style*="color: rgb(152, 28, 148)"],
+div[style*="color: rgb(152, 28, 148)"],
+span[style*="color: rgb(152, 28, 148)"] {
+  color: var(--color-primary) !important;
+}
+
+/* 紫のボーダーをプライマリカラーに */
+*[style*="border-color: rgb(152, 28, 148)"],
+*[style*="border-left-color: rgb(152, 28, 148)"],
+div[style*="border"] {
+  border-color: var(--color-border-light) !important;
+}
+
+div[style*="border-left-color: rgb(152, 28, 148)"] {
+  border-left-color: var(--color-primary) !important;
+}
+
+/* 紫の背景をグラデーションに */
+*[style*="background-color: rgb(152, 28, 148)"],
+*[style*="background:#981C94"],
+button[style*="background-color: rgb(152, 28, 148)"],
+div[style*="background-color: rgb(152, 28, 148)"] {
+  background: var(--gradient-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 基本情報タブのスタイル修正 */
+.c-basicInfo__tab {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.c-basicInfo__tab.is-active {
+  background: var(--gradient-primary) !important;
+  color: var(--color-text-white) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* テーブル関連の紫色を修正 */
+.c-basicInfo__tablePartTd,
+.c-basicInfo__tablePartTd * {
+  color: var(--color-primary) !important;
+  border-left-color: var(--color-primary) !important;
+}
+
+.c-basicInfo__tablePartName,
+.c-basicInfo__tablePartName * {
+  color: var(--color-primary) !important;
+}
+
+.c-basicInfo__tablePriceDesc {
+  color: var(--color-primary) !important;
+}
+
+/* テーブルセルの紫色ボーダーを修正 */
+.c-basicInfo__table td {
+  border-left-color: var(--color-primary) !important;
+  border-color: var(--color-border-light) !important;
+}
+
+.c-basicInfo__table td span {
+  color: var(--color-primary) !important;
+}
+
+/* 全てのtd要素の紫色テキストを修正 */
+td {
+  color: var(--color-text-body) !important;
+}
+
+td span {
+  color: var(--color-primary) !important;
+}
+
+/* ランキングカード関連の紫色を修正 */
+.rankingCard__epilatorInfo {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  border-left-color: var(--color-primary) !important;
+}
+
+.rankingCard__mapModalTitle {
+  border-color: var(--color-primary) !important;
+}
+
+/* その他のランキングカード要素 */
+.rankingCard__info,
+.rankingCard__detail,
+.rankingCard__price {
+  color: var(--color-text-body) !important;
+}
+
+.rankingCard__highlight {
+  color: var(--color-primary) !important;
+  font-weight: bold;
+}
+
+/* Description list要素の紫色を修正 */
+dd, dt {
+  color: var(--color-text-body) !important;
+}
+
+/* rankingCard__epilatorInfo dt のテキストを白色に */
+.rankingCard__epilatorInfo dt {
+  background: #2c2f33;
+  color: #fff !important;
+  width: 24%;
+}
+
+/* data-v-660fb7ba のスタイルを上書き */
+.cta-button[data-v-660fb7ba],
+.cta-button--primary[data-v-660fb7ba] {
+  /* background: #32D696; */
+  /* box-shadow: 0 2px 0 0 #28a877; */
+  /* font-size: 14px; */
+}
+
+/* data-v-356e3e82 の枠線を削除 */
+[data-v-356e3e82] {
+  border: none !important;
+}
+
+/* arrow-down-small.svg を白色に */
+img[src*="arrow-down-small.svg"] {
+  filter: brightness(0) invert(1);
+}
+
+dd strong,
+dd span,
+dd p {
+  color: var(--color-primary) !important;
+}
+
+/* その他の要素の紫色を強制的に上書き */
+p strong,
+strong {
+  color: var(--color-primary) !important;
+}
+
+/* 全要素に対する最終的な色の正規化 */
+*:not(.v-application):not(button):not(a) {
+  border-color: inherit !important;
+}
+
+/* ========================================
+   Vue Scoped Styles の古い色を上書き
+   ======================================== */
+
+/* data-v-* 属性付きCTAボタンの強制上書き */
+[class*="cta-button"][data-v-fa24a1ae],
+.cta-button--testDesign[data-v-fa24a1ae] {
+  background: var(--color-accent) !important;
+  box-shadow: 0 4px 0 0 var(--color-primary) !important;
+}
+
+[class*="cta-button"][data-v-54756d29],
+.cta-button[data-v-54756d29],
+.cta-button--dense[data-v-54756d29],
+.cta-button--primary[data-v-54756d29],
+.cta-button--secondary[data-v-54756d29] {
+  background: var(--color-bg-white) !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: inset 0 -2px 0 0 var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+[class*="cta-button"][data-v-422fc66f],
+.cta-button[data-v-422fc66f],
+.cta-button--dense[data-v-422fc66f],
+.cta-button--primary[data-v-422fc66f],
+.cta-button--secondary[data-v-422fc66f] {
+  background: var(--color-accent) !important;
+  box-shadow: 0 4px 0 0 var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* その他のdata-v属性付き要素の上書き */
+[data-v-fa24a1ae][style*="#f1381a"],
+[data-v-fa24a1ae][style*="rgb(241, 56, 26)"] {
+  background-color: var(--color-accent) !important;
+}
+
+[data-v-54756d29][style*="#e0462d"],
+[data-v-54756d29][style*="rgb(224, 70, 45)"] {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+[data-v-422fc66f][style*="#32D696"],
+[data-v-422fc66f][style*="rgb(50, 214, 150)"],
+[data-v-422fc66f][style*="#28a877"],
+[data-v-422fc66f][style*="rgb(40, 168, 119)"] {
+  background-color: var(--color-accent) !important;
+}
+
+/* data-vなしのCTAボタンのbox-shadow修正 */
+.cta-button:not([data-v-fa24a1ae]):not([data-v-54756d29]):not([data-v-422fc66f]) {
+  box-shadow: var(--color-primary) 0px -2px 0px 0px inset !important;
+}
+
+.cta-button--primary:not([data-v-fa24a1ae]):not([data-v-54756d29]):not([data-v-422fc66f]) {
+  box-shadow: var(--color-primary) 0px 2px 0px 0px !important;
+  color: var(--color-text-white) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* 全てのCTAボタンの古い緑色box-shadowを強制上書き */
+button[class*="cta"],
+a[class*="cta"],
+.cta-button,
+.cta-button--primary,
+.cta-button--secondary,
+.cta-button--testDesign {
+  /* box-shadow: 0 4px 0 0 var(--color-primary) !important; */
+}
+
+button[class*="cta"]:active,
+a[class*="cta"]:active {
+  /* box-shadow: 0 2px 0 0 var(--color-primary) !important; */
+}
+
+/* ご案内セクションの紫色テキストを修正 */
+.rankingCard__ctaBtnAnnot,
+.rankingCard__ctaBtnAnnot p,
+.rankingCard__ctaBtnAnnot br,
+.c-basicInfo__ctaBtnBox p,
+p:not([class]) {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+/* クラスのないp要素で紫色になっているものを修正 */
+p {
+  color: inherit;
+}
+
+p strong,
+p em {
+  color: var(--color-primary) !important;
+}
+
+/* ========================================
+   :before / :after 疑似要素の古い色を修正
+   ======================================== */
+
+/* タブのアクティブ状態の三角形 */
+.c-basicInfo__tab.is-active:after {
+  border-color: var(--color-primary) transparent transparent !important;
+}
+
+/* ランキングカードのポイント見出しの下線 */
+.rankingCard__pointItems h2:after {
+  background: var(--color-primary) !important;
+}
+
+.rankingCard__pointItems h2:before {
+  background: var(--color-border-light) !important;
+}
+
+.rankingCard__pointItems p + h2 {
+  margin-top: -1px;
+}
+
+.rankingCard__pointContainer {
+  margin-top: 20px;
+}
+
+.rankingCard__main[data-v-769f10cc] {
+    margin-bottom: 0px;
+}
+
+.rankingCard__pointItems {
+  margin-top: 20px;
+  position: relative;
+}
+
+.rankingCard__pointItems h2 {
+  font-size: 16px;
+  padding: 20px;
+  position: relative;
+}
+
+
+.rankingCard__pointTitle {
+  position: relative;
+  display: inline-block;
+  padding: 10px 32px 10px 28px;
+  margin-right: 16px;
+  background: linear-gradient(90deg, #00a497 0%, #104e96 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.rankingCard__pointTitle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -15px;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #104e96;
+}
+
+.rankingCard__pointTitle::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: -15px;
+  border-bottom: 15px solid #104e96;
+  border-right: 15px solid transparent;
+}
+
+.rankingCard__kuchikomiListWrapper {
+  margin-top: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rankingCard__kuchikomi .kuchikomi_list {
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  gap: 8px;
+}
+
+.rankingCard__kuchikomi .kuchikomi_item {
+  display: inline-flex;
+  flex: 0 0 248px;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 248px;
+  background-color: #fafafa;
+  border: 2px solid #eeeeee;
+  padding: 8px;
+  white-space: normal;
+}
+
+.rankingCard__kuchikomi .kuchikomi_item:last-child {
+  margin-right: 0;
+}
+
+.rankingCard__kuchikomi .kuchikomi_head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rankingCard__kuchikomi .kuchikomi_head .inner {
+  width: 74%;
+}
+
+.rankingCard__kuchikomi .kuchikomi_head .title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #0a315f;
+}
+
+.rankingCard__kuchikomi .kuchikomi_head .author {
+  font-size: 13px;
+  color: #3b4045;
+}
+
+.rankingCard__kuchikomi .kuchikomi_item .text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #3b4045;
+}
+
+.rankingCard__kuchikomi .kuchikomi_item .text.quote {
+  font-size: 12px;
+  text-align: right;
+  color: #7a7f87;
+}
+
+@media screen and (max-width: 767px) {
+  .rankingCard__kuchikomi .kuchikomi_item {
+    flex: 0 0 220px;
+    min-width: 220px;
+  }
+
+  .rankingCard__kuchikomi .kuchikomi_head .title {
+    font-size: 14px;
+  }
+
+  .rankingCard__kuchikomi .kuchikomi_item .text {
+    font-size: 13px;
+  }
+
+  .rankingCard__kuchikomi .kuchikomi_item .text.quote {
+    font-size: 12px;
+  }
+
+
+  .rankingCard__pointTitle {
+    font-size: 13px;
+    padding: 8px 26px 8px 20px;
+  }
+}
+
+/* ランキングカードのリード（見出し）の左ボーダー */
+.rankingCard__lead:before {
+  background: var(--color-primary) !important;
+}
+
+/* その他の:after/:before要素の色を#3a4046に統一 */
+[class*="tab"]:after,
+[class*="Tab"]:after {
+  border-color: #3a4046 transparent transparent !important;
+}
+
+/* compare系のタブ */
+.compare__tab.is-active:before,
+.compare__catTab.is-active:after,
+.compare__partTab.is-active:before {
+  border-color: var(--color-primary) transparent transparent !important;
+}
+
+/* ========================================
+   Vue Scoped Styles のより詳細な上書き
+   ======================================== */
+
+/* data-v-54756d29 の完全な上書き */
+.cta-button[data-v-54756d29],
+.cta-button--dense[data-v-54756d29],
+.cta-button--primary[data-v-54756d29],
+.cta-button--secondary[data-v-54756d29],
+button[data-v-54756d29],
+a[data-v-54756d29] {
+  background: var(--color-bg-white) !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: inset 0 -2px 0 0 var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+/* すべての疑似要素でborder-colorを強制上書き */
+*:before,
+*:after {
+  border-color: inherit !important;
+}
+
+[class*="active"]:after,
+[class*="active"]:before,
+.is-active:after,
+.is-active:before {
+  border-color: var(--color-primary) transparent transparent !important;
+}
+
+/* ========================================
+   ハンバーガーメニュー
+   ======================================== */
+
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  margin-left: 16px;
+  order: 10;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-menu:hover {
+  transform: scale(1.1);
+}
+
+.hamburger-menu span {
+  width: 100%;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* ========================================
+   サイドドロワー
+   ======================================== */
+
+.side-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.side-drawer.active {
+  pointer-events: all;
+}
+
+.side-drawer__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.side-drawer.active .side-drawer__overlay {
+  opacity: 1;
+}
+
+.side-drawer__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90%;
+  max-width: 400px;
+  height: 100%;
+  background: var(--color-bg-white);
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-drawer.active .side-drawer__content {
+  transform: translateX(0);
+}
+
+.side-drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: var(--gradient-primary);
+  color: var(--color-text-white);
+  flex-shrink: 0;
+}
+
+.side-drawer__header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text-white) !important;
+}
+
+.side-drawer__close {
+  background: transparent;
+  border: none;
+  color: var(--color-text-white);
+  font-size: 32px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.side-drawer__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.side-drawer__body {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* 検索フォームをサイドドロワー内でスタイル調整 */
+.side-drawer__body .searchForm__inner {
+  margin: 0;
+}
+
+.side-drawer__body .searchForm__title {
+  display: none;
+}
+
+.side-drawer__body .searchForm__contents {
+  border: none;
+  background: transparent;
+  max-height: none !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.side-drawer__body .searchForm__contentsInner {
+  flex-direction: column;
+  padding: 0;
+  gap: 20px;
+}
+
+.side-drawer__body .searchForm__selects {
+  grid-template: repeat(6, 1fr) / 1fr;
+  gap: 16px;
+}
+
+.side-drawer__body .searchForm__select select {
+  height: 48px;
+  font-size: 15px;
+}
+
+.side-drawer__body .searchForm__submitBtn {
+  width: 100%;
+  height: 56px;
+  font-size: 18px;
+  background: var(--color-accent) !important;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.side-drawer__body .searchForm__submitBtn:hover {
+  background: var(--color-accent-hover) !important;
+}
+
+/* ヘッダーのレイアウト調整 */
+.header__upper {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  order: 2;
+}
+
+.header__catchcopy {
+  order: 3;
+}
+
+/* ========================================
+   比較表パターンA（cryolipolysis003）スタイル
+   ======================================== */
+
+/* 比較表の基本スタイル */
+.comparison-table--matrix {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  margin: 0 auto 20px;
+  --comparison-fixed-col-width: 180px;
+  --comparison-clinic-col-width: 100px;
+}
+
+.comparison-table--matrix .comparison-table-wrapper {
+  display: inline-block;
+  min-width: calc(var(--comparison-fixed-col-width) + (var(--comparison-clinic-col-width) * var(--clinic-count, 1)));
+}
+
+.comparison-table--matrix #comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: calc(75px + var(--comparison-clinic-col-width) * var(--clinic-count, 1));
+  background: #ffffff;
+}
+
+/* テーブルヘッダー */
+.comparison-table--matrix #comparison-table thead th {
+  background: #f4fbfa;
+  color: #2f4f4e;
+  font-weight: 700;
+  padding: 5px 5px;
+  text-align: center;
+  border: 1px solid #ecf2f1;
+  white-space: nowrap;
+}
+
+/* 固定列（項目列）のスタイル */
+.comparison-table--matrix #comparison-table thead th.comparison-heading--item {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  min-width: var(--comparison-fixed-col-width);
+  max-width: var(--comparison-fixed-col-width);
+  width: var(--comparison-fixed-col-width);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04);
+}
+
+/* テーブルボディのセル */
+.comparison-table--matrix #comparison-table tbody td,
+.comparison-table--matrix #comparison-table tbody th {
+  border: 1px solid #ecf2f1;
+  padding: 10px 5px;
+  text-align: center;
+  vertical-align: middle;
+  background: #ffffff;
+  min-width: var(--comparison-clinic-col-width);
+}
+
+/* クリニック列の幅設定 */
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic,
+.comparison-table--matrix #comparison-table tbody td.comparison-cell {
+  min-width: var(--comparison-clinic-col-width);
+  max-width: var(--comparison-clinic-col-width);
+  width: var(--comparison-clinic-col-width);
+}
+
+/* 項目ラベル列のスタイル */
+.comparison-table--matrix #comparison-table tbody th.comparison-item-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #f4fbfa;
+  font-weight: 600;
+  color: #4c4c4c;
+  white-space: nowrap;
+  min-width: var(--comparison-fixed-col-width);
+  max-width: var(--comparison-fixed-col-width);
+  width: var(--comparison-fixed-col-width);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.03);
+}
+
+/* ストライプ背景 */
+.comparison-table--matrix #comparison-table tbody tr:nth-child(even) td.comparison-cell {
+  background: #fefefe;
+}
+
+/* ランキング1位の背景色 */
+.comparison-table--matrix #comparison-table tbody td.comparison-cell.is-rank-1,
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic.is-rank-1 {
+  background: #fffbdc;
+}
+
+/* ランキング2位の背景色 */
+.comparison-table--matrix #comparison-table tbody td.comparison-cell.is-rank-2,
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic.is-rank-2 {
+  background: #f4f9ff;
+}
+
+/* ランキング3位の背景色 */
+.comparison-table--matrix #comparison-table tbody td.comparison-cell.is-rank-3,
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic.is-rank-3 {
+  background: #f3fffb;
+}
+
+/* ランキング4位・5位の背景色 */
+.comparison-table--matrix #comparison-table tbody td.comparison-cell.is-rank-4,
+.comparison-table--matrix #comparison-table tbody td.comparison-cell.is-rank-5,
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic.is-rank-4,
+.comparison-table--matrix #comparison-table thead th.comparison-heading--clinic.is-rank-5 {
+  background-color: #f9f9f9;
+}
+
+/* クリニックヘッダー */
+.comparison-table--matrix .comparison-clinic-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* クリニックロゴのラッパー */
+.comparison-table--matrix .comparison-clinic-logo-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px #e1eceb;
+}
+
+/* クリニックロゴ */
+.comparison-table--matrix .comparison-clinic-header .comparison-logo {
+  max-width: 60px;
+  max-height: 36px;
+  width: 60px;
+}
+
+/* クリニック名リンク */
+.comparison-table--matrix .comparison-clinic-header .clinic-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2f4f4e;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 評価表示 */
+.comparison-table--matrix .comparison-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+/* 評価スコア */
+.comparison-table--matrix .comparison-rating-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff7f9c;
+  line-height: 1;
+}
+
+/* CTAボタンエリア */
+.comparison-table--matrix .comparison-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+/* 比較表内のリンクボタン */
+.comparison-table--matrix .comparison-cta .link_btn {
+  display: inline-block;
+  background: #ff95ae;
+  border-bottom: solid 2px #cf657d;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+/* 比較表内の詳細ボタン */
+.comparison-table--matrix .comparison-cta .detail_btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #4c4c4c;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #E0E0E0;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+}
+
+.comparison-table--matrix .comparison-cta .detail_btn:hover {
+  background: #f1f1f1;
+}
+
+/* 横スクロールのヒント */
+.comparison-table--matrix .comparison-scroll-hint {
+  margin: 8px 0 12px;
+  text-align: center;
+  font-size: 11px;
+  color: #7a8a89;
+  letter-spacing: 0.02em;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .comparison-table--matrix #comparison-table {
+    min-width: calc(var(--comparison-fixed-col-width) + (var(--comparison-clinic-col-width) * var(--clinic-count, 1)));
+  }
+
+  .comparison-table--matrix .comparison-cta .link_btn,
+  .comparison-table--matrix .comparison-cta .detail_btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .comparison-table--matrix .comparison-clinic-header .clinic-link {
+    font-size: 9px;
+  }
+
+  .comparison-table--matrix .comparison-rating-score {
+    font-size: 1rem;
+  }
+}
+
+/* rankingcomparetableにパターンAスタイルを適用 */
+.rankingcomparetable .table {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  margin: 0 auto 20px;
+}
+
+/* tableタグにmatrixスタイルを適用 */
+.rankingcomparetable .table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  min-width: 600px;
+}
+
+/* ヘッダー行のスタイル */
+.rankingcomparetable .table table thead th {
+  background: #f4fbfa !important;
+  color: #2f4f4e !important;
+  font-weight: 700;
+  padding: 10px 5px;
+  text-align: center;
+  border: 1px solid #ecf2f1 !important;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* 最初の列（項目列）を固定 - matrixパターンのみ */
+.rankingcomparetable:not(.comparison-table--classic) .table table thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #f4fbfa !important;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04);
+  min-width: 120px;
+}
+
+/* ボディのセル */
+.rankingcomparetable .table table tbody td {
+  border: 1px solid #ecf2f1 !important;
+  padding: 12px 8px;
+  text-align: center;
+  vertical-align: middle;
+  background: #ffffff;
+}
+
+/* 最初の列（項目列）のスタイル */
+.rankingcomparetable .table table tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #f4fbfa !important;
+  font-weight: 600;
+  color: #4c4c4c !important;
+  white-space: nowrap;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.03);
+  min-width: 120px;
+}
+
+/* ストライプ背景 */
+.rankingcomparetable .table table tbody tr:nth-child(even) td:not(:first-child) {
+  background: #fefefe;
+}
+
+/* 1位の列の背景色 - matrixパターンのみ */
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr:nth-child(1) td:not(:first-child),
+.rankingcomparetable:not(.comparison-table--classic) .table table thead th:nth-child(2) {
+  background: #fffbdc !important;
+}
+
+/* 2位の列の背景色 - matrixパターンのみ */
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr:nth-child(2) td:nth-child(3),
+.rankingcomparetable:not(.comparison-table--classic) .table table thead th:nth-child(3) {
+  background: #f4f9ff !important;
+}
+
+/* 3位の列の背景色 - matrixパターンのみ */
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr:nth-child(3) td:nth-child(4),
+.rankingcomparetable:not(.comparison-table--classic) .table table thead th:nth-child(4) {
+  background: #f3fffb !important;
+}
+
+/* 横スクロール式（matrix）の場合のみ列ごとの背景色を適用 */
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr td:nth-child(2) {
+  background: #fffbdc !important;
+}
+
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr td:nth-child(3) {
+  background: #f4f9ff !important;
+}
+
+.rankingcomparetable:not(.comparison-table--classic) .table table tbody tr td:nth-child(4) {
+  background: #f3fffb !important;
+}
+
+/* ロゴ画像のスタイル */
+.rankingcomparetable .table table td .logo {
+  max-width: 80px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* CTAボタンのスタイル調整 */
+.rankingcomparetable .table table td .cta-button {
+  margin: 5px auto;
+}
+
+/* 価格・値段のスタイル */
+.rankingcomparetable .table table td .value1 {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.rankingcomparetable .table table td .value2 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: black;
+}
+
+/* 効果・満足度のスタイル */
+.rankingcomparetable .table table td .effect {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* 特徴テキストのスタイル */
+.rankingcomparetable .table table td .feature {
+  font-size: 10px;
+  line-height: 1.4;
+  color: black;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .rankingcomparetable .table table {
+    min-width: 600px;
+    font-size: 12px;
+  }
+
+  .rankingcomparetable .table table thead th,
+  .rankingcomparetable .table table tbody td {
+    padding: 8px 4px;
+  }
+
+  .rankingcomparetable .table table td .logo {
+    max-width: 60px;
+  }
+
+  .rankingcomparetable .table table td .feature {
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   比較表パターンA（classic）スタイル - タブ切り替え式
+   ======================================== */
+
+/* タブメニューのスタイル */
+.rankingcomparetable .tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 0px;
+}
+
+.rankingcomparetable .tab {
+  border-radius: 4px 4px 0 0;
+  width: 32%;
+  text-align: center;
+  font-weight: 600;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #d2d2d2;
+  color: #7a7a7a;
+  transition: all 0.3s;
+}
+
+.rankingcomparetable .tab--active {
+  background-image: linear-gradient(135deg, rgb(30, 90, 142) 0%, rgb(74, 144, 200) 100%) !important;
+  color: #fff !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* classicパターンの比較表スタイル */
+.rankingcomparetable.comparison-table--classic .table {
+  position: relative;
+  z-index: 1;
+  overflow-x: visible;
+}
+
+.rankingcomparetable.comparison-table--classic .table table {
+  border-top: 1px solid #E0E0E0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  min-width: auto;
+}
+
+.rankingcomparetable.comparison-table--classic .table table th {
+  text-align: center !important;
+  padding: 15px 8px;
+  border-right: 1px solid #ffffff;
+  background: #121f39 !important;
+  color: white !important;
+  vertical-align: middle;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  white-space: normal;
+  position: static !important;
+  box-shadow: none !important;
+}
+
+.rankingcomparetable.comparison-table--classic .table table td {
+  text-align: center !important;
+  padding: 15px 8px;
+  vertical-align: middle;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  color: #2d3748 !important;
+  white-space: normal;
+  position: static !important;
+  box-shadow: none !important;
+}
+
+/* 行の背景色 - classicパターン */
+.rankingcomparetable.comparison-table--classic .table table tbody tr:first-child td {
+  background: #fffbdc !important;
+}
+
+.rankingcomparetable.comparison-table--classic .table table tbody tr:nth-child(2) td {
+  background: #ffffff !important;
+}
+
+.rankingcomparetable.comparison-table--classic .table table tbody tr:nth-child(3) td {
+  background: #ffffff !important;
+}
+
+.rankingcomparetable.comparison-table--classic .table table td:not(.ranking-table_td1) {
+  border-bottom: 1px solid #E0E0E0;
+  border-top: none;
+  border-left: none;
+}
+
+/* モバイル対応 - classicパターン */
+@media (max-width: 768px) {
+  .rankingcomparetable.comparison-table--classic .table table {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .rankingcomparetable .tab {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+}
+
+/* テーブルセル内のリンクテキストを改行 */
+.rankingcomparetable .cta-text {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* ========================================
+   rankingSummary セクション - ヘッダーは削除
+   ======================================== */
+
+.rankingSummary__heading {
+  display: none !important;
+}
+
+/* ========================================
+   rankingSummary__cardContents - summary スタイル
+   ======================================== */
+
+.rankingSummary__card,
+.rankingSummary__card[data-v-35a2c51d] {
+  margin: 24px auto !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+.rankingSummary__cardContents,
+.rankingSummary__cardContents[data-v-35a2c51d] {
+  padding: 0 16px 24px !important;
+  background-color: #ffffff !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 24px rgba(12, 35, 64, 0.08) !important;
+}
+
+.rankingSummary__cardHeader,
+.rankingSummary__cardHeader[data-v-35a2c51d] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 0 12px !important;
+  padding: 16px 8px 0 !important;
+}
+
+.rankingSummary__cardHeading,
+.rankingSummary__cardHeading[data-v-35a2c51d] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.rankingSummary__cardHeaderIconBrush,
+.rankingSummary__cardHeaderIconBrush[data-v-35a2c51d] {
+  width: 72px !important;
+  height: auto !important;
+}
+
+.rankingSummary__cardHeaderIconBrush img,
+.rankingSummary__cardHeaderIconBrush img[data-v-35a2c51d] {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.rankingSummary__tempFeature,
+.rankingSummary__tempFeature[data-v-35a2c51d] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 16px 0 0 !important;
+  color: #324d6c !important;
+  font-weight: 700 !important;
+}
+
+.rankingSummary__tempFeature span span,
+.rankingSummary__tempFeature span span[data-v-35a2c51d] {
+  background-color: #fffecc !important;
+  padding: 0 4px !important;
+}
+
+.rankingSummary__tempFeature img,
+.rankingSummary__tempFeature img[data-v-35a2c51d] {
+  width: 20px !important;
+  height: auto !important;
+}
+
+.rankingSummary__cardHeader-content,
+.rankingSummary__cardHeader-content[data-v-35a2c51d] {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin: 16px 0 0 !important;
+}
+
+.rankingSummary__cardMainImg,
+.rankingSummary__cardMainImg[data-v-35a2c51d] {
+  width: 72px !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+.rankingSummary__cardMainImg img,
+.rankingSummary__cardMainImg img[data-v-35a2c51d] {
+  border-radius: 8px !important;
+  border: 1px solid #e5e5e5 !important;
+}
+
+.rankingSummary__cardName,
+.rankingSummary__cardName[data-v-35a2c51d] {
+  color: #4a90e2 !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
+  margin: 4px 0 0 !important;
+  line-height: 1.4 !important;
+}
+
+.rankingSummary__cardContentsMain,
+.rankingSummary__cardContentsMain[data-v-35a2c51d] {
+  margin-top: 16px !important;
+}
+
+.rankingSummary__cardTable-outer,
+.rankingSummary__cardTable-outer[data-v-35a2c51d] {
+  width: 100% !important;
+}
+
+.rankingSummary__cardTable,
+.rankingSummary__cardTable[data-v-35a2c51d] {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  border: 1px solid #d9d9d9 !important;
+  margin: 16px 0 0 !important;
+  background-color: #ffffff !important;
+}
+
+.rankingSummary__cardTableBox,
+.rankingSummary__cardTableBox[data-v-35a2c51d] {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100% !important;
+  border-right: 1px solid #d9d9d9 !important;
+}
+
+.rankingSummary__cardTableBox:nth-child(4n),
+.rankingSummary__cardTableBox[data-v-35a2c51d]:nth-child(4n) {
+  border-right: none !important;
+}
+
+.rankingSummary__cardTableBoxTitle,
+.rankingSummary__cardTableBoxTitle[data-v-35a2c51d] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 10px 4px !important;
+  min-height: 52px !important;
+  background-color: #3A4046 !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  border-bottom: 1px solid #d9d9d9 !important;
+}
+
+.rankingSummary__cardTableBoxDesc,
+.rankingSummary__cardTableBoxDesc[data-v-35a2c51d] {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 12px 8px !important;
+  min-height: 132px !important;
+  font-size: 13px !important;
+  text-align: center !important;
+  background-color: #ffffff !important;
+  color: #324d6c !important;
+}
+
+.rankingSummary__cardTableIcon,
+.rankingSummary__cardTableIcon[data-v-35a2c51d] {
+  margin: 0 auto !important;
+  width: 32px !important;
+}
+
+.rankingSummary__cardTableTexts,
+.rankingSummary__cardTableTexts[data-v-35a2c51d] {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  margin-top: 6px !important;
+}
+
+.rankingSummary__cardTableText,
+.rankingSummary__cardTableText[data-v-35a2c51d] {
+  color: #324d6c !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+}
+
+.rankingSummary__cardTableTextTag,
+.rankingSummary__cardTableTextTag[data-v-35a2c51d] {
+  display: inline-block !important;
+  padding: 4px 6px !important;
+  border-radius: 2px !important;
+  background-color: #324d6c !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.rankingSummary__annotation,
+.rankingSummary__annotation[data-v-35a2c51d] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 16px !important;
+  color: #324d6c !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.rankingSummary__cardBtns,
+.rankingSummary__cardBtns[data-v-35a2c51d] {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-top: 16px !important;
+}
+
+.rankingSummary__cardBtn,
+.rankingSummary__cardBtn[data-v-35a2c51d] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: calc(50% - 36px) !important;
+  padding: 12px 0 !important;
+  border-radius: 4px !important;
+  background-color: #02A8C0 !important;
+  box-shadow: 0 4px 0 #028899 !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+.rankingSummary__cardBtns .cta-link.cta-button--testDesign,
+.rankingSummary__cardBtns .cta-link.cta-button--testDesign[data-v-fa24a1ae] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: calc(50% + 28px) !important;
+  padding: 12px 0 !important;
+  border-radius: 4px !important;
+  border: none !important;
+  background-color: #32D696 !important;
+  box-shadow: 0 4px 0 #28a872 !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.rankingSummary__cardBtns .cta-link.cta-button--testDesign:hover,
+.rankingSummary__cardBtns .cta-link.cta-button--testDesign[data-v-fa24a1ae]:hover {
+  background-color: #2a9f6d !important;
+}
+
+@media screen and (max-width: 1023px) {
+  .rankingSummary__cardTable,
+  .rankingSummary__cardTable[data-v-35a2c51d] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .rankingSummary__cardTableBox:nth-child(2n),
+  .rankingSummary__cardTableBox[data-v-35a2c51d]:nth-child(2n) {
+    border-right: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .rankingSummary__cardHeader-content,
+  .rankingSummary__cardHeader-content[data-v-35a2c51d] {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .rankingSummary__card,
+  .rankingSummary__card[data-v-35a2c51d] {
+    margin: 16px auto !important;
+  }
+
+  .rankingSummary__cardMainImg,
+  .rankingSummary__cardMainImg[data-v-35a2c51d] {
+    width: 110px !important;
+  }
+
+  .rankingSummary__cardName,
+  .rankingSummary__cardName[data-v-35a2c51d] {
+    font-size: 18px !important;
+  }
+
+  .rankingSummary__cardTable,
+  .rankingSummary__cardTable[data-v-35a2c51d] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rankingSummary__cardTableBox,
+  .rankingSummary__cardTableBox[data-v-35a2c51d] {
+    border-right: none !important;
+    border-bottom: 1px solid #d9d9d9 !important;
+  }
+
+  .rankingSummary__cardTableBox:last-child,
+  .rankingSummary__cardTableBox[data-v-35a2c51d]:last-child {
+    border-bottom: none !important;
+  }
+
+  .rankingSummary__cardBtns,
+  .rankingSummary__cardBtns[data-v-35a2c51d] {
+    flex-direction: column !important;
+  }
+
+  .rankingSummary__cardBtn,
+  .rankingSummary__cardBtn[data-v-35a2c51d],
+  .rankingSummary__cardBtns .cta-link.cta-button--testDesign,
+  .rankingSummary__cardBtns .cta-link.cta-button--testDesign[data-v-fa24a1ae] {
+    width: 100% !important;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* ========================================
+   Top Summary Section Styles
+   ======================================== */
+
+.top-summary .top-summary-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0px;
+  margin-bottom: -10px;
+  background: black;
+}
+
+.top-summary .top-summary-title .title-left .title-copy1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-summary .top-summary-title .title-left .title-copy1 .copy1-label {
+  padding: 4px 4px 4px 5px;
+  background-color: rgb(255 255 255);
+  color: rgb(252 93 110);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.top-summary .top-summary-title .title-left .title-copy1 .copy1-cross {
+  margin: 0px 2px;
+  color: white;
+}
+
+.top-summary .top-summary-title .title-left .title-copy1 .copy1-text {
+  margin-left: 4px;
+  color: white;
+}
+
+.top-summary .top-summary-title .title-left .title-copy2 {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+}
+
+.top-summary .top-summary-title .title-left .title-copy2 .marker {
+  background: linear-gradient(rgba(0, 0, 0, 0) 79%, rgb(251 233 110 / 62%) 0px);
+}
+
+.top-summary .top-summary-title .title-right {
+  margin-left: 8px;
+  width: 140px;
+}
+
+.top-summary .top-summary-content {
+  padding-bottom: 32px;
+  background-color: rgb(18 31 57);
+}
+
+.top-summary .top-summary-content .summaries {
+  margin-top: 8px;
+  padding: 0px 12px;
+}
+
+.top-summary .top-summary-content .summaries > .summary:not(:first-child) {
+  margin-top: 24px;
+}
+
+.summary {
+  padding: 0px 8px 16px;
+  background-color: rgb(255, 255, 255);
+}
+
+.summary .summary-header {
+  display: flex;
+  margin-right: -8px;
+}
+
+.summary .summary-header .summary-header-rank {
+  width: 35px;
+  flex-shrink: 0;
+  position: relative;
+  top: 10px;
+}
+
+.summary .summary-header .summary-header-right {
+  margin-left: 4px;
+  padding-top: 16px;
+}
+
+.summary .summary-header .summary-header-right .summary-header-name {
+  display: flex;
+  align-items: center;
+  color: rgb(74, 144, 226);
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.summary .summary-header .summary-header-right .summary-header-name .link-icon {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.summary .summary-header .summary-header-right .summary-header-score {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.summary .summary-header .summary-header-right .summary-header-score .score-stars {
+  display: flex;
+  gap: 1px;
+  position: relative;
+  top: -1px;
+}
+
+.summary .summary-header .summary-header-right .summary-header-score .score-stars > img {
+  width: 14px;
+  height: 14px;
+}
+
+.summary .summary-header .summary-header-right .summary-header-score .score-num {
+  margin-left: 4px;
+  color: rgb(255, 105, 0);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.summary .summary-header .summary-header-right .summary-header-score .score-text {
+  margin-left: 4px;
+  color: rgb(140, 140, 140);
+  font-size: 11px;
+}
+
+.summary .summary-banner {
+  margin: 12px auto 0px;
+  width: 75%;
+}
+
+.summary .summary-table {
+  margin-top: 16px;
+}
+
+.summary .summary-table table {
+  width: 100%;
+}
+
+.summary .summary-table table td,
+.summary .summary-table table th {
+  width: 25%;
+  padding: 8px 0px;
+  border: 1px solid rgb(217, 217, 217);
+  font-size: 13px;
+  text-align: center;
+}
+
+.summary .summary-table table th {
+  background-color: rgb(18 31 57);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.summary .summary-table table td {
+  color: rgb(50, 77, 108);
+  vertical-align: top;
+}
+
+.summary .summary-table table .t-score img {
+  width: 32px;
+  height: 32px;
+}
+
+.summary .summary-table table .t-comment {
+  margin-top: 8px;
+}
+
+.summary .summary-table table .t-times {
+  display: inline-block;
+  padding: 4px 6px;
+  border-radius: 2px;
+  background-color: rgb(50, 77, 108);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.summary .summary-table table .t-price {
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.summary .summary-cta {
+  margin-top: 16px;
+}
+
+.summary .summary-cta .summary-cta-copy {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 8px;
+}
+
+.summary .summary-cta .summary-cta-copy .copy-text {
+  margin: 0px 4px;
+  color: rgb(50, 77, 108);
+  font-weight: 700;
+}
+
+.summary .summary-cta .summary-cta-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary .summary-cta .summary-cta-btns .summary-cta-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0px;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.summary .summary-cta .summary-cta-btns .summary-cta-btn.btn-narrow {
+  width: calc(50% - 36px);
+  background-color: rgb(0, 84, 167);
+  box-shadow: rgb(0, 44, 127) 0px 4px 0px;
+}
+
+.summary .summary-cta .summary-cta-btns .summary-cta-btn.btn-wide {
+  width: calc(50% + 28px);
+  background-color: rgb(207, 46, 46);
+  box-shadow: rgb(167, 6, 6) 0px 4px 0px;
+}
+
+/* レスポンシブデザイン */
+@media screen and (max-width: 767px) {
+  .top-summary .top-summary-title {
+    padding: 16px 0px;
+  }
+
+  .top-summary .top-summary-title .title-left .title-copy1 .copy1-label {
+    /* font-size: 10px; */
+    /* padding: 3px 3px 3px 4px; */
+  }
+
+  .top-summary .top-summary-title .title-left .title-copy2 {
+    /* font-size: 14px; */
+  }
+
+  .top-summary .top-summary-title .title-right {
+    width: 100px;
+  }
+
+  .top-summary .top-summary-content {
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+  }
+
+  .top-summary .top-summary-content .summaries {
+    padding: 0px 8px;
+  }
+
+  .top-summary .top-summary-content .summaries > .summary:not(:first-child) {
+    margin-top: 16px;
+  }
+
+  .summary {
+    padding: 0px 6px 12px;
+  }
+
+  .summary .summary-header .summary-header-rank {
+    width: 35px;
+  }
+
+  .summary .summary-header .summary-header-right {
+    padding-top: 12px;
+  }
+
+  .summary .summary-header .summary-header-right .summary-header-name {
+    font-size: 16px;
+  }
+
+  .summary .summary-header .summary-header-right .summary-header-score .score-num {
+    font-size: 13px;
+  }
+
+  .summary .summary-header .summary-header-right .summary-header-score .score-text {
+    font-size: 10px;
+  }
+
+  .summary .summary-banner {
+    width: 85%;
+  }
+
+  .summary .summary-table table td,
+  .summary .summary-table table th {
+    padding: 6px 2px;
+    font-size: 11px;
+  }
+
+  .summary .summary-table table .t-score img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .summary .summary-table table .t-times {
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+
+  .summary .summary-table table .t-price {
+    font-size: 12px;
+  }
+
+  .summary .summary-cta-copy {
+    font-size: 13px;
+  }
+
+  .summary .summary-cta .summary-cta-btns .summary-cta-btn {
+    font-size: 14px;
+    padding: 10px 0px;
+  }
+
+  .summary .summary-cta .summary-cta-btns .summary-cta-btn.btn-narrow {
+    width: calc(40% - 8px);
+  }
+
+  .summary .summary-cta .summary-cta-btns .summary-cta-btn.btn-wide {
+    width: calc(60% - 8px);
+  }
+
+  .l-salonCard__header {
+    padding: 6px 20px 6px 3px;
+  }
+}

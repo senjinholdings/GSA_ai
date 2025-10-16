@@ -1,0 +1,122 @@
+<!-- SummaryCard.html - ランキングサマリーカード -->
+<div class="px-2 pb-4 bg-white mt-6 first:mt-0">
+    <!-- ヘッダー（ランク + ブランド名 + スコア） -->
+    <div class="flex -mr-2">
+        <!-- ランクバッジ -->
+        <div class="flex-shrink-0 relative -top-1.5 w-[72px]">
+            <img src="{{rankBadge}}" alt="{{rankText}}">
+        </div>
+
+        <!-- 右側情報 -->
+        <div class="ml-1 pt-4">
+            <!-- ブランド名 -->
+            <a
+                href="{{detailLink}}"
+                class="flex items-center text-blue-500 text-xl font-bold underline"
+            >
+                {{brandName}}
+                <svg class="ml-2 text-base" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0L10 6H16L11 10L13 16L8 12L3 16L5 10L0 6H6L8 0Z"/>
+                </svg>
+            </a>
+
+            <!-- スコア -->
+            <div class="flex items-center mt-1">
+                <div class="flex gap-px relative -top-px">
+                    {{#each stars}}
+                        <img src="{{this}}" alt="star" class="w-3.5 h-3.5">
+                    {{/each}}
+                </div>
+                <div class="ml-1 text-orange-600 text-[15px] leading-none">
+                    {{scoreNumber}}
+                </div>
+                <div class="ml-1 text-gray-400 text-[11px]">
+                    {{scoreText}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- バナー画像 -->
+    <img
+        src="{{bannerImage}}"
+        alt="{{brandName}}"
+        class="mt-3 mx-auto w-3/4"
+    >
+
+    <!-- 情報テーブル -->
+    <table class="w-full mt-4 border-collapse">
+        <thead>
+            <tr>
+                <th class="w-1/4 py-2 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                    評価
+                </th>
+                <th class="w-1/4 py-2 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                    料金<br><small>{{priceLabel}}</small>
+                </th>
+                <th class="w-1/4 py-2 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                    回数
+                </th>
+                <th class="w-1/4 py-2 border border-gray-300 bg-gray-700 text-white font-bold text-center align-middle text-sm">
+                    脱毛機
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- 評価 -->
+                <td class="border border-gray-300 text-center align-top text-slate-700 text-sm">
+                    <img src="{{scoreIcon}}" alt="{{score}}" class="w-8 h-8 mx-auto">
+                </td>
+                <!-- 料金 -->
+                <td class="border border-gray-300 text-center align-top text-slate-700 text-sm">
+                    <div class="mt-0.5 font-bold">{{price}}</div>
+                </td>
+                <!-- 回数 -->
+                <td class="border border-gray-300 text-center align-top text-slate-700 text-sm">
+                    <span class="inline-block px-1.5 py-1 rounded-sm bg-slate-700 text-white text-xs leading-none">
+                        {{times}}
+                    </span>
+                </td>
+                <!-- 脱毛機 -->
+                <td class="border border-gray-300 text-center align-top text-slate-700 text-sm">
+                    <ul class="px-2">
+                        {{#each machines}}
+                            <li class="py-1 border border-gray-300 rounded-sm font-bold text-xs leading-none mt-0.5 first:mt-0 {{#if active}}border-blue-600 bg-yellow-50 text-blue-600{{/if}}">
+                                {{name}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- CTA -->
+    <div class="mt-4">
+        <!-- コピー -->
+        <div class="flex justify-center items-end mb-2">
+            <img src="{{copyLeftIcon}}" alt="" class="w-5">
+            <div class="mx-1 text-slate-700 font-bold">{{ctaCopyText}}</div>
+            <img src="{{copyRightIcon}}" alt="" class="w-5">
+        </div>
+
+        <!-- ボタン -->
+        <div class="flex justify-between">
+            <a
+                href="{{detailLink}}"
+                class="flex justify-center items-center w-[calc(50%-36px)] py-3 rounded bg-blue-700 shadow-[0_4px_0_#002c7f] text-white text-base font-bold"
+            >
+                {{detailButtonText}}
+            </a>
+            <a
+                href="{{officialLink}}"
+                target="_blank"
+                rel="nofollow"
+                class="flex justify-center items-center w-[calc(50%+28px)] py-3 rounded bg-red-600 shadow-[0_4px_0_#a70606] text-white text-base font-bold"
+            >
+                {{officialButtonText}}
+            </a>
+        </div>
+    </div>
+</div>

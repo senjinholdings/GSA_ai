@@ -1,0 +1,144 @@
+<!-- BrandCard.html - ブランド詳細カード -->
+<div class="px-2 pb-8 bg-white mt-8 first:mt-0">
+    <!-- ヘッダー（ランク + ブランド名 + スコア） -->
+    <div class="flex -mr-2">
+        <!-- ランクバッジ -->
+        <div class="flex-shrink-0 relative -top-1.5 w-[72px]">
+            <img src="{{rankBadge}}" alt="{{rankText}}">
+        </div>
+
+        <!-- 右側情報 -->
+        <div class="ml-1 pt-4">
+            <!-- ブランド名 -->
+            <a
+                href="{{link}}"
+                class="flex items-center text-blue-500 text-xl font-bold underline"
+            >
+                {{brandName}}
+                <svg class="ml-2 text-base" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0L10 6H16L11 10L13 16L8 12L3 16L5 10L0 6H6L8 0Z"/>
+                </svg>
+            </a>
+
+            <!-- スコア -->
+            <div class="flex items-center mt-1">
+                <div class="flex gap-px relative -top-px">
+                    {{#each stars}}
+                        <img src="{{this}}" alt="star" class="w-3.5 h-3.5">
+                    {{/each}}
+                </div>
+                <div class="ml-1 text-orange-600 text-[15px] leading-none">
+                    {{scoreNumber}}
+                </div>
+                <div class="ml-1 text-gray-400 text-[11px]">
+                    {{scoreText}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- バナー画像 -->
+    <img
+        src="{{bannerImage}}"
+        alt="{{brandName}}"
+        class="mt-3 mx-auto w-3/4"
+    >
+
+    <!-- 特徴ポイント -->
+    <div class="mt-4 p-5 rounded-2xl bg-yellow-50">
+        {{#each briefPoints}}
+            <div class="mt-6 first:mt-0">
+                <div class="w-fit px-2 py-1 bg-white text-slate-700 text-[15px] font-bold">
+                    {{heading}}
+                </div>
+                <div class="mt-2 leading-[1.8]">
+                    {{description}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-4">
+        <!-- コピー -->
+        <div class="flex justify-center items-end mb-2">
+            <img src="{{copyLeftIcon}}" alt="" class="w-5">
+            <div class="mx-1 text-slate-700 font-bold">{{ctaCopyText}}</div>
+            <img src="{{copyRightIcon}}" alt="" class="w-5">
+        </div>
+
+        <!-- ボタン -->
+        <a
+            href="{{officialLink}}"
+            target="_blank"
+            rel="nofollow"
+            class="flex justify-center items-center relative min-h-[56px] py-2.5 rounded bg-red-600 shadow-[0_4px_0_#a70606] text-white text-base font-bold"
+        >
+            <div class="leading-[1.5] text-center">{{buttonText}}</div>
+            <svg class="absolute right-4" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 10L13 16L8 12L3 16L5 10L0 6H6L8 0Z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- プランセクション（オプション） -->
+    {{#if plans}}
+        <div class="mt-8">
+            <div class="-mx-2 py-3 border-t border-b border-slate-700 bg-gray-100 text-slate-700 text-base font-bold text-center">
+                {{plansSectionTitle}}
+            </div>
+
+            <!-- プランカードスクロール -->
+            <div class="mt-4 flex justify-center">
+                <div class="flex overflow-x-auto -mx-2 -mb-2 px-2 pb-2">
+                    {{#each plans}}
+                        <div class="min-w-[160px] max-w-[160px] overflow-hidden border border-blue-600 rounded bg-white text-center ml-2 first:ml-0">
+                            <!-- プラン名 -->
+                            <div class="py-2 bg-blue-600 text-white">
+                                <div class="text-[15px] font-bold">{{partName}}</div>
+                                <div class="mt-0.5 text-xs">{{partDetail}}</div>
+                            </div>
+
+                            <!-- プラン内容 -->
+                            <div class="p-3">
+                                <img
+                                    src="{{image}}"
+                                    alt="{{partName}}"
+                                    class="max-w-[120px] mx-auto border border-gray-300"
+                                >
+
+                                <!-- 料金 -->
+                                <div class="flex justify-center items-center mt-3">
+                                    <div class="px-1.5 py-1 rounded-sm bg-slate-700 text-white text-sm leading-none">
+                                        {{times}}
+                                    </div>
+                                    <div class="ml-1 text-slate-700 text-base font-bold">
+                                        {{price}}
+                                    </div>
+                                </div>
+
+                                <div class="mt-1 text-slate-700 text-xs">
+                                    {{monthlyPrice}}
+                                </div>
+
+                                <!-- CTA -->
+                                <div class="mt-2">
+                                    <a
+                                        href="{{link}}"
+                                        target="_blank"
+                                        class="flex justify-center items-center py-2.5 rounded bg-red-600 shadow-[0_3px_0_#a70606] text-white font-bold"
+                                    >
+                                        {{buttonText}}
+                                        <svg class="ml-2 -mr-2" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                                            <path d="M8 0L10 6H16L11 10L13 16L8 12L3 16L5 10L0 6H6L8 0Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</div>

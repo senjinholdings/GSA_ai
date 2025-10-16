@@ -1,0 +1,16 @@
+<!-- RankingSection.html - ランキングセクション全体 -->
+<div class="bg-cyan-50">
+    <!-- タイトル -->
+    <div class="bg-gray-100">
+        <div class="w-fit mx-auto px-3 md:px-4 py-2.5 md:py-3 bg-slate-700 rounded-t text-white text-[15px] md:text-xl font-bold leading-none tracking-wide">
+            {{sectionTitle}}
+        </div>
+    </div>
+
+    <!-- ブランドカードリスト -->
+    <div class="px-3 pb-16">
+        {{#each brands}}
+            {{> BrandCard this}}
+        {{/each}}
+    </div>
+</div>
