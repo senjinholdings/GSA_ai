@@ -1,0 +1,45 @@
+{
+  "timestamp": 1760672872047,
+  "method": "getBoundingClientRect (correct)",
+  "geometries": [
+    {
+      "selector": "img[src=\"img/banner/shiftai_banner.webp\"]",
+      "rectW": 384.2,
+      "rectH": 216.1,
+      "cssW": "384.188px",
+      "cssH": "216.094px",
+      "propW": 384,
+      "propH": 216,
+      "attrW": null,
+      "attrH": null,
+      "naturalW": 1536,
+      "naturalH": 864
+    },
+    {
+      "selector": "img[src=\"img/banner/dmmai_banner.webp\"]",
+      "rectW": 384.2,
+      "rectH": 186.1,
+      "cssW": "384.188px",
+      "cssH": "186.094px",
+      "propW": 384,
+      "propH": 186,
+      "attrW": null,
+      "attrH": null,
+      "naturalW": 1251,
+      "naturalH": 606
+    },
+    {
+      "selector": "img[src=\"img/banner/samuraiai_banner.webp\"]",
+      "rectW": 384.2,
+      "rectH": 185.5,
+      "cssW": "384.188px",
+      "cssH": "185.469px",
+      "propW": 384,
+      "propH": 185,
+      "attrW": null,
+      "attrH": null,
+      "naturalW": 1249,
+      "naturalH": 603
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+selector,src,naturalWidth,naturalHeight,displayedWidth,displayedHeight,estimatedShift
+header .header__logo img,img/common/logo.webp,unknown,unknown,auto,auto,high (404 error)
+img[alt="TOP3"],img/ranking/summary_h2.svg,725,208,100%,auto,medium
+.rankingCard img.logo (SHIFT AI),img/banner/shiftai_banner.webp,1536,864,auto,auto,high
+.rankingCard img.logo (DMM),img/banner/dmmai_banner.webp,1251,606,auto,auto,high
+.rankingCard img.logo (侍),img/banner/samuraiai_banner.webp,1249,603,auto,auto,high
+img[alt="AI副業TOP3を詳しくチェック"],img/ranking/title_clinic.svg,753,123,auto,auto,medium
+.c-basicInfo__tablePartImg img (multiple),dynamic (CSV-loaded),unknown,unknown,auto,auto,medium
+img.ai-column__hero-image,img/column/column1.webp,1280,720,auto,auto,medium
+img.ribbon (gold/silver/bronze),img/ranking/ribbon_*.webp,50,65,26px,auto,low
+svg dialog close icons,svg/sign/close.svg,unknown,unknown,auto,auto,low

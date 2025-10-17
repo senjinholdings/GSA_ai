@@ -1,0 +1,38 @@
+diff --git a/index.html b/index.html
+--- a/index.html
++++ b/index.html
+@@ -636 +636
+-<img alt="TOP3" src="img/ranking/summary_h2.svg" style="width:100%;"/>
++<img alt="TOP3" src="img/ranking/summary_h2.svg" width="725" height="208" style="width:100%;"/>
+
+@@ -662 +662
+-<img alt="" src="img/banner/shiftai_banner.webp"/>
++<img alt="" src="img/banner/shiftai_banner.webp" width="1536" height="864"/>
+
+@@ -719 +719
+-<img alt="" src="img/banner/dmmai_banner.webp"/>
++<img alt="" src="img/banner/dmmai_banner.webp" width="1251" height="606"/>
+
+@@ -776 +776
+-<img alt="" src="img/banner/samuraiai_banner.webp"/>
++<img alt="" src="img/banner/samuraiai_banner.webp" width="1249" height="603"/>
+
+@@ -816 +816 (line in dense HTML, finding exact match)
+-<img alt="AI副業TOP3を詳しくチェック" data-v-031c5b88="" decoding="async" src="img/ranking/title_clinic.svg"/>
++<img alt="AI副業TOP3を詳しくチェック" data-v-031c5b88="" decoding="async" src="img/ranking/title_clinic.svg" width="753" height="123"/>
+
+@@ -816 +816 (in same dense line, second location)
+-<img alt="" class="logo" data-v-769f10cc="" src="img/banner/shiftai_banner.webp" style="cursor: pointer"/>
++<img alt="" class="logo" data-v-769f10cc="" src="img/banner/shiftai_banner.webp" width="1536" height="864" style="cursor: pointer"/>
+
+@@ -821 +821 (in dense line)
+-<img alt="" class="logo" data-v-769f10cc="" src="img/banner/dmmai_banner.webp" style="cursor: pointer"/>
++<img alt="" class="logo" data-v-769f10cc="" src="img/banner/dmmai_banner.webp" width="1251" height="606" style="cursor: pointer"/>
+
+@@ -826 +826 (in dense line)
+-<img alt="" class="logo" data-v-769f10cc="" src="img/banner/samuraiai_banner.webp" style="cursor: pointer"/>
++<img alt="" class="logo" data-v-769f10cc="" src="img/banner/samuraiai_banner.webp" width="1249" height="603" style="cursor: pointer"/>
+
+@@ -838 +838
+-<img alt="生成AIスクール選び 失敗しないためのポイント" class="ai-column__hero-image" src="img/column/column1.webp"/>
++<img alt="生成AIスクール選び 失敗しないためのポイント" class="ai-column__hero-image" src="img/column/column1.webp" width="1280" height="720"/>

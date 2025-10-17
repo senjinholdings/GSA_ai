@@ -1,0 +1,51 @@
+{
+  "timestamp": 1760672113706,
+  "conditions": {
+    "viewport": "360x640",
+    "harness": "animations/transitions disabled",
+    "wait": "load + fonts.ready + 1500ms",
+    "scroll": "0"
+  },
+  "geometries": [
+    {
+      "selector": ".summary-banner:nth-of-type(2)",
+      "top": 1223,
+      "left": 58,
+      "width": 384,
+      "height": 216,
+      "objectFit": "fill",
+      "visibility": "visible",
+      "display": "block"
+    },
+    {
+      "selector": "img[src=\"img/banner/shiftai_banner.webp\"]",
+      "top": 1223,
+      "left": 58,
+      "width": 384,
+      "height": 216,
+      "objectFit": "fill",
+      "visibility": "visible",
+      "display": "inline"
+    },
+    {
+      "selector": "img[src=\"img/banner/dmmai_banner.webp\"]",
+      "top": 1742,
+      "left": 58,
+      "width": 384,
+      "height": 186,
+      "objectFit": "fill",
+      "visibility": "visible",
+      "display": "inline"
+    },
+    {
+      "selector": "img[src=\"img/banner/samuraiai_banner.webp\"]",
+      "top": 2231,
+      "left": 58,
+      "width": 384,
+      "height": 185,
+      "objectFit": "fill",
+      "visibility": "visible",
+      "display": "inline"
+    }
+  ]
+}

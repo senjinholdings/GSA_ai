@@ -1,0 +1,14 @@
+{
+  "targetUrl": "http://localhost:8000/",
+  "mode": "mobile",
+  "viewport": "360x640",
+  "network": "Slow 4G",
+  "cpuThrottling": 4,
+  "cache": "cold",
+  "runs": 3,
+  "chromeVersion": "手動確認が必要",
+  "devtoolsVersion": "手動確認が必要",
+  "devtoolsMcpVersion": "利用可能",
+  "extensionsDisabled": true,
+  "note": "タスクではポート3000を想定していますが、現在のstart-server.shはポート8000を使用しています"
+}

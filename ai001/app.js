@@ -2079,3 +2079,71 @@ if (window.isSearchResultsPage) {
       noResults.querySelector('.no-results-text').textContent = 'ページの読み込みに失敗しました。もう一度お試しください。';
     });
 }
+
+// MV SVGを読み込んでテキストを置換
+async function initializeMvTextOverlay() {
+  try {
+    const commonText = await loadCommonText();
+    const container = document.getElementById('mv-svg-container');
+
+    if (!container) {
+      console.error('❌ mv-svg-containerが見つかりません');
+      return;
+    }
+
+    // SVGファイルを読み込む
+    const response = await fetch('img/mv/mv_ranking_semminar.svg');
+    if (!response.ok) {
+      throw new Error(`SVG読み込みエラー: ${response.status}`);
+    }
+    const svgText = await response.text();
+
+    // コンテナにSVGを挿入
+    container.innerHTML = svgText;
+
+    // SVGのスタイルを適用
+    const svg = container.querySelector('svg');
+    if (svg) {
+      svg.style.width = '100%';
+      svg.style.height = 'auto';
+      svg.style.imageRendering = '-webkit-optimize-contrast';
+    }
+
+    // SVG内のテキスト要素を探して置換
+    const textElements = container.querySelectorAll('text');
+
+    textElements.forEach(textEl => {
+      const tspan = textEl.querySelector('tspan');
+      if (tspan) {
+        const content = tspan.textContent;
+
+        // 「生成AIスクール」を置換
+        if (content && content.includes('生成AIスクール')) {
+          tspan.textContent = commonText.mv_main_title || '生成AIセミナー';
+          console.log('✅ テキスト置換完了:', content, '→', tspan.textContent);
+        }
+
+        // 「2025年最新版」を置換（オプション）
+        if (content && content.includes('2025年最新版') && commonText.mv_year_label) {
+          tspan.textContent = commonText.mv_year_label;
+        }
+      }
+    });
+
+    console.log('✅ MV SVG初期化完了');
+  } catch (error) {
+    console.error('❌ MV SVG初期化エラー:', error);
+    // エラー時は通常の画像として表示
+    const container = document.getElementById('mv-svg-container');
+    if (container) {
+      container.innerHTML = '<img src="img/mv/mv_ranking_semminar.svg" style="width: 100%; height: auto; image-rendering: -webkit-optimize-contrast;" alt="" />';
+    }
+  }
+}
+
+// ページ読み込み時にMVテキストを初期化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeMvTextOverlay);
+} else {
+  initializeMvTextOverlay();
+}
