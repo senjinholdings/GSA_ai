@@ -7,4 +7,12 @@
 <path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M7.19995 2.05005H13.3894L6.46973 8.96973L7.53039 10.0304L14.45 3.11082V9.30005H15.95V0.550049H7.19995V2.05005ZM1.5 4.00006H6V2.50006H0V16.5001H14V10.5001H12.5V15.0001H1.5V4.00006Z" fill="white"/>
 </g>
 </g>
+<defs>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    text {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+  </style>
+</defs>
 </svg>

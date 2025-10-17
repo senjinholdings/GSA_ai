@@ -7,4 +7,12 @@
 <path id="Vector (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M0.646484 3.51372L1.35359 2.80661L5.00004 6.45306L8.64649 2.80661L9.35359 3.51372L5.00004 7.86727L0.646484 3.51372Z" fill="#666666"/>
 </g>
 </g>
+<defs>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    text {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+  </style>
+</defs>
 </svg>

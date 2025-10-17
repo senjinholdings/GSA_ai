@@ -1,3 +1,11 @@
 <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.1665 1L6.6665 6.5L12.1665 1" stroke="white" stroke-width="2"/>
+<defs>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+    text {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+  </style>
+</defs>
 </svg>
